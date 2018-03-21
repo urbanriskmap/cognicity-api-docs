@@ -13,6 +13,7 @@ toc_footers:
 includes:
   - introduction
   - authentication
+  - cities
   - sensors
   - version
 

@@ -48,15 +48,6 @@ request(
 }
 ```
 
-> Example JSON output types:
-
-```json
-{
-  "version":"{number}",
-  "schema":"{number}"
-}
-```
-
 This endpoint gets the CogniCity server and database versions.
 
 ### HTTP Request

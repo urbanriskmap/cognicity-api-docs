@@ -1,48 +1,183 @@
-# Reports
+# Cities
 
-## Get All Reports
+CogniCity deployments are organised by city. Cities are delineated by a unique code and bounding box geometries.
+
+## Get All Cities
 
 ```python
-import kittn
+import requests # module to make http requests
 
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
+response = requests.get('/cities')
+print (response.status_code)
+print (response.json())    
 ```
 
 ```shell
-curl "http://example.com/api/kittens"
-  -H "Authorization: meowmeowmeow"
+curl "/cities?geoformat=geojson"
 ```
 
 ```javascript
-const kittn = require('kittn');
+import axios from 'axios'; // package to make http requests
 
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
+axios.get('/sensors', {
+  params: {
+    geoformat: 'geojson'
+    }
+  })
+  .then(response => console.log(response))
+  .catch(err => console.log(err))
 ```
 
 > The above command returns JSON structured like this:
 
 ```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
+{
+  "statusCode": 200,
+  "result": {
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                106.48,
+                -6.733
+              ],
+              [
+                107.175,
+                -6.733
+              ],
+              [
+                107.175,
+                -5.88
+              ],
+              [
+                106.48,
+                -5.88
+              ],
+              [
+                106.48,
+                -6.733
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "code": "jbd",
+          "name": "Jabodetabek"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                107.369,
+                -7.165
+              ],
+              [
+                107.931,
+                -7.165
+              ],
+              [
+                107.931,
+                -6.668
+              ],
+              [
+                107.369,
+                -6.668
+              ],
+              [
+                107.369,
+                -7.165
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "code": "bdg",
+          "name": "Bandung"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                112.3975,
+                -7.5499
+              ],
+              [
+                113.0318,
+                -7.5499
+              ],
+              [
+                113.0318,
+                -7.0143
+              ],
+              [
+                112.3975,
+                -7.0143
+              ],
+              [
+                112.3975,
+                -7.5499
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "code": "sby",
+          "name": "Surabaya"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                110.057,
+                -7.33525
+              ],
+              [
+                110.715,
+                -7.33525
+              ],
+              [
+                110.715,
+                -6.72701
+              ],
+              [
+                110.057,
+                -6.72701
+              ],
+              [
+                110.057,
+                -7.33525
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "code": "srg",
+          "name": "Semarang"
+        }
+      }
+    ]
   }
-]
+}
 ```
 
-This endpoint retrieves all Reports.
+This endpoint returns all cities covered by the CogniCity instance, including their three letter code and bounding box geometry.
 
 ### HTTP Request
 
@@ -50,101 +185,14 @@ This endpoint retrieves all Reports.
 
 ### Query Parameters
 
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
+Parameter | Required | Description | Default |
+--------- | ------- | ------------ | ------- |
+geoformat | false | Specifies either 'geojson' or 'topojson'. | topojson |
 
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
+### Response
+The returned data uses the GeoJSON FeatureCollection or TopoJSON GeometryCollection types. The properties of each sensor feature as described in the following table.
 
-## Get a Specific Report
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.get(2);
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
-}
-```
-
-This endpoint retrieves a specific sensor.
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-
-### HTTP Request
-
-`GET http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
-
-## Delete a Specific Kitten
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.delete(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2"
-  -X DELETE
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.delete(2);
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "deleted" : ":("
-}
-```
-
-This endpoint deletes a specific kitten.
-
-### HTTP Request
-
-`DELETE http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to delete
+Attribute | Type | Description |
+--------- | --------- | ----------- |
+code | string | Unique 3 letter code for each city |
+name | string | City name |

@@ -1,24 +1,11 @@
 # Reports
 
+ A flood report is...
+
 ## Get All Reports
 
 ```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
-
-```shell
-curl "http://example.com/api/kittens"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
+# TODO
 ```
 
 > The above command returns JSON structured like this:
@@ -46,7 +33,7 @@ This endpoint retrieves all Reports.
 
 ### HTTP Request
 
-`GET http://example.com/api/kittens`
+`GET /reports`
 
 ### Query Parameters
 
