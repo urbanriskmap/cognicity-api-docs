@@ -4,14 +4,6 @@ CogniCity deployments are organised by city. Cities are delineated by a unique c
 
 ## Get All Cities
 
-```python
-import requests # module to make http requests
-
-response = requests.get('/cities')
-print (response.status_code)
-print (response.json())    
-```
-
 ```shell
 curl "/cities?geoformat=geojson"
 ```
@@ -187,7 +179,7 @@ This endpoint returns all cities covered by the CogniCity instance, including th
 
 Parameter | Required | Description | Default |
 --------- | ------- | ------------ | ------- |
-geoformat | false | Specifies either 'geojson' or 'topojson'. | topojson |
+geoformat | false | Specifies either 'geojson' or 'topojson' | topojson |
 
 ### Response
 The returned data uses the GeoJSON FeatureCollection or TopoJSON GeometryCollection types. The properties of each sensor feature as described in the following table.

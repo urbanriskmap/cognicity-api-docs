@@ -30,14 +30,6 @@ axios.get('/sensors', {
 
 ```
 
-```python
-import requests # module to make http requests
-
-response = requests.get('/sensors')
-print (response.status_code)
-print (response.json())        
-```
-
 > The response body contains the following JSON object:
 
 ```json
@@ -101,8 +93,8 @@ This endpoint returns a collection of sensors and their properties within the sp
 
 Parameter | Required | Description | Default | Example |
 --------- | ------- | ------------ | ------- | ------- |
-bbox | false | A list of longitude and latitude pairs represening the top left and bottom right corners of a bounding box for sensor locations. | none | longitude, latitude, longitude, latitude
-geoformat | false | Specifies either 'geojson' or 'topojson'. | geojson | geojson |
+bbox | false | A list of longitude and latitude pairs representing the top left and bottom right corners of a bounding box for sensor locations. | none | longitude, latitude, longitude, latitude
+geoformat | false | Specifies either 'geojson' or 'topojson' | geojson | geojson |
 
 ### Response
 The returned data uses the GeoJSON FeatureCollection or TopoJSON GeometryCollection types. The properties of each sensor feature as described in the following table.
@@ -122,13 +114,9 @@ curl "/sensors/3"
 ```javascript
 import axios from 'axios'; // package to make http requests
 
-axios.get('https://sensors.riskmap.us/sensors/3')
+axios.get('/sensors/3')
   .then(response => console.log(response))
   .catch(err => console.log(err))
-```
-
-```python
-# TODO
 ```
 
 > The above command returns JSON structured like this:
@@ -209,10 +197,6 @@ axios.post('/sensors', {
   .catch(err => console.log(err))
 ```
 
-```python
-# TODO
-```
-
 > The above command returns JSON structured like this:
 
 ```json
@@ -285,10 +269,6 @@ axios.post('/sensors/4', {
 
 ```
 
-```python
-# TODO
-```
-
 > The above command returns JSON structured like this:
 
 ```json
@@ -344,10 +324,6 @@ import axios from 'axios'; // package to make http requests
 axios.delete('/sensors/4/2345', {'headers': {'x-api-key': 'key'}, {'content-type': 'application/json'}})
   .then(response => console.log(response))
   .catch(err => console.log(err))
-```
-
-```python
-# TODO
 ```
 
 ```json

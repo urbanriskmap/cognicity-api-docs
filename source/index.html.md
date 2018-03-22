@@ -4,7 +4,6 @@ title: API Reference
 language_tabs: # must be one of https://git.io/vQNgJ
   - shell
   - javascript
-  - python
 
 toc_footers:
   - <a href='https://github.com/urbanriskmap/'>CogniCity on GitHub</a>
@@ -14,6 +13,7 @@ includes:
   - introduction
   - authentication
   - cities
+  - reports
   - sensors
   - version
 

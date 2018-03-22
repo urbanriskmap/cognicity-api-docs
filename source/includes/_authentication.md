@@ -14,17 +14,7 @@ axios.get('/endpoint', {'headers': {'Authorization': 'token'}})
 
 ```
 
-```python
-import requests # module to make http requests
-
-headers = {'Authorization': 'token'}
-response = requests.get('/endpoint', headers=headers)
-
-print (response.status_code)
-print (response.json())        
-```
-
-Some CogniCity endpoints require authentication in the form of either an API key or a JSON Web Token. Authentication keys or tokens are passed via the `x-api-key` or `Authorization` headers. Endpoints requiring authentication are detailed below. 
+Some CogniCity endpoints require authentication in the form of either an API key or a JSON Web Token. Authentication keys or tokens are passed via the `x-api-key` or `Authorization` headers. Endpoints requiring authentication are detailed below.
 
 `x-api-key: key`
 
