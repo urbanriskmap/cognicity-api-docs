@@ -322,7 +322,7 @@
 
 <p>The <code>/floods</code> endpoint also supports responses using the Common Alerting Protocol, an XML format.</p>
 
-<p>CogniCity uses the <a href="https://www.postgresql.org/docs/current/static/datatype-numeric.html">PostgreSQL BIGINT</a>{:target=&quot;_blank&quot;} data type. As these numbers are potentially greater than <code>Numbers.MAX_SAFE_INTEGER</code> they are returned as Strings.</p>
+<p>CogniCity uses the <a href="https://www.postgresql.org/docs/current/static/datatype-numeric.html">PostgreSQL BIGINT</a> data type. As these numbers are potentially greater than <code>Numbers.MAX_SAFE_INTEGER</code> they are returned as Strings.</p>
 <h1 id='authentication'>Authentication</h1><pre class="highlight shell tab-shell"><code>curl <span class="s2">"endpoint"</span> -H <span class="s2">"Authorization: token or key"</span>
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">axios</span> <span class="nx">from</span> <span class="s1">'axios'</span><span class="p">;</span> <span class="c1">// package to make http requests</span>
@@ -1071,11 +1071,11 @@ Start and end times require UTC offsets using either '+' or '-' which need to be
 <aside class="notice">
 Note that these endpoints reside on a separate sensors subdomain.
 </aside>
-<h2 id='get-all-sensors'>Get All Sensors</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"/sensors?bbox=-81,27,-79,25&amp;geoformat=geojson"</span>
+<h2 id='get-all-sensors'>Get All Sensors</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"/?bbox=-81,27,-79,25&amp;geoformat=geojson"</span>
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">axios</span> <span class="nx">from</span> <span class="s1">'axios'</span><span class="p">;</span> <span class="c1">// package to make http requests</span>
 
-<span class="nx">axios</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/sensors'</span><span class="p">,</span> <span class="p">{</span>
+<span class="nx">axios</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="p">{</span>
   <span class="na">params</span><span class="p">:</span> <span class="p">{</span>
     <span class="na">bbox</span><span class="p">:</span> <span class="s1">'-81,27,-79,25'</span><span class="p">,</span>
     <span class="na">geoformat</span><span class="p">:</span> <span class="s1">'geojson'</span>
@@ -1139,7 +1139,7 @@ Note that these endpoints reside on a separate sensors subdomain.
 </span></code></pre>
 <p>This endpoint returns a collection of sensors and their properties within the specified bounding box. If no bounding box is provided all sensors in the database will be returned.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code>GET /sensors</code></p>
+<p><code>GET /</code></p>
 <h3 id='query-parameters'>Query Parameters</h3>
 <table><thead>
 <tr>
@@ -1191,10 +1191,10 @@ Note that these endpoints reside on a separate sensors subdomain.
 <td>metadata attributes for each sensor</td>
 </tr>
 </tbody></table>
-<h2 id='get-sensor-data'>Get Sensor Data</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"/sensors/3"</span>
+<h2 id='get-sensor-data'>Get Sensor Data</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"/3"</span>
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">axios</span> <span class="nx">from</span> <span class="s1">'axios'</span><span class="p">;</span> <span class="c1">// package to make http requests</span>
 
-<span class="nx">axios</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/sensors/3'</span><span class="p">)</span>
+<span class="nx">axios</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/3'</span><span class="p">)</span>
   <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">))</span>
   <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">err</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">))</span>
 </code></pre>
@@ -1226,7 +1226,7 @@ Note that these endpoints reside on a separate sensors subdomain.
 </span></code></pre>
 <p>This endpoint retrieves a list of data for a specific sensor. Data are organised into records, indexed by the <code>id</code> attribute. The <code>created</code> attribute details when the record was last updated. The <code>properties</code> attribute contains the data for the record. The <code>properties</code> object may be in varying formats. The example shows a <code>properties</code> object for a single data record which contains an <code>observations</code> array of measurements.</p>
 <h3 id='http-request-2'>HTTP Request</h3>
-<p><code>GET /sensors/&lt;ID&gt;</code></p>
+<p><code>GET /&lt;ID&gt;</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -1268,7 +1268,7 @@ Note that these endpoints reside on a separate sensors subdomain.
 <td>Record data</td>
 </tr>
 </tbody></table>
-<h2 id='create-sensor'>Create Sensor</h2><pre class="highlight shell tab-shell"><code>curl -X POST /sensors -H <span class="s1">'Content-Type: application/json'</span> -H <span class="s1">'x-api-key: key'</span> -d <span class="s1">'{
+<h2 id='create-sensor'>Create Sensor</h2><pre class="highlight shell tab-shell"><code>curl -X POST / -H <span class="s1">'Content-Type: application/json'</span> -H <span class="s1">'x-api-key: key'</span> -d <span class="s1">'{
     "properties":{
         "name": "test sensor"
     },
@@ -1280,7 +1280,7 @@ Note that these endpoints reside on a separate sensors subdomain.
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">axios</span> <span class="nx">from</span> <span class="s1">'axios'</span><span class="p">;</span> <span class="c1">// package to make http requests</span>
 
-<span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">'/sensors'</span><span class="p">,</span> <span class="p">{</span>
+<span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="p">{</span>
     <span class="na">properties</span><span class="p">:</span> <span class="p">{</span>
       <span class="na">name</span><span class="p">:</span> <span class="s2">"test sensor"</span>
     <span class="p">},</span>
@@ -1323,7 +1323,7 @@ Note that these endpoints reside on a separate sensors subdomain.
 </span></code></pre>
 <p>This endpoint creates a new sensor. On success a GeoJSON feature representing the new sensor is returned.</p>
 <h3 id='http-request-3'>HTTP Request</h3>
-<p><code>POST /sensors</code></p>
+<p><code>POST /</code></p>
 
 <aside class="success">
 This request requires an API key for authorization using the `x-api-key` header.
@@ -1350,7 +1350,7 @@ This request requires an API key for authorization using the `x-api-key` header.
 <td>Yes</td>
 </tr>
 </tbody></table>
-<h2 id='add-sensor-data'>Add Sensor Data</h2><pre class="highlight shell tab-shell"><code>curl -X POST /sensors/4 -H <span class="s1">'Content-Type: application/json'</span> -H <span class="s1">'x-api-key: key'</span> -d <span class="s1">'{
+<h2 id='add-sensor-data'>Add Sensor Data</h2><pre class="highlight shell tab-shell"><code>curl -X POST /4 -H <span class="s1">'Content-Type: application/json'</span> -H <span class="s1">'x-api-key: key'</span> -d <span class="s1">'{
     "properties":{
         "METAR": "CYYQ 182200Z 07002KT 15SM OVC017 06/03 A2966 RMK SC10 3 POLAR BEARS ALNG RNWY=="
   }
@@ -1358,7 +1358,7 @@ This request requires an API key for authorization using the `x-api-key` header.
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">axios</span> <span class="nx">from</span> <span class="s1">'axios'</span><span class="p">;</span> <span class="c1">// package to make http requests</span>
 
-<span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">'/sensors/4'</span><span class="p">,</span> <span class="p">{</span>
+<span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">'/4'</span><span class="p">,</span> <span class="p">{</span>
     <span class="na">properties</span><span class="p">:</span> <span class="p">{</span>
       <span class="na">METAR</span><span class="p">:</span> <span class="s2">"CYYQ 182200Z 07002KT 15SM OVC017 06/03 A2966 RMK SC10 3 POLAR BEARS ALNG RNWY=="</span>
     <span class="p">},</span>
@@ -1385,7 +1385,7 @@ This request requires an API key for authorization using the `x-api-key` header.
 This request requires an API key for authorization using the `x-api-key` header.
 </aside>
 <h3 id='http-request-4'>HTTP Request</h3>
-<p><code>POST /sensors/&lt;ID&gt;</code></p>
+<p><code>POST /&lt;ID&gt;</code></p>
 <h3 id='url-parameters-2'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -1414,12 +1414,10 @@ This request requires an API key for authorization using the `x-api-key` header.
 <td>Yes</td>
 </tr>
 </tbody></table>
-<h2 id='delete-sensor-data'>Delete Sensor Data</h2><pre class="highlight sh tab-shell"><code>curl -X DELETE /sensors/4 -H <span class="s1">'Content-Type: application/json'</span> -H <span class="s1">'x-api-key: key'</span> -d <span class="s1">'{
-    "data_id": 2345
-}'</span>
+<h2 id='delete-sensor-data'>Delete Sensor Data</h2><pre class="highlight sh tab-shell"><code>curl -X DELETE /4/2345 -H <span class="s1">'Content-Type: application/json'</span> -H <span class="s1">'x-api-key: key'</span>
 
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">axios</span> <span class="nx">from</span> <span class="s1">'axios'</span><span class="p">;</span> <span class="c1">// package to make http requests</span>
-<span class="c1">// proposed new form...</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">axios</span> <span class="nx">from</span> <span class="s1">'axios'</span><span class="p">;</span> <span class="c1">// http requests</span>
+<span class="c1">// delete record 2345 from sensor 4</span>
 <span class="nx">axios</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="s1">'/sensors/4/2345'</span><span class="p">,</span> <span class="p">{</span><span class="na">headers</span><span class="p">:</span> <span class="p">{</span><span class="s1">'x-api-key'</span><span class="p">:</span> <span class="s1">'key'</span><span class="p">},</span> <span class="p">{</span><span class="s1">'content-type'</span><span class="p">:</span> <span class="s1">'application/json'</span><span class="p">}})</span>
   <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">))</span>
   <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">err</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">))</span>
@@ -1433,12 +1431,8 @@ This request requires an API key for authorization using the `x-api-key` header.
 <aside class="success">
 This request requires an API key for authorization using the `x-api-key` header.
 </aside>
-
-<aside class="warning">
-The API doesn't currently return an error if the data record doesn't exist. See <a href="https://github.com/urbanriskmap/cognicity-sensors/issues/11" target=\_blank>GitHub issue</a>
-</aside>
 <h3 id='http-request-5'>HTTP Request</h3>
-<p><code>DELETE /sensors/&lt;ID&gt;</code></p>
+<p><code>DELETE /&lt;ID&gt;/&lt;DATAID&gt;</code></p>
 <h1 id='version'>Version</h1><h2 id='get-cognicity-versions'>Get CogniCity Versions</h2>
 <p>Get the CogniCity server and database versions for the chosen instance.</p>
 
