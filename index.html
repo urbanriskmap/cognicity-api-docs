@@ -201,7 +201,7 @@
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;python&quot;,&quot;javascript&quot;]">
+  <body class="index" data-languages="[&quot;shell&quot;,&quot;javascript&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -212,8 +212,6 @@
       <img src="images/logo.png" class="logo" alt="Logo" />
         <div class="lang-selector">
               <a href="#" data-language-name="shell">shell</a>
-              <a href="#" data-language-name="ruby">ruby</a>
-              <a href="#" data-language-name="python">python</a>
               <a href="#" data-language-name="javascript">javascript</a>
         </div>
         <div class="search">
@@ -222,31 +220,67 @@
         <ul class="search-results"></ul>
       <div id="toc" class="toc-list-h1">
           <li>
-            <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
+            <a href="#introduction" class="toc-h1 toc-link" data-title="introduction">Introduction</a>
           </li>
           <li>
-            <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
+            <a href="#api-responses" class="toc-h1 toc-link" data-title="api-responses">API Responses</a>
           </li>
           <li>
-            <a href="#kittens" class="toc-h1 toc-link" data-title="Kittens">Kittens</a>
+            <a href="#authentication" class="toc-h1 toc-link" data-title="authentication">Authentication</a>
+          </li>
+          <li>
+            <a href="#cities" class="toc-h1 toc-link" data-title="cities">Cities</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#get-all-kittens" class="toc-h2 toc-link" data-title="Get All Kittens">Get All Kittens</a>
-                  </li>
-                  <li>
-                    <a href="#get-a-specific-kitten" class="toc-h2 toc-link" data-title="Get a Specific Kitten">Get a Specific Kitten</a>
-                  </li>
-                  <li>
-                    <a href="#delete-a-specific-kitten" class="toc-h2 toc-link" data-title="Delete a Specific Kitten">Delete a Specific Kitten</a>
+                    <a href="#get-all-cities" class="toc-h2 toc-link" data-title="get-all-cities">Get All Cities</a>
                   </li>
               </ul>
           </li>
           <li>
-            <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
+            <a href="#reports" class="toc-h1 toc-link" data-title="reports">Reports</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-all-reports" class="toc-h2 toc-link" data-title="get-all-reports">Get All Reports</a>
+                  </li>
+                  <li>
+                    <a href="#archive" class="toc-h2 toc-link" data-title="archive">Archive</a>
+                  </li>
+                  <li>
+                    <a href="#timeseries" class="toc-h2 toc-link" data-title="timeseries">Timeseries</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#sensors" class="toc-h1 toc-link" data-title="sensors">Sensors</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-all-sensors" class="toc-h2 toc-link" data-title="get-all-sensors">Get All Sensors</a>
+                  </li>
+                  <li>
+                    <a href="#get-sensor-data" class="toc-h2 toc-link" data-title="get-sensor-data">Get Sensor Data</a>
+                  </li>
+                  <li>
+                    <a href="#create-sensor" class="toc-h2 toc-link" data-title="create-sensor">Create Sensor</a>
+                  </li>
+                  <li>
+                    <a href="#add-sensor-data" class="toc-h2 toc-link" data-title="add-sensor-data">Add Sensor Data</a>
+                  </li>
+                  <li>
+                    <a href="#delete-sensor-data" class="toc-h2 toc-link" data-title="delete-sensor-data">Delete Sensor Data</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#version" class="toc-h1 toc-link" data-title="version">Version</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-cognicity-versions" class="toc-h2 toc-link" data-title="get-cognicity-versions">Get CogniCity Versions</a>
+                  </li>
+              </ul>
           </li>
       </div>
         <ul class="toc-footer">
-            <li><a href='#'>Sign Up for a Developer Key</a></li>
+            <li><a href='https://github.com/urbanriskmap/'>CogniCity on GitHub</a></li>
             <li><a href='https://github.com/lord/slate'>Documentation Powered by Slate</a></li>
         </ul>
     </div>
@@ -254,133 +288,945 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
-<p>Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.</p>
+<p>Welcome to the CogniCity API. CogniCity is the engine that powers Urban Risk Map. You can use this API to access CogniCity data including flood reports and sensor measurements that are stored in the CogniCity database. You can view example requests in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
 
-<p>We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
+<p>CogniCity deployments are organised into <em>instances</em> for different countries. Currently available instances:</p>
 
-<p>This example API documentation page was created with <a href="https://github.com/lord/slate">Slate</a>. Feel free to edit it and use it as a base for your own API&#39;s documentation.</p>
-<h1 id='authentication'>Authentication</h1>
+<ul>
+<li><a href="https://petabencana.id">PetaBencana</a></li>
+<li><a href="https://riskmap.us">RiskMap US</a></li>
+<li><a href="https://riskmap.in">RiskMap India</a></li>
+</ul>
+
+<p>The CogniCity API is accessible via the <em>data subdomain</em> of each instance, for example:</p>
+
+<ul>
+<li><a href="https://data.petabencana.id">data.petabencana.id</a></li>
+</ul>
+
+<p>The CogniCity Sensors API is accessible via the <em>sensors subdomain</em> of each instance, for example:</p>
+
+<ul>
+<li><a href="https://sensors.petabencana.id">sensors.petabencana.id</a></li>
+</ul>
+<h1 id='api-responses'>API Responses</h1>
 <blockquote>
-<p>To authorize, use this code:</p>
+<p>Response structure:</p>
 </blockquote>
-<pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"statusCode"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">Number</span><span class="w"> </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">Object</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="err">Array</span><span class="w"> </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>CogniCity provides responses in JSON format. The <code>statusCode</code> object gives the HTTP response status for the request (also available in the response header). The <code>response</code> property may be either an <code>Object</code> or an <code>Array</code> depending on the data returned.</p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<p>The <code>/floods</code> endpoint also supports responses using the Common Alerting Protocol, an XML format.</p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
+<p>CogniCity uses the <a href="https://www.postgresql.org/docs/current/static/datatype-numeric.html">PostgreSQL BIGINT</a>{:target=&quot;_blank&quot;} data type. As these numbers are potentially greater than <code>Numbers.MAX_SAFE_INTEGER</code> they are returned as Strings.</p>
+<h1 id='authentication'>Authentication</h1><pre class="highlight shell tab-shell"><code>curl <span class="s2">"endpoint"</span> -H <span class="s2">"Authorization: token or key"</span>
 
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">axios</span> <span class="nx">from</span> <span class="s1">'axios'</span><span class="p">;</span> <span class="c1">// package to make http requests</span>
+
+<span class="cm">/* Request with API key authentication */</span>
+<span class="nx">axios</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/endpoint'</span><span class="p">,</span> <span class="p">{</span><span class="na">headers</span><span class="p">:</span> <span class="p">{</span><span class="s1">'x-api-key'</span><span class="p">:</span> <span class="s1">'key'</span><span class="p">}})</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">err</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">))</span>
+
+<span class="cm">/* Request with token authentication */</span>
+<span class="nx">axios</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/endpoint'</span><span class="p">,</span> <span class="p">{</span><span class="na">headers</span><span class="p">:</span> <span class="p">{</span><span class="s1">'Authorization'</span><span class="p">:</span> <span class="s1">'token'</span><span class="p">}})</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">err</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">))</span>
 </code></pre>
-<blockquote>
-<p>Make sure to replace <code>meowmeowmeow</code> with your API key.</p>
-</blockquote>
+<p>Some CogniCity endpoints require authentication in the form of either an API key or a JSON Web Token. Authentication keys or tokens are passed via the <code>x-api-key</code> or <code>Authorization</code> headers. Endpoints requiring authentication are detailed below.</p>
 
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
+<p><code>x-api-key: key</code></p>
 
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
+<p><code>Authorization: token</code></p>
 
-<p><code>Authorization: meowmeowmeow</code></p>
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+<aside class="success">
+All requests should be made via https.
 </aside>
-<h1 id='kittens'>Kittens</h1><h2 id='get-all-kittens'>Get All Kittens</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<h1 id='cities'>Cities</h1>
+<p>CogniCity deployments are organised by city. Cities are delineated by a unique code and bounding box geometries.</p>
+<h2 id='get-all-cities'>Get All Cities</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"/cities?geoformat=geojson"</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">axios</span> <span class="nx">from</span> <span class="s1">'axios'</span><span class="p">;</span> <span class="c1">// package to make http requests</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">kittens</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">();</span>
+<span class="nx">axios</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/cities'</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">params</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">geoformat</span><span class="p">:</span> <span class="s1">'geojson'</span>
+    <span class="p">}</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">err</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">))</span>
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"statusCode"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FeatureCollection"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"features"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Feature"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"geometry"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Polygon"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"coordinates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">[</span><span class="w">
+              </span><span class="p">[</span><span class="w">
+                </span><span class="mf">106.48</span><span class="p">,</span><span class="w">
+                </span><span class="mf">-6.733</span><span class="w">
+              </span><span class="p">],</span><span class="w">
+              </span><span class="p">[</span><span class="w">
+                </span><span class="mf">107.175</span><span class="p">,</span><span class="w">
+                </span><span class="mf">-6.733</span><span class="w">
+              </span><span class="p">],</span><span class="w">
+              </span><span class="p">[</span><span class="w">
+                </span><span class="mf">107.175</span><span class="p">,</span><span class="w">
+                </span><span class="mf">-5.88</span><span class="w">
+              </span><span class="p">],</span><span class="w">
+              </span><span class="p">[</span><span class="w">
+                </span><span class="mf">106.48</span><span class="p">,</span><span class="w">
+                </span><span class="mf">-5.88</span><span class="w">
+              </span><span class="p">],</span><span class="w">
+              </span><span class="p">[</span><span class="w">
+                </span><span class="mf">106.48</span><span class="p">,</span><span class="w">
+                </span><span class="mf">-6.733</span><span class="w">
+              </span><span class="p">]</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"jbd"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jabodetabek"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Feature"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"geometry"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Polygon"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"coordinates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">[</span><span class="w">
+              </span><span class="p">[</span><span class="w">
+                </span><span class="mf">107.369</span><span class="p">,</span><span class="w">
+                </span><span class="mf">-7.165</span><span class="w">
+              </span><span class="p">],</span><span class="w">
+              </span><span class="p">[</span><span class="w">
+                </span><span class="mf">107.931</span><span class="p">,</span><span class="w">
+                </span><span class="mf">-7.165</span><span class="w">
+              </span><span class="p">],</span><span class="w">
+              </span><span class="p">[</span><span class="w">
+                </span><span class="mf">107.931</span><span class="p">,</span><span class="w">
+                </span><span class="mf">-6.668</span><span class="w">
+              </span><span class="p">],</span><span class="w">
+              </span><span class="p">[</span><span class="w">
+                </span><span class="mf">107.369</span><span class="p">,</span><span class="w">
+                </span><span class="mf">-6.668</span><span class="w">
+              </span><span class="p">],</span><span class="w">
+              </span><span class="p">[</span><span class="w">
+                </span><span class="mf">107.369</span><span class="p">,</span><span class="w">
+                </span><span class="mf">-7.165</span><span class="w">
+              </span><span class="p">]</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bdg"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bandung"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Feature"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"geometry"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Polygon"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"coordinates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">[</span><span class="w">
+              </span><span class="p">[</span><span class="w">
+                </span><span class="mf">112.3975</span><span class="p">,</span><span class="w">
+                </span><span class="mf">-7.5499</span><span class="w">
+              </span><span class="p">],</span><span class="w">
+              </span><span class="p">[</span><span class="w">
+                </span><span class="mf">113.0318</span><span class="p">,</span><span class="w">
+                </span><span class="mf">-7.5499</span><span class="w">
+              </span><span class="p">],</span><span class="w">
+              </span><span class="p">[</span><span class="w">
+                </span><span class="mf">113.0318</span><span class="p">,</span><span class="w">
+                </span><span class="mf">-7.0143</span><span class="w">
+              </span><span class="p">],</span><span class="w">
+              </span><span class="p">[</span><span class="w">
+                </span><span class="mf">112.3975</span><span class="p">,</span><span class="w">
+                </span><span class="mf">-7.0143</span><span class="w">
+              </span><span class="p">],</span><span class="w">
+              </span><span class="p">[</span><span class="w">
+                </span><span class="mf">112.3975</span><span class="p">,</span><span class="w">
+                </span><span class="mf">-7.5499</span><span class="w">
+              </span><span class="p">]</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sby"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Surabaya"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Feature"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"geometry"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Polygon"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"coordinates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">[</span><span class="w">
+              </span><span class="p">[</span><span class="w">
+                </span><span class="mf">110.057</span><span class="p">,</span><span class="w">
+                </span><span class="mf">-7.33525</span><span class="w">
+              </span><span class="p">],</span><span class="w">
+              </span><span class="p">[</span><span class="w">
+                </span><span class="mf">110.715</span><span class="p">,</span><span class="w">
+                </span><span class="mf">-7.33525</span><span class="w">
+              </span><span class="p">],</span><span class="w">
+              </span><span class="p">[</span><span class="w">
+                </span><span class="mf">110.715</span><span class="p">,</span><span class="w">
+                </span><span class="mf">-6.72701</span><span class="w">
+              </span><span class="p">],</span><span class="w">
+              </span><span class="p">[</span><span class="w">
+                </span><span class="mf">110.057</span><span class="p">,</span><span class="w">
+                </span><span class="mf">-6.72701</span><span class="w">
+              </span><span class="p">],</span><span class="w">
+              </span><span class="p">[</span><span class="w">
+                </span><span class="mf">110.057</span><span class="p">,</span><span class="w">
+                </span><span class="mf">-7.33525</span><span class="w">
+              </span><span class="p">]</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"srg"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Semarang"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
   </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint retrieves all kittens.</p>
+<p>This endpoint returns all cities covered by the CogniCity instance, including their three letter code and bounding box geometry.</p>
 <h3 id='http-request'>HTTP Request</h3>
 <p><code>GET http://example.com/api/kittens</code></p>
 <h3 id='query-parameters'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
+<th>Required</th>
+<th>Description</th>
 <th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>geoformat</td>
+<td>false</td>
+<td>Specifies either &#39;geojson&#39; or &#39;topojson&#39;</td>
+<td>topojson</td>
+</tr>
+</tbody></table>
+<h3 id='response'>Response</h3>
+<p>The returned data uses the GeoJSON FeatureCollection or TopoJSON GeometryCollection types. The properties of each sensor feature as described in the following table.</p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
+<td>code</td>
+<td>string</td>
+<td>Unique 3 letter code for each city</td>
 </tr>
 <tr>
-<td>available</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
+<td>name</td>
+<td>string</td>
+<td>City name</td>
 </tr>
 </tbody></table>
+<h1 id='reports'>Reports</h1>
+<p>The reports endpoint contains CogniCity reports as GeoJSON or TopoJSON features. Reports are represented by point-geometries and their accompanying properties (e.g. description, time etc.). Note that all times are UTC, and geometries use the WGS 1984 coordinate system.</p>
+<h2 id='get-all-reports'>Get All Reports</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"/reports?city=jbd&amp;geoformat=geojson"</span>
 
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-<h2 id='get-a-specific-kitten'>Get a Specific Kitten</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">axios</span> <span class="nx">from</span> <span class="s1">'axios'</span><span class="p">;</span> <span class="c1">// package to make http requests</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<span class="nx">axios</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/reports'</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">params</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">city</span><span class="p">:</span> <span class="s1">'jbd'</span><span class="p">,</span>
+    <span class="na">geoformat</span><span class="p">:</span> <span class="s1">'geojson'</span>
+    <span class="p">}</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">err</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">))</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+  </span><span class="s2">"statusCode"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FeatureCollection"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"features"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Feature"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"geometry"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Point"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"coordinates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="mf">106.835474968</span><span class="p">,</span><span class="w">
+            </span><span class="mf">-6.1795742571</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"pkey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7904"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-03-22T05:07:18.525Z"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"grasp"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"confirmed"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8dddfd33-d995-4061-863e-57414993aa35"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"image_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://images-dev.petabencana.id/8dddfd33-d995-4061-863e-57414993aa35.jpg"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"disaster_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"flood"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"report_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"report_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"flood"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"flood_depth"</span><span class="p">:</span><span class="w"> </span><span class="mi">92</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="s2">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"district_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3173"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"local_area_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"508"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"instance_region_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"jbd"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test flood reporting"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint retrieves a specific kitten.</p>
+<p>This endpoint retrieves all reports.  Note that all times are UTC, and geometries use the WGS 1984 coordinate system.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>GET /reports</code></p>
+<h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Description</th>
+<th>Default</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>city</td>
+<td>false</td>
+<td>Filter reports by 3-letter city code (see cities endpoint for details). If no city specified then reports for all cities in CogniCity instance are returned</td>
+<td>none</td>
+<td>jbd</td>
+</tr>
+<tr>
+<td>geoformat</td>
+<td>false</td>
+<td>Specifies either &#39;geojson&#39; or &#39;topojson&#39;</td>
+<td>topojson</td>
+<td>geojson</td>
+</tr>
+<tr>
+<td>timeperiod</td>
+<td>false</td>
+<td>Time period in seconds to filter reports by, must be strictly between 1 and 604800 (1 week)</td>
+<td>3600 (1 hour)</td>
+<td>3600</td>
+</tr>
+</tbody></table>
+<h2 id='archive'>Archive</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"/reports/archive?start=2017-11-20T00:00:00%2B0700&amp;end=2017-11-22T15:00:00%2B0700"</span>
 
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">axios</span> <span class="nx">from</span> <span class="s1">'axios'</span><span class="p">;</span> <span class="c1">// package to make http requests</span>
+
+<span class="nx">axios</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/reports/archive'</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">params</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">city</span><span class="p">:</span> <span class="s1">'jbd'</span><span class="p">,</span>
+    <span class="na">geoformat</span><span class="p">:</span> <span class="s1">'geojson'</span><span class="p">,</span>
+    <span class="na">start</span><span class="p">:</span> <span class="s1">'2017-11-20T00:00:00+0700'</span><span class="p">,</span>
+    <span class="na">end</span><span class="p">:</span> <span class="s1">'2017-11-22T15:00:00+0700'</span>
+    <span class="p">}</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">err</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">))</span>
+
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"statusCode"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FeatureCollection"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"features"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Feature"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"geometry"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Point"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"coordinates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="mf">106.835474968</span><span class="p">,</span><span class="w">
+            </span><span class="mf">-6.1795742571</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"pkey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7904"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-03-22T05:07:18.525Z"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"grasp"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"confirmed"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8dddfd33-d995-4061-863e-57414993aa35"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"image_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://images-dev.petabencana.id/8dddfd33-d995-4061-863e-57414993aa35.jpg"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"disaster_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"flood"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"report_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"report_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"flood"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"flood_depth"</span><span class="p">:</span><span class="w"> </span><span class="mi">92</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="s2">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"district_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3173"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"local_area_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"508"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"instance_region_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"jbd"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test flood reporting"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint retrieves reports within the specified time period. The maximum duration between start and end times is one week. Note that all times are UTC, and geometries use the WGS 1984 coordinate system.</p>
 <h3 id='http-request-2'>HTTP Request</h3>
-<p><code>GET http://example.com/kittens/&lt;ID&gt;</code></p>
+<p><code>GET /reports/archive</code></p>
+<h3 id='query-parameters-2'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Description</th>
+<th>Default</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>city</td>
+<td>false</td>
+<td>Filter reports by 3-letter city code (see cities endpoint for details). If no city specified then reports for all cities in CogniCity instance are returned</td>
+<td>none</td>
+<td>jbd</td>
+</tr>
+<tr>
+<td>geoformat</td>
+<td>false</td>
+<td>Specifies either &#39;geojson&#39; or &#39;topojson&#39;</td>
+<td>topojson</td>
+<td>geojson</td>
+</tr>
+<tr>
+<td>start</td>
+<td>true</td>
+<td>Start time for archive period in ISO 8601 string format</td>
+<td>none</td>
+<td>2017-02-21T07:00:00+0700</td>
+</tr>
+<tr>
+<td>end</td>
+<td>true</td>
+<td>End time for archive period in ISO 8601 string format. Must bet within 604800 seconds (1 week) from start time</td>
+<td>none</td>
+<td>2017-02-21T19:00:00+0700</td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+Start and end times require UTC offsets using either '+' or '-' which need to be URL encoded as '%2B' and '%2D' respectively.
+</aside>
+<h2 id='timeseries'>Timeseries</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"/reports/timeseries?start=2017-11-20T00:00:00%2B0700&amp;end=2017-11-22T15:00:00%2B0700"</span>
+
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">axios</span> <span class="nx">from</span> <span class="s1">'axios'</span><span class="p">;</span> <span class="c1">// package to make http requests</span>
+
+<span class="nx">axios</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/reports/timeseries'</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">params</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">start</span><span class="p">:</span> <span class="s1">'2017-11-20T00:00:00+0700'</span><span class="p">,</span>
+    <span class="na">end</span><span class="p">:</span> <span class="s1">'2017-11-22T15:00:00+0700'</span>
+    <span class="p">}</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">err</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">))</span>
+
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"statusCode"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-19T17:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-19T18:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-19T19:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-19T20:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-19T21:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-19T22:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-19T23:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-20T00:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-20T01:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-20T02:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-20T03:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-20T04:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-20T05:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-20T06:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-20T07:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-20T08:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-20T09:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-20T10:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-20T11:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-20T12:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-20T13:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-20T14:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-20T15:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-20T16:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-20T17:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-20T18:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-20T19:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-20T20:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-20T21:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-20T22:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-20T23:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-21T00:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-21T01:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-21T02:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-21T03:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-21T04:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-21T05:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-21T06:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-21T07:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-21T08:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-21T09:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-21T10:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-21T11:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-21T12:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-21T13:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-21T14:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-21T15:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-21T16:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-21T17:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-21T18:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-21T19:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-21T20:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-21T21:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-21T22:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-21T23:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-22T00:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-22T01:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-22T02:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-22T03:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-22T04:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-22T05:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-22T06:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-22T07:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-22T08:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<p>This endpoint generates a time series of reports presented as a count of reports every hour within the specified time period. The maximum duration between start and end times is one week. Report count is recorded alongside an hourly UTC timestamp in ISO 8061 format.</p>
+<h3 id='http-request-3'>HTTP Request</h3>
+<p><code>GET /reports/timeseries</code></p>
+<h3 id='query-parameters-3'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Description</th>
+<th>Default</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>city</td>
+<td>false</td>
+<td>Filter reports by 3-letter city code (see cities endpoint for details). If no city specified then reports for all cities in CogniCity instance are returned</td>
+<td>none</td>
+<td>jbd</td>
+</tr>
+<tr>
+<td>start</td>
+<td>true</td>
+<td>Start time for archive period in ISO 8601 string format</td>
+<td>none</td>
+<td>2017-02-21T07:00:00+0700</td>
+</tr>
+<tr>
+<td>end</td>
+<td>true</td>
+<td>End time for archive period in ISO 8601 string format. Must bet within 604800 seconds (1 week) from start time</td>
+<td>none</td>
+<td>2017-02-21T19:00:00+0700</td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+Start and end times require UTC offsets using either '+' or '-' which need to be URL encoded as '%2B' and '%2D' respectively.
+</aside>
+<h1 id='sensors'>Sensors</h1>
+<p>The CogniCity Sensors endpoints supports centralizing data from automated sensor networks. Sensor data can be inserted into the database for storage, and subsequently served as GeoJSON or TopoJSON to support map visualisations.</p>
+
+<p>Sensor locations are point geometries defined using latitude and longitude coordinates in the WGS 1984 coordinate system.</p>
+
+<aside class="notice">
+Note that these endpoints reside on a separate sensors subdomain.
+</aside>
+<h2 id='get-all-sensors'>Get All Sensors</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"/sensors?bbox=-81,27,-79,25&amp;geoformat=geojson"</span>
+
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">axios</span> <span class="nx">from</span> <span class="s1">'axios'</span><span class="p">;</span> <span class="c1">// package to make http requests</span>
+
+<span class="nx">axios</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/sensors'</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">params</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">bbox</span><span class="p">:</span> <span class="s1">'-81,27,-79,25'</span><span class="p">,</span>
+    <span class="na">geoformat</span><span class="p">:</span> <span class="s1">'geojson'</span>
+    <span class="p">}</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">err</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">))</span>
+
+</code></pre>
+<blockquote>
+<p>The response body contains the following JSON object:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"statusCode"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FeatureCollection"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"features"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Feature"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"geometry"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Point"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"coordinates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="mf">-80.3853056</span><span class="p">,</span><span class="w">
+                </span><span class="mf">26.0341111</span><span class="w">
+              </span><span class="p">]</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-10-24T22:35:58.875Z"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"uid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"260653080184901"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GW"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"class"</span><span class="p">:</span><span class="w"> </span><span class="s2">"62610"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"units"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ft"</span><span class="w">
+              </span><span class="p">}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Feature"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"geometry"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Point"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"coordinates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="mf">-80.1153333</span><span class="p">,</span><span class="w">
+                </span><span class="mf">26.31780556</span><span class="w">
+              </span><span class="p">]</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-10-24T22:35:58.883Z"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"uid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"261903080065601"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GW"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"class"</span><span class="p">:</span><span class="w"> </span><span class="s2">"62610"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"units"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ft"</span><span class="w">
+              </span><span class="p">}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint returns a collection of sensors and their properties within the specified bounding box. If no bounding box is provided all sensors in the database will be returned.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>GET /sensors</code></p>
+<h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Description</th>
+<th>Default</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>bbox</td>
+<td>false</td>
+<td>A list of longitude and latitude pairs representing the top left and bottom right corners of a bounding box for sensor locations.</td>
+<td>none</td>
+<td>longitude, latitude, longitude, latitude</td>
+</tr>
+<tr>
+<td>geoformat</td>
+<td>false</td>
+<td>Specifies either &#39;geojson&#39; or &#39;topojson&#39;</td>
+<td>geojson</td>
+<td>geojson</td>
+</tr>
+</tbody></table>
+<h3 id='response'>Response</h3>
+<p>The returned data uses the GeoJSON FeatureCollection or TopoJSON GeometryCollection types. The properties of each sensor feature as described in the following table.</p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>integer</td>
+<td>Unique sensor identifier</td>
+</tr>
+<tr>
+<td>created</td>
+<td>string</td>
+<td>timestamp sensor created in database (ISO 8601 format)</td>
+</tr>
+<tr>
+<td>properties</td>
+<td>json</td>
+<td>metadata attributes for each sensor</td>
+</tr>
+</tbody></table>
+<h2 id='get-sensor-data'>Get Sensor Data</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"/sensors/3"</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">axios</span> <span class="nx">from</span> <span class="s1">'axios'</span><span class="p">;</span> <span class="c1">// package to make http requests</span>
+
+<span class="nx">axios</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/sensors/3'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">err</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">))</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"statusCode"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"24439"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"sensor_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-03-16T17:37:47.116Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"observations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3.84"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"dateTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-03-15T13:45:00.000-04:00"</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3.84"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"dateTime"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-03-15T14:00:00.000-04:00"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint retrieves a list of data for a specific sensor. Data are organised into records, indexed by the <code>id</code> attribute. The <code>created</code> attribute details when the record was last updated. The <code>properties</code> attribute contains the data for the record. The <code>properties</code> object may be in varying formats. The example shows a <code>properties</code> object for a single data record which contains an <code>observations</code> array of measurements.</p>
+<h3 id='http-request-2'>HTTP Request</h3>
+<p><code>GET /sensors/&lt;ID&gt;</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -390,36 +1236,156 @@ Remember — a happy kitten is an authenticated kitten!
 </thead><tbody>
 <tr>
 <td>ID</td>
-<td>The ID of the kitten to retrieve</td>
+<td>The ID of the sensor to retrieve</td>
 </tr>
 </tbody></table>
-<h2 id='delete-a-specific-kitten'>Delete a Specific Kitten</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<h3 id='response-2'>Response</h3>
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>integer</td>
+<td>Unique data record identifier</td>
+</tr>
+<tr>
+<td>sensor_id</td>
+<td>integer</td>
+<td>The ID of the sensor</td>
+</tr>
+<tr>
+<td>created</td>
+<td>string</td>
+<td>Data record update time (ISO 8601 format)</td>
+</tr>
+<tr>
+<td>properties</td>
+<td>object</td>
+<td>Record data</td>
+</tr>
+</tbody></table>
+<h2 id='create-sensor'>Create Sensor</h2><pre class="highlight shell tab-shell"><code>curl -X POST /sensors -H <span class="s1">'Content-Type: application/json'</span> -H <span class="s1">'x-api-key: key'</span> -d <span class="s1">'{
+    "properties":{
+        "name": "test sensor"
+    },
+    "location":{
+        "lat": 25.0,
+        "lng": -80.0
+    }
+}'</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">axios</span> <span class="nx">from</span> <span class="s1">'axios'</span><span class="p">;</span> <span class="c1">// package to make http requests</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -X DELETE
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">'/sensors'</span><span class="p">,</span> <span class="p">{</span>
+    <span class="na">properties</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">name</span><span class="p">:</span> <span class="s2">"test sensor"</span>
+    <span class="p">},</span>
+    <span class="na">location</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">lat</span><span class="p">:</span> <span class="mf">25.0</span><span class="p">,</span>
+      <span class="na">lng</span><span class="p">:</span> <span class="o">-</span><span class="mf">80.0</span>
+    <span class="p">}</span>
+  <span class="p">},</span> <span class="p">{</span><span class="na">headers</span><span class="p">:</span> <span class="p">{</span><span class="s1">'x-api-key'</span><span class="p">:</span> <span class="s1">'key'</span><span class="p">}})</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">err</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">))</span>
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"deleted"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">":("</span><span class="w">
+    </span><span class="s2">"statusCode"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"FeatureCollection"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"features"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Feature"</span><span class="p">,</span><span class="w">
+                </span><span class="s2">"geometry"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Point"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"coordinates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                        </span><span class="mf">-80.0</span><span class="p">,</span><span class="w">
+                        </span><span class="mf">25.0</span><span class="w">
+                    </span><span class="p">]</span><span class="w">
+                </span><span class="p">},</span><span class="w">
+                </span><span class="s2">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-03-16T18:25:07.613Z"</span><span class="p">,</span><span class="w">
+                    </span><span class="s2">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test sensor"</span><span class="w">
+                    </span><span class="p">}</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+    </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint deletes a specific kitten.</p>
+<p>This endpoint creates a new sensor. On success a GeoJSON feature representing the new sensor is returned.</p>
 <h3 id='http-request-3'>HTTP Request</h3>
-<p><code>DELETE http://example.com/kittens/&lt;ID&gt;</code></p>
+<p><code>POST /sensors</code></p>
+
+<aside class="success">
+This request requires an API key for authorization using the `x-api-key` header.
+</aside>
+<h3 id='new-sensor-attributes'>New Sensor Attributes</h3>
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>properties</td>
+<td>object</td>
+<td>Sensor metadata properties</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>location</td>
+<td>object</td>
+<td>An object with <code>lat</code> and <code>lng</code> numerical values representing the sensor&#39;s latitude and longitude</td>
+<td>Yes</td>
+</tr>
+</tbody></table>
+<h2 id='add-sensor-data'>Add Sensor Data</h2><pre class="highlight shell tab-shell"><code>curl -X POST /sensors/4 -H <span class="s1">'Content-Type: application/json'</span> -H <span class="s1">'x-api-key: key'</span> -d <span class="s1">'{
+    "properties":{
+        "METAR": "CYYQ 182200Z 07002KT 15SM OVC017 06/03 A2966 RMK SC10 3 POLAR BEARS ALNG RNWY=="
+  }
+}'</span>
+
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">axios</span> <span class="nx">from</span> <span class="s1">'axios'</span><span class="p">;</span> <span class="c1">// package to make http requests</span>
+
+<span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">'/sensors/4'</span><span class="p">,</span> <span class="p">{</span>
+    <span class="na">properties</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">METAR</span><span class="p">:</span> <span class="s2">"CYYQ 182200Z 07002KT 15SM OVC017 06/03 A2966 RMK SC10 3 POLAR BEARS ALNG RNWY=="</span>
+    <span class="p">},</span>
+  <span class="p">},</span> <span class="p">{</span><span class="na">headers</span><span class="p">:</span> <span class="p">{</span><span class="s1">'x-api-key'</span><span class="p">:</span> <span class="s1">'key'</span><span class="p">}})</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">err</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">))</span>
+
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"statusCode"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"dataId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"240288"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-03-16T19:30:33.042Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint adds a new data record to the specified sensor. On success the sensor ID and an updated timestamp are returned.</p>
+
+<aside class="success">
+This request requires an API key for authorization using the `x-api-key` header.
+</aside>
+<h3 id='http-request-4'>HTTP Request</h3>
+<p><code>POST /sensors/&lt;ID&gt;</code></p>
 <h3 id='url-parameters-2'>URL Parameters</h3>
 <table><thead>
 <tr>
@@ -429,72 +1395,97 @@ Remember — a happy kitten is an authenticated kitten!
 </thead><tbody>
 <tr>
 <td>ID</td>
-<td>The ID of the kitten to delete</td>
+<td>The ID of the sensor</td>
 </tr>
 </tbody></table>
-<h1 id='errors'>Errors</h1>
-<aside class="notice">This error section is stored in a separate file in `includes/_errors.md`. Slate allows you to optionally separate out your docs into many files...just save them to the `includes` folder and add them to the top of your `index.md`'s frontmatter. Files are included in the order listed.</aside>
-
-<p>The Kittn API uses the following error codes:</p>
-
+<h3 id='new-sensor-attributes-2'>New Sensor Attributes</h3>
 <table><thead>
 <tr>
-<th>Error Code</th>
-<th>Meaning</th>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>400</td>
-<td>Bad Request -- Your request sucks.</td>
-</tr>
-<tr>
-<td>401</td>
-<td>Unauthorized -- Your API key is wrong.</td>
-</tr>
-<tr>
-<td>403</td>
-<td>Forbidden -- The kitten requested is hidden for administrators only.</td>
-</tr>
-<tr>
-<td>404</td>
-<td>Not Found -- The specified kitten could not be found.</td>
-</tr>
-<tr>
-<td>405</td>
-<td>Method Not Allowed -- You tried to access a kitten with an invalid method.</td>
-</tr>
-<tr>
-<td>406</td>
-<td>Not Acceptable -- You requested a format that isn&#39;t json.</td>
-</tr>
-<tr>
-<td>410</td>
-<td>Gone -- The kitten requested has been removed from our servers.</td>
-</tr>
-<tr>
-<td>418</td>
-<td>I&#39;m a teapot.</td>
-</tr>
-<tr>
-<td>429</td>
-<td>Too Many Requests -- You&#39;re requesting too many kittens! Slow down!</td>
-</tr>
-<tr>
-<td>500</td>
-<td>Internal Server Error -- We had a problem with our server. Try again later.</td>
-</tr>
-<tr>
-<td>503</td>
-<td>Service Unavailable -- We&#39;re temporarily offline for maintenance. Please try again later.</td>
+<td>properties</td>
+<td>object</td>
+<td>New data record to be added</td>
+<td>Yes</td>
 </tr>
 </tbody></table>
+<h2 id='delete-sensor-data'>Delete Sensor Data</h2><pre class="highlight sh tab-shell"><code>curl -X DELETE /sensors/4 -H <span class="s1">'Content-Type: application/json'</span> -H <span class="s1">'x-api-key: key'</span> -d <span class="s1">'{
+    "data_id": 2345
+}'</span>
+
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">axios</span> <span class="nx">from</span> <span class="s1">'axios'</span><span class="p">;</span> <span class="c1">// package to make http requests</span>
+<span class="c1">// proposed new form...</span>
+<span class="nx">axios</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="s1">'/sensors/4/2345'</span><span class="p">,</span> <span class="p">{</span><span class="na">headers</span><span class="p">:</span> <span class="p">{</span><span class="s1">'x-api-key'</span><span class="p">:</span> <span class="s1">'key'</span><span class="p">},</span> <span class="p">{</span><span class="s1">'content-type'</span><span class="p">:</span> <span class="s1">'application/json'</span><span class="p">}})</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">err</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">))</span>
+</code></pre><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"statusCode"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"body"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint deletes a data record for the specified sensor. On success the statusCode and an empty body object are returned.</p>
+
+<aside class="success">
+This request requires an API key for authorization using the `x-api-key` header.
+</aside>
+
+<aside class="warning">
+The API doesn't currently return an error if the data record doesn't exist. See <a href="https://github.com/urbanriskmap/cognicity-sensors/issues/11" target=\_blank>GitHub issue</a>
+</aside>
+<h3 id='http-request-5'>HTTP Request</h3>
+<p><code>DELETE /sensors/&lt;ID&gt;</code></p>
+<h1 id='version'>Version</h1><h2 id='get-cognicity-versions'>Get CogniCity Versions</h2>
+<p>Get the CogniCity server and database versions for the chosen instance.</p>
+
+<p>The following attributes are returned:</p>
+
+<ul>
+<li><code>version</code> refers to CogniCity Server <a href="https://github.com/urbanriskmap/cognicity-server/releases">release version</a></li>
+<li><code>schema</code> refers to the CogniCity Database <a href="https://github.com/urbanriskmap/cognicity-schema/releases">release version</a></li>
+</ul>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://data.{instance}.{tld}/'</span><span class="p">)</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">):</span>
+  <span class="n">version</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>        <span class="c"># success</span>
+  <span class="k">print</span><span class="p">(</span><span class="n">version</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+  <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>      <span class="c"># error            </span>
+</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s1">'https://data.{instance}.{tld}/'</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'request'</span><span class="p">);</span>
+<span class="nx">request</span><span class="p">(</span>
+  <span class="p">{</span>
+    <span class="na">method</span><span class="p">:</span> <span class="s1">'GET'</span><span class="p">,</span>
+    <span class="na">uri</span><span class="p">:</span> <span class="s1">'https://data.{instance}.{tld}/'</span>
+  <span class="p">},</span>
+  <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">response</span><span class="p">,</span> <span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">statusCode</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">)</span>
+</code></pre>
+<blockquote>
+<p>Example JSON output:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"version"</span><span class="p">:</span><span class="s2">"3.0.6"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"schema"</span><span class="p">:</span><span class="s2">"3.0.6"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint gets the CogniCity server and database versions.</p>
+<h3 id='http-request'>HTTP Request</h3>
+<p><code>GET https://data.{instance}.{tld}/</code></p>
 
       </div>
       <div class="dark-box">
           <div class="lang-selector">
                 <a href="#" data-language-name="shell">shell</a>
-                <a href="#" data-language-name="ruby">ruby</a>
-                <a href="#" data-language-name="python">python</a>
                 <a href="#" data-language-name="javascript">javascript</a>
           </div>
       </div>
