@@ -35,7 +35,7 @@ axios.get('/sensors', {
 ```json
 {
     "statusCode": 200,
-    "body": {
+    "result": {
         "type": "FeatureCollection",
         "features": [
           {
@@ -124,7 +124,7 @@ axios.get('/sensors/3')
 ```json
 {
   "statusCode": 200,
-  "body": [
+  "result": [
     {
       "id": "24439",
       "sensor_id": "3",
@@ -202,7 +202,7 @@ axios.post('/sensors', {
 ```json
 {
     "statusCode": 200,
-    "body": {
+    "result": {
         "type": "FeatureCollection",
         "features": [
             {
@@ -274,13 +274,11 @@ axios.post('/sensors/4', {
 ```json
 {
     "statusCode": 200,
-    "body": [
-        {
-            "sensor_id": "4",
-            "data_id": "240288",
+    "result": {
+            "id": "4",
+            "dataId": "240288",
             "created": "2018-03-16T19:30:33.042Z"
-        }
-    ]
+    }
 }
 ```
 
@@ -326,7 +324,7 @@ axios.delete('/sensors/4/2345', {headers: {'x-api-key': 'key'}, {'content-type':
 ```json
 {
     "statusCode": 200,
-    "body": []
+    "body": {}
 }
 ```
 This endpoint deletes a data record for the specified sensor. On success the statusCode and an empty body object are returned.
