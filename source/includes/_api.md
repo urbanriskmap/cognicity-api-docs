@@ -14,4 +14,4 @@ CogniCity provides responses in JSON format. The `statusCode` object gives the H
 
 The `/floods` endpoint also supports responses using the Common Alerting Protocol, an XML format.
 
-CogniCity uses the [PostgreSQL BIGINT](https://www.postgresql.org/docs/current/static/datatype-numeric.html){:target="_blank"} data type. As these numbers are potentially greater than `Numbers.MAX_SAFE_INTEGER` they are returned as Strings.
+CogniCity uses the [PostgreSQL BIGINT](https://www.postgresql.org/docs/current/static/datatype-numeric.html) data type. As these numbers are potentially greater than `Numbers.MAX_SAFE_INTEGER` they are returned as Strings.

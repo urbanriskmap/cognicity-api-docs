@@ -12,14 +12,14 @@ Note that these endpoints reside on a separate sensors subdomain.
 ## Get All Sensors
 
 ```shell
-curl "/sensors?bbox=-81,27,-79,25&geoformat=geojson"
+curl "/?bbox=-81,27,-79,25&geoformat=geojson"
 
 ```
 
 ```javascript
 import axios from 'axios'; // package to make http requests
 
-axios.get('/sensors', {
+axios.get('/', {
   params: {
     bbox: '-81,27,-79,25',
     geoformat: 'geojson'
@@ -87,7 +87,7 @@ This endpoint returns a collection of sensors and their properties within the sp
 
 ### HTTP Request
 
-`GET /sensors`
+`GET /`
 
 ### Query Parameters
 
@@ -108,13 +108,13 @@ properties | json | metadata attributes for each sensor |
 ## Get Sensor Data
 
 ```shell
-curl "/sensors/3"
+curl "/3"
 ```
 
 ```javascript
 import axios from 'axios'; // package to make http requests
 
-axios.get('/sensors/3')
+axios.get('/3')
   .then(response => console.log(response))
   .catch(err => console.log(err))
 ```
@@ -150,7 +150,7 @@ This endpoint retrieves a list of data for a specific sensor. Data are organised
 
 ### HTTP Request
 
-`GET /sensors/<ID>`
+`GET /<ID>`
 
 ### URL Parameters
 
@@ -169,7 +169,7 @@ properties | object | Record data |
 ## Create Sensor
 
 ```shell
-curl -X POST /sensors -H 'Content-Type: application/json' -H 'x-api-key: key' -d '{
+curl -X POST / -H 'Content-Type: application/json' -H 'x-api-key: key' -d '{
 	"properties":{
 		"name": "test sensor"
 	},
@@ -184,7 +184,7 @@ curl -X POST /sensors -H 'Content-Type: application/json' -H 'x-api-key: key' -d
 ```javascript
 import axios from 'axios'; // package to make http requests
 
-axios.post('/sensors', {
+axios.post('/', {
     properties: {
       name: "test sensor"
     },
@@ -231,7 +231,7 @@ This endpoint creates a new sensor. On success a GeoJSON feature representing th
 
 ### HTTP Request
 
-`POST /sensors `
+`POST / `
 
 <aside class="success">
 This request requires an API key for authorization using the `x-api-key` header.
@@ -248,7 +248,7 @@ location | object | An object with `lat` and `lng` numerical values representing
 ## Add Sensor Data
 
 ```shell
-curl -X POST /sensors/4 -H 'Content-Type: application/json' -H 'x-api-key: key' -d '{
+curl -X POST /4 -H 'Content-Type: application/json' -H 'x-api-key: key' -d '{
 	"properties":{
 		"METAR": "CYYQ 182200Z 07002KT 15SM OVC017 06/03 A2966 RMK SC10 3 POLAR BEARS ALNG RNWY=="
   }
@@ -259,7 +259,7 @@ curl -X POST /sensors/4 -H 'Content-Type: application/json' -H 'x-api-key: key' 
 ```javascript
 import axios from 'axios'; // package to make http requests
 
-axios.post('/sensors/4', {
+axios.post('/4', {
     properties: {
       METAR: "CYYQ 182200Z 07002KT 15SM OVC017 06/03 A2966 RMK SC10 3 POLAR BEARS ALNG RNWY=="
     },
@@ -290,7 +290,7 @@ This request requires an API key for authorization using the `x-api-key` header.
 
 ### HTTP Request
 
-`POST /sensors/<ID>`
+`POST /<ID>`
 
 ### URL Parameters
 
@@ -307,15 +307,13 @@ properties | object | New data record to be added | Yes
 ## Delete Sensor Data
 
 ```sh
-curl -X DELETE /sensors/4 -H 'Content-Type: application/json' -H 'x-api-key: key' -d '{
-	"data_id": 2345
-}'
+curl -X DELETE /4/2345 -H 'Content-Type: application/json' -H 'x-api-key: key'
 
 ```
 
 ```javascript
-import axios from 'axios'; // package to make http requests
-// proposed new form...
+import axios from 'axios'; // http requests
+// delete record 2345 from sensor 4
 axios.delete('/sensors/4/2345', {headers: {'x-api-key': 'key'}, {'content-type': 'application/json'}})
   .then(response => console.log(response))
   .catch(err => console.log(err))
@@ -333,10 +331,6 @@ This endpoint deletes a data record for the specified sensor. On success the sta
 This request requires an API key for authorization using the `x-api-key` header.
 </aside>
 
-<aside class="warning">
-The API doesn't currently return an error if the data record doesn't exist. See <a href="https://github.com/urbanriskmap/cognicity-sensors/issues/11" target=\_blank>GitHub issue</a>
-</aside>
-
 ### HTTP Request
 
-`DELETE /sensors/<ID>`
+`DELETE /<ID>/<DATAID>`
