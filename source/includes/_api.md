@@ -1,34 +1,17 @@
 
-# API
+# API Responses
 
-> To authorize, use this code:
+> Response structure:
 
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
+```json
+{
+  "statusCode": { Number },
+  "result": { Object | Array }
+}
 ```
 
-```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
-```
+CogniCity provides responses in JSON format. The `statusCode` object gives the HTTP response status for the request (also available in the response header). The `response` property may be either an `Object` or an `Array` depending on the data returned.
 
-```javascript
-const kittn = require('kittn');
+The `/floods` endpoint also supports responses using the Common Alerting Protocol, an XML format.
 
-let api = kittn.authorize('meowmeowmeow');
-```
-
-> Make sure to replace `meowmeowmeow` with your API key.
-
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
-
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
-
-`Authorization: meowmeowmeow`
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
+CogniCity uses the [PostgreSQL BIGINT](https://www.postgresql.org/docs/current/static/datatype-numeric.html){:target="_blank"} data type. As these numbers are potentially greater than `Numbers.MAX_SAFE_INTEGER` they are returned as Strings.
