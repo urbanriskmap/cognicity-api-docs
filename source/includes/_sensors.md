@@ -192,7 +192,7 @@ axios.post('/sensors', {
       lat: 25.0,
       lng: -80.0
     }
-  }, {'headers': {'x-api-key': 'key'}})
+  }, {headers: {'x-api-key': 'key'}})
   .then(response => console.log(response))
   .catch(err => console.log(err))
 ```
@@ -263,7 +263,7 @@ axios.post('/sensors/4', {
     properties: {
       METAR: "CYYQ 182200Z 07002KT 15SM OVC017 06/03 A2966 RMK SC10 3 POLAR BEARS ALNG RNWY=="
     },
-  }, {'headers': {'x-api-key': 'key'}})
+  }, {headers: {'x-api-key': 'key'}})
   .then(response => console.log(response))
   .catch(err => console.log(err))
 
@@ -277,6 +277,7 @@ axios.post('/sensors/4', {
     "body": [
         {
             "sensor_id": "4",
+            "data_id": "240288",
             "created": "2018-03-16T19:30:33.042Z"
         }
     ]
@@ -287,10 +288,6 @@ This endpoint adds a new data record to the specified sensor. On success the sen
 
 <aside class="success">
 This request requires an API key for authorization using the `x-api-key` header.
-</aside>
-
-<aside class="warning">
-The API doesn't currently return the ID of the new data record. See <a href="https://github.com/urbanriskmap/cognicity-sensors/issues/9" target=\_blank>GitHub issue</a>
 </aside>
 
 ### HTTP Request
@@ -321,7 +318,7 @@ curl -X DELETE /sensors/4 -H 'Content-Type: application/json' -H 'x-api-key: key
 ```javascript
 import axios from 'axios'; // package to make http requests
 // proposed new form...
-axios.delete('/sensors/4/2345', {'headers': {'x-api-key': 'key'}, {'content-type': 'application/json'}})
+axios.delete('/sensors/4/2345', {headers: {'x-api-key': 'key'}, {'content-type': 'application/json'}})
   .then(response => console.log(response))
   .catch(err => console.log(err))
 ```
@@ -340,10 +337,6 @@ This request requires an API key for authorization using the `x-api-key` header.
 
 <aside class="warning">
 The API doesn't currently return an error if the data record doesn't exist. See <a href="https://github.com/urbanriskmap/cognicity-sensors/issues/11" target=\_blank>GitHub issue</a>
-</aside>
-
-<aside class="warning">
-The API currently requires a body to be submitted for delete. This breaks the HTTP v1 standard See <a href="https://github.com/urbanriskmap/cognicity-sensors/issues/10" target=\_blank>GitHub issue</a>
 </aside>
 
 ### HTTP Request

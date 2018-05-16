@@ -11,7 +11,7 @@ curl "/cities?geoformat=geojson"
 ```javascript
 import axios from 'axios'; // package to make http requests
 
-axios.get('/sensors', {
+axios.get('/cities', {
   params: {
     geoformat: 'geojson'
     }
