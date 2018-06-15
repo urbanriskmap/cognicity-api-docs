@@ -307,7 +307,7 @@ properties | object | New data record to be added | Yes
 ## Delete Sensor Data
 
 ```sh
-curl -X DELETE /4/2345 -H 'Content-Type: application/json' -H 'x-api-key: key'
+curl -X DELETE /4 -H 'Content-Type: application/json' -H 'x-api-key: key'
 
 ```
 
