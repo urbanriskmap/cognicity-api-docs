@@ -126,8 +126,8 @@ axios.get('/3')
   "statusCode": 200,
   "result": [
     {
-      "id": "24439",
-      "sensor_id": "3",
+      "dataId": "24439",
+      "sensorId": "3",
       "created": "2018-03-16T17:37:47.116Z",
       "properties": {
         "observations": [
@@ -161,8 +161,8 @@ ID | The ID of the sensor to retrieve
 ### Response
 Attribute | Type | Description |
 --------- | --------- | ----------- |
-id | integer | Unique data record identifier |
-sensor_id | integer | The ID of the sensor |
+dataId | integer | Unique data record identifier |
+sensorId | integer | The ID of the sensor |
 created | string | Data record update time (ISO 8601 format) |
 properties | object | Record data |
 
@@ -334,3 +334,34 @@ This request requires an API key for authorization using the `x-api-key` header.
 ### HTTP Request
 
 `DELETE /<ID>/<DATAID>`
+
+## Delete Sensor
+
+```sh
+curl -X DELETE /4/2345 -H 'Content-Type: application/json' -H 'x-api-key: key'
+
+```
+
+```javascript
+import axios from 'axios'; // http requests
+// delete record 2345 from sensor 4
+axios.delete('/sensors/4', {headers: {'x-api-key': 'key'}, {'content-type': 'application/json'}})
+  .then(response => console.log(response))
+  .catch(err => console.log(err))
+```
+
+```json
+{
+    "statusCode": 200,
+    "body": {}
+}
+```
+This endpoint deletes a sensor and any data from that sensor. On success the statusCode and an empty body object are returned.
+
+<aside class="success">
+This request requires an API key for authorization using the `x-api-key` header.
+</aside>
+
+### HTTP Request
+
+`DELETE /<ID>`
