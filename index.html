@@ -1417,7 +1417,7 @@ This request requires an API key for authorization using the `x-api-key` header.
 <td>Yes</td>
 </tr>
 </tbody></table>
-<h2 id='delete-sensor-data'>Delete Sensor Data</h2><pre class="highlight sh tab-shell"><code>curl -X DELETE /4 -H <span class="s1">'Content-Type: application/json'</span> -H <span class="s1">'x-api-key: key'</span>
+<h2 id='delete-sensor-data'>Delete Sensor Data</h2><pre class="highlight sh tab-shell"><code>curl -X DELETE /4/2345 -H <span class="s1">'Content-Type: application/json'</span> -H <span class="s1">'x-api-key: key'</span>
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">axios</span> <span class="nx">from</span> <span class="s1">'axios'</span><span class="p">;</span> <span class="c1">// http requests</span>
 <span class="c1">// delete record 2345 from sensor 4</span>
@@ -1436,7 +1436,7 @@ This request requires an API key for authorization using the `x-api-key` header.
 </aside>
 <h3 id='http-request-5'>HTTP Request</h3>
 <p><code>DELETE /&lt;ID&gt;/&lt;DATAID&gt;</code></p>
-<h2 id='delete-sensor'>Delete Sensor</h2><pre class="highlight sh tab-shell"><code>curl -X DELETE /4/2345 -H <span class="s1">'Content-Type: application/json'</span> -H <span class="s1">'x-api-key: key'</span>
+<h2 id='delete-sensor'>Delete Sensor</h2><pre class="highlight sh tab-shell"><code>curl -X DELETE /4 -H <span class="s1">'Content-Type: application/json'</span> -H <span class="s1">'x-api-key: key'</span>
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">axios</span> <span class="nx">from</span> <span class="s1">'axios'</span><span class="p">;</span> <span class="c1">// http requests</span>
 <span class="c1">// delete record 2345 from sensor 4</span>
@@ -1464,15 +1464,7 @@ This request requires an API key for authorization using the `x-api-key` header.
 <li><code>version</code> refers to CogniCity Server <a href="https://github.com/urbanriskmap/cognicity-server/releases">release version</a></li>
 <li><code>schema</code> refers to the CogniCity Database <a href="https://github.com/urbanriskmap/cognicity-schema/releases">release version</a></li>
 </ul>
-<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span>
-
-<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://data.{instance}.{tld}/'</span><span class="p">)</span>
-<span class="k">if</span> <span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">):</span>
-  <span class="n">version</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>        <span class="c"># success</span>
-  <span class="k">print</span><span class="p">(</span><span class="n">version</span><span class="p">)</span>
-<span class="k">else</span><span class="p">:</span>
-  <span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>      <span class="c"># error            </span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s1">'https://data.{instance}.{tld}/'</span>
+<pre class="highlight shell tab-shell"><code>curl <span class="s1">'https://data.{instance}.{tld}/'</span>
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'request'</span><span class="p">);</span>
 <span class="nx">request</span><span class="p">(</span>
   <span class="p">{</span>
