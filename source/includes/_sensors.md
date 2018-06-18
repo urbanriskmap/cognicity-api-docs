@@ -275,8 +275,8 @@ axios.post('/4', {
 {
     "statusCode": 200,
     "result": {
-            "id": "4",
             "dataId": "240288",
+            "sensorId": "4",
             "created": "2018-03-16T19:30:33.042Z"
     }
 }
