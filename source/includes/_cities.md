@@ -1,6 +1,6 @@
 # Cities
 
-CogniCity deployments are organised by city. Cities are delineated by a unique code and bounding box geometries.
+CogniCity deployments are organised by city. Cities are delineated by a unique code and bounding box geometries. Note that the term "city" is used somewhat arbitrairily for organisational purposes. Cities may refer to an urban conurbation or wider metropolitan area. For example in the United States "Broward" is used to refer to the area of Broward County which includes multiple cities.
 
 ## Get All Cities
 
@@ -35,133 +35,31 @@ axios.get('/cities', {
           "coordinates": [
             [
               [
-                106.48,
-                -6.733
+                -80.56454636,
+                26.4393434677
               ],
               [
-                107.175,
-                -6.733
+                -80.011194015,
+                26.4376911515
               ],
               [
-                107.175,
-                -5.88
+                -80.0147106747,
+                25.8743814793
               ],
               [
-                106.48,
-                -5.88
+                -80.5690752042,
+                25.8759818852
               ],
               [
-                106.48,
-                -6.733
+                -80.56454636,
+                26.4393434677
               ]
             ]
           ]
         },
         "properties": {
-          "code": "jbd",
-          "name": "Jabodetabek"
-        }
-      },
-      {
-        "type": "Feature",
-        "geometry": {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [
-                107.369,
-                -7.165
-              ],
-              [
-                107.931,
-                -7.165
-              ],
-              [
-                107.931,
-                -6.668
-              ],
-              [
-                107.369,
-                -6.668
-              ],
-              [
-                107.369,
-                -7.165
-              ]
-            ]
-          ]
-        },
-        "properties": {
-          "code": "bdg",
-          "name": "Bandung"
-        }
-      },
-      {
-        "type": "Feature",
-        "geometry": {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [
-                112.3975,
-                -7.5499
-              ],
-              [
-                113.0318,
-                -7.5499
-              ],
-              [
-                113.0318,
-                -7.0143
-              ],
-              [
-                112.3975,
-                -7.0143
-              ],
-              [
-                112.3975,
-                -7.5499
-              ]
-            ]
-          ]
-        },
-        "properties": {
-          "code": "sby",
-          "name": "Surabaya"
-        }
-      },
-      {
-        "type": "Feature",
-        "geometry": {
-          "type": "Polygon",
-          "coordinates": [
-            [
-              [
-                110.057,
-                -7.33525
-              ],
-              [
-                110.715,
-                -7.33525
-              ],
-              [
-                110.715,
-                -6.72701
-              ],
-              [
-                110.057,
-                -6.72701
-              ],
-              [
-                110.057,
-                -7.33525
-              ]
-            ]
-          ]
-        },
-        "properties": {
-          "code": "srg",
-          "name": "Semarang"
+          "code": "brw",
+          "name": "broward"
         }
       }
     ]
@@ -173,7 +71,7 @@ This endpoint returns all cities covered by the CogniCity instance, including th
 
 ### HTTP Request
 
-`GET http://example.com/api/kittens`
+`GET /cities`
 
 ### Query Parameters
 

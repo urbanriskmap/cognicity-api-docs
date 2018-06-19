@@ -1,11 +1,11 @@
 # Reports
 
-The reports endpoint contains CogniCity reports as GeoJSON or TopoJSON features. Reports are represented by point-geometries and their accompanying properties (e.g. description, time etc.). Note that all times are UTC, and geometries use the WGS 1984 coordinate system.
+The reports endpoint contains CogniCity reports submitted by the public. Reports are represented by point-geometries and their accompanying properties (e.g. description, time etc.). Note that all times are UTC, and geometries use the WGS 1984 coordinate system.
 
 ## Get All Reports
 
 ```shell
-curl "/reports?city=jbd&geoformat=geojson"
+curl "/reports?city=brw&geoformat=geojson"
 
 ```
 
@@ -14,7 +14,7 @@ import axios from 'axios'; // package to make http requests
 
 axios.get('/reports', {
   params: {
-    city: 'jbd',
+    city: 'brw',
     geoformat: 'geojson'
     }
   })
@@ -36,29 +36,29 @@ axios.get('/reports', {
         "geometry": {
           "type": "Point",
           "coordinates": [
-            106.835474968,
-            -6.1795742571
+            -80.0946879387,
+            26.1381793399
           ]
         },
         "properties": {
-          "pkey": "7904",
-          "created_at": "2018-03-22T05:07:18.525Z",
+          "pkey": "94",
+          "created_at": "2018-06-19T17:53:43.229Z",
           "source": "grasp",
           "status": "confirmed",
-          "url": "8dddfd33-d995-4061-863e-57414993aa35",
-          "image_url": "https://images-dev.petabencana.id/8dddfd33-d995-4061-863e-57414993aa35.jpg",
+          "url": "ad63ccb2-024f-4617-81a1-4e8782499afa",
+          "image_url": "https://images.riskmap.us/ad63ccb2-024f-4617-81a1-4e8782499afa.jpg",
           "disaster_type": "flood",
           "report_data": {
             "report_type": "flood",
-            "flood_depth": 92
+            "flood_depth": 8
           },
           "tags": {
-            "district_id": "3173",
-            "local_area_id": "508",
-            "instance_region_code": "jbd"
+            "district_id": null,
+            "local_area_id": null,
+            "instance_region_code": "brw"
           },
           "title": null,
-          "text": "Test flood reporting"
+          "text": "Test flood report (MIT)"
         }
       }
     ]
@@ -76,15 +76,14 @@ This endpoint retrieves all reports.  Note that all times are UTC, and geometrie
 
 Parameter | Required | Description | Default | Example |
 --------- | ------- | ------------ | ------- | ------- |
-city | false | Filter reports by 3-letter city code (see cities endpoint for details). If no city specified then reports for all cities in CogniCity instance are returned | none | jbd |
+city | false | Filter reports by 3-letter city code (see cities endpoint for details). If no city specified then reports for all cities in CogniCity instance are returned | none | brw |
 geoformat | false | Specifies either 'geojson' or 'topojson' | topojson | geojson |
 timeperiod | false | Time period in seconds to filter reports by, must be strictly between 1 and 604800 (1 week) | 3600 (1 hour) | 3600 | 3600 |
 
 ## Archive
 
-
 ```shell
-curl "/reports/archive?start=2017-11-20T00:00:00%2B0700&end=2017-11-22T15:00:00%2B0700"
+curl "/reports/archive?city=brw&geoformat=geojson&start=2018-06-15T00:00:00-0400&end=2018-06-19T15:00:00-0400"
 
 ```
 
@@ -93,10 +92,10 @@ import axios from 'axios'; // package to make http requests
 
 axios.get('/reports/archive', {
   params: {
-    city: 'jbd',
+    city: 'brw',
     geoformat: 'geojson',
-    start: '2017-11-20T00:00:00+0700',
-    end: '2017-11-22T15:00:00+0700'
+    start: '2018-06-15T00:00:00-0400',
+    end: '2017-06-19T15:00:00-0400'
     }
   })
   .then(response => console.log(response))
@@ -117,29 +116,29 @@ axios.get('/reports/archive', {
         "geometry": {
           "type": "Point",
           "coordinates": [
-            106.835474968,
-            -6.1795742571
+            -80.0977993011,
+            26.140336808
           ]
         },
         "properties": {
-          "pkey": "7904",
-          "created_at": "2018-03-22T05:07:18.525Z",
+          "pkey": "92",
+          "created_at": "2018-06-15T18:48:57.084Z",
           "source": "grasp",
           "status": "confirmed",
-          "url": "8dddfd33-d995-4061-863e-57414993aa35",
-          "image_url": "https://images-dev.petabencana.id/8dddfd33-d995-4061-863e-57414993aa35.jpg",
+          "url": "d56c91dc-15c9-4d3b-83f1-cc86b94ae330",
+          "image_url": null,
           "disaster_type": "flood",
           "report_data": {
             "report_type": "flood",
-            "flood_depth": 92
+            "flood_depth": 10
           },
           "tags": {
-            "district_id": "3173",
-            "local_area_id": "508",
-            "instance_region_code": "jbd"
+            "district_id": null,
+            "local_area_id": "1375",
+            "instance_region_code": "brw"
           },
           "title": null,
-          "text": "Test flood reporting"
+          "text": "test flood"
         }
       }
     ]
@@ -157,10 +156,10 @@ This endpoint retrieves reports within the specified time period. The maximum du
 
 Parameter | Required | Description | Default | Example |
 --------- | ------- | ------------ | ------- | ------- |
-city | false | Filter reports by 3-letter city code (see cities endpoint for details). If no city specified then reports for all cities in CogniCity instance are returned | none | jbd |
+city | false | Filter reports by 3-letter city code (see cities endpoint for details). If no city specified then reports for all cities in CogniCity instance are returned | none | brw |
 geoformat | false | Specifies either 'geojson' or 'topojson' | topojson | geojson |
-start | true | Start time for archive period in ISO 8601 string format | none | 2017-02-21T07:00:00+0700
-end | true | End time for archive period in ISO 8601 string format. Must bet within 604800 seconds (1 week) from start time | none | 2017-02-21T19:00:00+0700
+start | true | Start time for archive period in ISO 8601 string format | none | 2018-06-15T00:00:00-0400
+end | true | End time for archive period in ISO 8601 string format. Must bet within 604800 seconds (1 week) from start time | none | 2017-06-19T15:00:00-0400
 
 <aside class="success">
 Start and end times require UTC offsets using either '+' or '-' which need to be URL encoded as '%2B' and '%2D' respectively.

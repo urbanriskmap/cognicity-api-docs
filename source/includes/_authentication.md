@@ -19,7 +19,7 @@ axios.get('/endpoint', {headers: {'Authorization': 'token'}})
   .catch(err => console.log(err))
 ```
 
-Some CogniCity endpoints require authentication in the form of either an API key or a JSON Web Token. Authentication keys or tokens are passed via the `x-api-key` or `Authorization` headers. Endpoints requiring authentication are detailed below.
+Some CogniCity endpoints require authentication in the form of either an API key or a JSON Web Token. Authentication keys and tokens are passed via the `x-api-key` or `Authorization` header respectively. Endpoints requiring authentication are detailed below.
 
 `x-api-key: key`
 
