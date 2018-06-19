@@ -293,24 +293,24 @@
         <h1 id='introduction'>Introduction</h1>
 <p>Welcome to the CogniCity API. CogniCity is the engine that powers Urban Risk Map. You can use this API to access CogniCity data including flood reports and sensor measurements that are stored in the CogniCity database. You can view example requests in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
 
-<p>CogniCity deployments are organised into <em>instances</em> for different countries. Currently available instances:</p>
+<p>CogniCity deployments are organised into <em>instances</em> for different countries. Each instance may support mapping for one of more cities. Currently available instances:</p>
 
 <ul>
-<li><a href="https://petabencana.id">PetaBencana</a></li>
-<li><a href="https://riskmap.us">RiskMap US</a></li>
-<li><a href="https://riskmap.in">RiskMap India</a></li>
+<li><a href="https://petabencana.id">petabencana.id</a></li>
+<li><a href="https://riskmap.us">riskmap.us</a></li>
+<li><a href="https://riskmap.in">riskmap.in</a></li>
 </ul>
 
 <p>The CogniCity API is accessible via the <em>data subdomain</em> of each instance, for example:</p>
 
 <ul>
-<li><a href="https://data.petabencana.id">data.petabencana.id</a></li>
+<li><a href="https://data.riskmap.us">data.riskmap.us</a></li>
 </ul>
 
 <p>The CogniCity Sensors API is accessible via the <em>sensors subdomain</em> of each instance, for example:</p>
 
 <ul>
-<li><a href="https://sensors.petabencana.id">sensors.petabencana.id</a></li>
+<li><a href="https://sensors.riskmap.us">sensors.riskmap.us</a></li>
 </ul>
 <h1 id='api-responses'>API Responses</h1>
 <blockquote>
@@ -323,7 +323,9 @@
 </span></code></pre>
 <p>CogniCity provides responses in JSON format. The <code>statusCode</code> object gives the HTTP response status for the request (also available in the response header). The <code>response</code> property may be either an <code>Object</code> or an <code>Array</code> depending on the data returned.</p>
 
-<p>The <code>/floods</code> endpoint also supports responses using the Common Alerting Protocol, an XML format.</p>
+<p>Where responses contain geographical information both the <a href="http://geojson.org/">GeoJSON</a> and <a href="https://github.com/topojson/topojson">TopoJSON</a> formats are supported.</p>
+
+<p>The <code>/floods</code> endpoint also supports responses using the <a href="https://docs.oasis-open.org/emergency/cap/v1.2/CAP-v1.2-os.html">Common Alerting Protocol</a>, an XML format.</p>
 
 <p>CogniCity uses the <a href="https://www.postgresql.org/docs/current/static/datatype-numeric.html">PostgreSQL BIGINT</a> data type. As these numbers are potentially greater than <code>Numbers.MAX_SAFE_INTEGER</code> they are returned as Strings.</p>
 <h1 id='authentication'>Authentication</h1><pre class="highlight shell tab-shell"><code>curl <span class="s2">"endpoint"</span> -H <span class="s2">"Authorization: token or key"</span>
@@ -340,7 +342,7 @@
   <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">))</span>
   <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">err</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">))</span>
 </code></pre>
-<p>Some CogniCity endpoints require authentication in the form of either an API key or a JSON Web Token. Authentication keys or tokens are passed via the <code>x-api-key</code> or <code>Authorization</code> headers. Endpoints requiring authentication are detailed below.</p>
+<p>Some CogniCity endpoints require authentication in the form of either an API key or a JSON Web Token. Authentication keys and tokens are passed via the <code>x-api-key</code> or <code>Authorization</code> header respectively. Endpoints requiring authentication are detailed below.</p>
 
 <p><code>x-api-key: key</code></p>
 
@@ -350,7 +352,7 @@
 All requests should be made via https.
 </aside>
 <h1 id='cities'>Cities</h1>
-<p>CogniCity deployments are organised by city. Cities are delineated by a unique code and bounding box geometries.</p>
+<p>CogniCity deployments are organised by city. Cities are delineated by a unique code and bounding box geometries. Note that the term &quot;city&quot; is used somewhat arbitrairily for organisational purposes. Cities may refer to an urban conurbation or wider metropolitan area. For example in the United States &quot;Broward&quot; is used to refer to the area of Broward County which includes multiple cities.</p>
 <h2 id='get-all-cities'>Get All Cities</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"/cities?geoformat=geojson"</span>
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">axios</span> <span class="nx">from</span> <span class="s1">'axios'</span><span class="p">;</span> <span class="c1">// package to make http requests</span>
 
@@ -377,133 +379,31 @@ All requests should be made via https.
           </span><span class="s2">"coordinates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
             </span><span class="p">[</span><span class="w">
               </span><span class="p">[</span><span class="w">
-                </span><span class="mf">106.48</span><span class="p">,</span><span class="w">
-                </span><span class="mf">-6.733</span><span class="w">
+                </span><span class="mf">-80.56454636</span><span class="p">,</span><span class="w">
+                </span><span class="mf">26.4393434677</span><span class="w">
               </span><span class="p">],</span><span class="w">
               </span><span class="p">[</span><span class="w">
-                </span><span class="mf">107.175</span><span class="p">,</span><span class="w">
-                </span><span class="mf">-6.733</span><span class="w">
+                </span><span class="mf">-80.011194015</span><span class="p">,</span><span class="w">
+                </span><span class="mf">26.4376911515</span><span class="w">
               </span><span class="p">],</span><span class="w">
               </span><span class="p">[</span><span class="w">
-                </span><span class="mf">107.175</span><span class="p">,</span><span class="w">
-                </span><span class="mf">-5.88</span><span class="w">
+                </span><span class="mf">-80.0147106747</span><span class="p">,</span><span class="w">
+                </span><span class="mf">25.8743814793</span><span class="w">
               </span><span class="p">],</span><span class="w">
               </span><span class="p">[</span><span class="w">
-                </span><span class="mf">106.48</span><span class="p">,</span><span class="w">
-                </span><span class="mf">-5.88</span><span class="w">
+                </span><span class="mf">-80.5690752042</span><span class="p">,</span><span class="w">
+                </span><span class="mf">25.8759818852</span><span class="w">
               </span><span class="p">],</span><span class="w">
               </span><span class="p">[</span><span class="w">
-                </span><span class="mf">106.48</span><span class="p">,</span><span class="w">
-                </span><span class="mf">-6.733</span><span class="w">
+                </span><span class="mf">-80.56454636</span><span class="p">,</span><span class="w">
+                </span><span class="mf">26.4393434677</span><span class="w">
               </span><span class="p">]</span><span class="w">
             </span><span class="p">]</span><span class="w">
           </span><span class="p">]</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="s2">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"jbd"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jabodetabek"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Feature"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"geometry"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Polygon"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"coordinates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-            </span><span class="p">[</span><span class="w">
-              </span><span class="p">[</span><span class="w">
-                </span><span class="mf">107.369</span><span class="p">,</span><span class="w">
-                </span><span class="mf">-7.165</span><span class="w">
-              </span><span class="p">],</span><span class="w">
-              </span><span class="p">[</span><span class="w">
-                </span><span class="mf">107.931</span><span class="p">,</span><span class="w">
-                </span><span class="mf">-7.165</span><span class="w">
-              </span><span class="p">],</span><span class="w">
-              </span><span class="p">[</span><span class="w">
-                </span><span class="mf">107.931</span><span class="p">,</span><span class="w">
-                </span><span class="mf">-6.668</span><span class="w">
-              </span><span class="p">],</span><span class="w">
-              </span><span class="p">[</span><span class="w">
-                </span><span class="mf">107.369</span><span class="p">,</span><span class="w">
-                </span><span class="mf">-6.668</span><span class="w">
-              </span><span class="p">],</span><span class="w">
-              </span><span class="p">[</span><span class="w">
-                </span><span class="mf">107.369</span><span class="p">,</span><span class="w">
-                </span><span class="mf">-7.165</span><span class="w">
-              </span><span class="p">]</span><span class="w">
-            </span><span class="p">]</span><span class="w">
-          </span><span class="p">]</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bdg"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bandung"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Feature"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"geometry"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Polygon"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"coordinates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-            </span><span class="p">[</span><span class="w">
-              </span><span class="p">[</span><span class="w">
-                </span><span class="mf">112.3975</span><span class="p">,</span><span class="w">
-                </span><span class="mf">-7.5499</span><span class="w">
-              </span><span class="p">],</span><span class="w">
-              </span><span class="p">[</span><span class="w">
-                </span><span class="mf">113.0318</span><span class="p">,</span><span class="w">
-                </span><span class="mf">-7.5499</span><span class="w">
-              </span><span class="p">],</span><span class="w">
-              </span><span class="p">[</span><span class="w">
-                </span><span class="mf">113.0318</span><span class="p">,</span><span class="w">
-                </span><span class="mf">-7.0143</span><span class="w">
-              </span><span class="p">],</span><span class="w">
-              </span><span class="p">[</span><span class="w">
-                </span><span class="mf">112.3975</span><span class="p">,</span><span class="w">
-                </span><span class="mf">-7.0143</span><span class="w">
-              </span><span class="p">],</span><span class="w">
-              </span><span class="p">[</span><span class="w">
-                </span><span class="mf">112.3975</span><span class="p">,</span><span class="w">
-                </span><span class="mf">-7.5499</span><span class="w">
-              </span><span class="p">]</span><span class="w">
-            </span><span class="p">]</span><span class="w">
-          </span><span class="p">]</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sby"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Surabaya"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Feature"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"geometry"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Polygon"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"coordinates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-            </span><span class="p">[</span><span class="w">
-              </span><span class="p">[</span><span class="w">
-                </span><span class="mf">110.057</span><span class="p">,</span><span class="w">
-                </span><span class="mf">-7.33525</span><span class="w">
-              </span><span class="p">],</span><span class="w">
-              </span><span class="p">[</span><span class="w">
-                </span><span class="mf">110.715</span><span class="p">,</span><span class="w">
-                </span><span class="mf">-7.33525</span><span class="w">
-              </span><span class="p">],</span><span class="w">
-              </span><span class="p">[</span><span class="w">
-                </span><span class="mf">110.715</span><span class="p">,</span><span class="w">
-                </span><span class="mf">-6.72701</span><span class="w">
-              </span><span class="p">],</span><span class="w">
-              </span><span class="p">[</span><span class="w">
-                </span><span class="mf">110.057</span><span class="p">,</span><span class="w">
-                </span><span class="mf">-6.72701</span><span class="w">
-              </span><span class="p">],</span><span class="w">
-              </span><span class="p">[</span><span class="w">
-                </span><span class="mf">110.057</span><span class="p">,</span><span class="w">
-                </span><span class="mf">-7.33525</span><span class="w">
-              </span><span class="p">]</span><span class="w">
-            </span><span class="p">]</span><span class="w">
-          </span><span class="p">]</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="s2">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"srg"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Semarang"</span><span class="w">
+          </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"brw"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"broward"</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
@@ -512,7 +412,7 @@ All requests should be made via https.
 </span></code></pre>
 <p>This endpoint returns all cities covered by the CogniCity instance, including their three letter code and bounding box geometry.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code>GET http://example.com/api/kittens</code></p>
+<p><code>GET /cities</code></p>
 <h3 id='query-parameters'>Query Parameters</h3>
 <table><thead>
 <tr>
@@ -551,14 +451,14 @@ All requests should be made via https.
 </tr>
 </tbody></table>
 <h1 id='reports'>Reports</h1>
-<p>The reports endpoint contains CogniCity reports as GeoJSON or TopoJSON features. Reports are represented by point-geometries and their accompanying properties (e.g. description, time etc.). Note that all times are UTC, and geometries use the WGS 1984 coordinate system.</p>
-<h2 id='get-all-reports'>Get All Reports</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"/reports?city=jbd&amp;geoformat=geojson"</span>
+<p>The reports endpoint contains CogniCity reports submitted by the public. Reports are represented by point-geometries and their accompanying properties (e.g. description, time etc.). Note that all times are UTC, and geometries use the WGS 1984 coordinate system.</p>
+<h2 id='get-all-reports'>Get All Reports</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"/reports?city=brw&amp;geoformat=geojson"</span>
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">axios</span> <span class="nx">from</span> <span class="s1">'axios'</span><span class="p">;</span> <span class="c1">// package to make http requests</span>
 
 <span class="nx">axios</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/reports'</span><span class="p">,</span> <span class="p">{</span>
   <span class="na">params</span><span class="p">:</span> <span class="p">{</span>
-    <span class="na">city</span><span class="p">:</span> <span class="s1">'jbd'</span><span class="p">,</span>
+    <span class="na">city</span><span class="p">:</span> <span class="s1">'brw'</span><span class="p">,</span>
     <span class="na">geoformat</span><span class="p">:</span> <span class="s1">'geojson'</span>
     <span class="p">}</span>
   <span class="p">})</span>
@@ -579,29 +479,29 @@ All requests should be made via https.
         </span><span class="s2">"geometry"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Point"</span><span class="p">,</span><span class="w">
           </span><span class="s2">"coordinates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-            </span><span class="mf">106.835474968</span><span class="p">,</span><span class="w">
-            </span><span class="mf">-6.1795742571</span><span class="w">
+            </span><span class="mf">-80.0946879387</span><span class="p">,</span><span class="w">
+            </span><span class="mf">26.1381793399</span><span class="w">
           </span><span class="p">]</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="s2">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"pkey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7904"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-03-22T05:07:18.525Z"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"pkey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"94"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-06-19T17:53:43.229Z"</span><span class="p">,</span><span class="w">
           </span><span class="s2">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"grasp"</span><span class="p">,</span><span class="w">
           </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"confirmed"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8dddfd33-d995-4061-863e-57414993aa35"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"image_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://images-dev.petabencana.id/8dddfd33-d995-4061-863e-57414993aa35.jpg"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ad63ccb2-024f-4617-81a1-4e8782499afa"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"image_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://images.riskmap.us/ad63ccb2-024f-4617-81a1-4e8782499afa.jpg"</span><span class="p">,</span><span class="w">
           </span><span class="s2">"disaster_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"flood"</span><span class="p">,</span><span class="w">
           </span><span class="s2">"report_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="s2">"report_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"flood"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"flood_depth"</span><span class="p">:</span><span class="w"> </span><span class="mi">92</span><span class="w">
+            </span><span class="s2">"flood_depth"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="w">
           </span><span class="p">},</span><span class="w">
           </span><span class="s2">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"district_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3173"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"local_area_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"508"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"instance_region_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"jbd"</span><span class="w">
+            </span><span class="s2">"district_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"local_area_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"instance_region_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"brw"</span><span class="w">
           </span><span class="p">},</span><span class="w">
           </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test flood reporting"</span><span class="w">
+          </span><span class="s2">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test flood report (MIT)"</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
@@ -626,7 +526,7 @@ All requests should be made via https.
 <td>false</td>
 <td>Filter reports by 3-letter city code (see cities endpoint for details). If no city specified then reports for all cities in CogniCity instance are returned</td>
 <td>none</td>
-<td>jbd</td>
+<td>brw</td>
 </tr>
 <tr>
 <td>geoformat</td>
@@ -643,16 +543,16 @@ All requests should be made via https.
 <td>3600</td>
 </tr>
 </tbody></table>
-<h2 id='archive'>Archive</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"/reports/archive?start=2017-11-20T00:00:00%2B0700&amp;end=2017-11-22T15:00:00%2B0700"</span>
+<h2 id='archive'>Archive</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"/reports/archive?city=brw&amp;geoformat=geojson&amp;start=2018-06-15T00:00:00-0400&amp;end=2018-06-19T15:00:00-0400"</span>
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">axios</span> <span class="nx">from</span> <span class="s1">'axios'</span><span class="p">;</span> <span class="c1">// package to make http requests</span>
 
 <span class="nx">axios</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/reports/archive'</span><span class="p">,</span> <span class="p">{</span>
   <span class="na">params</span><span class="p">:</span> <span class="p">{</span>
-    <span class="na">city</span><span class="p">:</span> <span class="s1">'jbd'</span><span class="p">,</span>
+    <span class="na">city</span><span class="p">:</span> <span class="s1">'brw'</span><span class="p">,</span>
     <span class="na">geoformat</span><span class="p">:</span> <span class="s1">'geojson'</span><span class="p">,</span>
-    <span class="na">start</span><span class="p">:</span> <span class="s1">'2017-11-20T00:00:00+0700'</span><span class="p">,</span>
-    <span class="na">end</span><span class="p">:</span> <span class="s1">'2017-11-22T15:00:00+0700'</span>
+    <span class="na">start</span><span class="p">:</span> <span class="s1">'2018-06-15T00:00:00-0400'</span><span class="p">,</span>
+    <span class="na">end</span><span class="p">:</span> <span class="s1">'2017-06-19T15:00:00-0400'</span>
     <span class="p">}</span>
   <span class="p">})</span>
   <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">))</span>
@@ -672,29 +572,29 @@ All requests should be made via https.
         </span><span class="s2">"geometry"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Point"</span><span class="p">,</span><span class="w">
           </span><span class="s2">"coordinates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-            </span><span class="mf">106.835474968</span><span class="p">,</span><span class="w">
-            </span><span class="mf">-6.1795742571</span><span class="w">
+            </span><span class="mf">-80.0977993011</span><span class="p">,</span><span class="w">
+            </span><span class="mf">26.140336808</span><span class="w">
           </span><span class="p">]</span><span class="w">
         </span><span class="p">},</span><span class="w">
         </span><span class="s2">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="s2">"pkey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7904"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-03-22T05:07:18.525Z"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"pkey"</span><span class="p">:</span><span class="w"> </span><span class="s2">"92"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-06-15T18:48:57.084Z"</span><span class="p">,</span><span class="w">
           </span><span class="s2">"source"</span><span class="p">:</span><span class="w"> </span><span class="s2">"grasp"</span><span class="p">,</span><span class="w">
           </span><span class="s2">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"confirmed"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8dddfd33-d995-4061-863e-57414993aa35"</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"image_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://images-dev.petabencana.id/8dddfd33-d995-4061-863e-57414993aa35.jpg"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"d56c91dc-15c9-4d3b-83f1-cc86b94ae330"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"image_url"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
           </span><span class="s2">"disaster_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"flood"</span><span class="p">,</span><span class="w">
           </span><span class="s2">"report_data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="s2">"report_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"flood"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"flood_depth"</span><span class="p">:</span><span class="w"> </span><span class="mi">92</span><span class="w">
+            </span><span class="s2">"flood_depth"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
           </span><span class="p">},</span><span class="w">
           </span><span class="s2">"tags"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"district_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3173"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"local_area_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"508"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"instance_region_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"jbd"</span><span class="w">
+            </span><span class="s2">"district_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"local_area_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1375"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"instance_region_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"brw"</span><span class="w">
           </span><span class="p">},</span><span class="w">
           </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-          </span><span class="s2">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test flood reporting"</span><span class="w">
+          </span><span class="s2">"text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test flood"</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">]</span><span class="w">
@@ -719,7 +619,7 @@ All requests should be made via https.
 <td>false</td>
 <td>Filter reports by 3-letter city code (see cities endpoint for details). If no city specified then reports for all cities in CogniCity instance are returned</td>
 <td>none</td>
-<td>jbd</td>
+<td>brw</td>
 </tr>
 <tr>
 <td>geoformat</td>
@@ -733,14 +633,14 @@ All requests should be made via https.
 <td>true</td>
 <td>Start time for archive period in ISO 8601 string format</td>
 <td>none</td>
-<td>2017-02-21T07:00:00+0700</td>
+<td>2018-06-15T00:00:00-0400</td>
 </tr>
 <tr>
 <td>end</td>
 <td>true</td>
 <td>End time for archive period in ISO 8601 string format. Must bet within 604800 seconds (1 week) from start time</td>
 <td>none</td>
-<td>2017-02-21T19:00:00+0700</td>
+<td>2017-06-19T15:00:00-0400</td>
 </tr>
 </tbody></table>
 
