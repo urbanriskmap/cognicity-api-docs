@@ -6,7 +6,7 @@ language_tabs: # must be one of https://git.io/vQNgJ
   - javascript
 
 toc_footers:
-  - <a href='https://github.com/urbanriskmap/'>CogniCity & Urban Risk Map on GitHub</a>
+  - <a href='https://github.com/urbanriskmap/'>CogniCity & Risk Map on GitHub</a>
   - <a href='https://github.com/lord/slate'>Documentation Powered by Slate</a>
 
 includes:
