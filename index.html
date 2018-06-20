@@ -385,7 +385,11 @@ All requests should be made via https.
 <p><code>GET /</code></p>
 <h1 id='data-api'>Data API</h1>
 <p>The data API is...</p>
-<h2 id='cards'>Cards</h2><h3 id='todo'>TODO</h3><h2 id='cities'>Cities</h2>
+<h2 id='cards'>Cards</h2><h3 id='todo'>TODO</h3>
+<ul>
+<li>the cards api...</li>
+</ul>
+<h2 id='cities'>Cities</h2>
 <p>CogniCity deployments are organised by city. Cities are delineated by a unique code and bounding box geometries. Note that the term &quot;city&quot; is used somewhat arbitrairily for organisational purposes. Cities may refer to an urban conurbation or wider metropolitan area. For example in the United States &quot;Broward&quot; is used to refer to Broward County which includes multiple cities and non-urban areas.</p>
 <h3 id='get-all-cities'>Get All Cities</h3><pre class="highlight shell tab-shell"><code>curl <span class="s2">"/cities?geoformat=geojson"</span>
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">axios</span> <span class="nx">from</span> <span class="s1">'axios'</span><span class="p">;</span> <span class="c1">// package to make http requests</span>
