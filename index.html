@@ -1166,6 +1166,22 @@ This request requires an API key for authorization using the `x-api-key` header.
 </aside>
 <h3 id='http-request-5'>HTTP Request</h3>
 <p><code>DELETE /&lt;ID&gt;/&lt;DATAID&gt;</code></p>
+<h3 id='url-parameters-3'>URL Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>ID</td>
+<td>The ID of the sensor</td>
+</tr>
+<tr>
+<td>DATAID</td>
+<td>The ID of the data record to delete</td>
+</tr>
+</tbody></table>
 <h2 id='delete-sensor'>Delete Sensor</h2><pre class="highlight sh tab-shell"><code>curl -X DELETE /4 -H <span class="s1">'Content-Type: application/json'</span> -H <span class="s1">'x-api-key: key'</span>
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">axios</span> <span class="nx">from</span> <span class="s1">'axios'</span><span class="p">;</span> <span class="c1">// http requests</span>
