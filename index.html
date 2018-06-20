@@ -927,7 +927,7 @@ Note that these endpoints reside on a separate sensors subdomain.
 <p>This endpoint retrieves a list of data for a specific sensor. Data are organised into records, indexed by the <code>id</code> attribute. The <code>created</code> attribute details when the record was last updated. The <code>properties</code> attribute contains the data for the record. The <code>properties</code> object may be in varying formats. The example shows a <code>properties</code> object for a single data record which contains an <code>observations</code> array of measurements. Data records are returned in reverse chronological order by <code>created</code> date.</p>
 
 <aside class="warn">
-When a sensor does not have any data associated with it the endpoint will return a 404 error "Sensor [ID] not found".
+When a sensor does not have any data associated with it the endpoint will return a 404 error "No data found for sensor [ID]".
 </aside>
 <h3 id='http-request-2'>HTTP Request</h3>
 <p><code>GET /&lt;ID&gt;</code></p>
