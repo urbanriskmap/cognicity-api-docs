@@ -1,4 +1,4 @@
-# Authentication
+## Authentication
 
 ```shell
 curl "endpoint" -H "Authorization: token or key"

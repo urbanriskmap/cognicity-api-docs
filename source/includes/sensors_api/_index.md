@@ -1,4 +1,4 @@
-# Sensors
+# Sensors API
 
 The CogniCity Sensors endpoints supports centralizing data from automated sensor networks. Sensor data can be inserted into the database for storage, and subsequently served as GeoJSON or TopoJSON to support map visualisations.
 
@@ -131,6 +131,7 @@ axios.get('/3')
       "sensorId": "3",
       "created": "2018-03-16T17:37:47.116Z",
       "properties": {
+        "type": "observation",
         "observations": [
           {
             "value": "3.84",
@@ -147,7 +148,12 @@ axios.get('/3')
 }
 ```
 
-This endpoint retrieves a list of data for a specific sensor. Data are organised into records, indexed by the `id` attribute. The `created` attribute details when the record was last updated. The `properties` attribute contains the data for the record. The `properties` object may be in varying formats. The example shows a `properties` object for a single data record which contains an `observations` array of measurements.
+This endpoint retrieves a list of data for a specific sensor. Data are organised into records, indexed by the `id` attribute. The `created` attribute details when the record was last updated. The `properties` attribute contains the data for the record. The `properties` object may be in varying formats. The example shows a `properties` object for a single data record which contains an `observations` array of measurements. Data records are returned in reverse chronological order by `created` date.
+
+<aside class="warn">
+When a sensor does not have any data associated with it the endpoint will return a 404 error "Sensor [ID] not found".
+</aside>
+
 
 ### HTTP Request
 
@@ -158,6 +164,8 @@ This endpoint retrieves a list of data for a specific sensor. Data are organised
 Parameter | Description
 --------- | -----------
 ID | The ID of the sensor to retrieve
+type | Optional filter for the type field
+limit | Optional limit on number of returned records
 
 ### Response
 Attribute | Type | Description |

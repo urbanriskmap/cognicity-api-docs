@@ -1,5 +1,5 @@
 
-# API Responses
+## Data Formats
 
 > Response structure:
 

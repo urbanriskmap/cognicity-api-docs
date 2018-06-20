@@ -1,8 +1,8 @@
-# Cities
+## Cities
 
-CogniCity deployments are organised by city. Cities are delineated by a unique code and bounding box geometries. Note that the term "city" is used somewhat arbitrairily for organisational purposes. Cities may refer to an urban conurbation or wider metropolitan area. For example in the United States "Broward" is used to refer to the area of Broward County which includes multiple cities.
+CogniCity deployments are organised by city. Cities are delineated by a unique code and bounding box geometries. Note that the term "city" is used somewhat arbitrairily for organisational purposes. Cities may refer to an urban conurbation or wider metropolitan area. For example in the United States "Broward" is used to refer to Broward County which includes multiple cities and non-urban areas.
 
-## Get All Cities
+### Get All Cities
 
 ```shell
 curl "/cities?geoformat=geojson"
@@ -69,17 +69,17 @@ axios.get('/cities', {
 
 This endpoint returns all cities covered by the CogniCity instance, including their three letter code and bounding box geometry.
 
-### HTTP Request
+#### HTTP Request
 
 `GET /cities`
 
-### Query Parameters
+#### Query Parameters
 
 Parameter | Required | Description | Default |
 --------- | ------- | ------------ | ------- |
 geoformat | false | Specifies either 'geojson' or 'topojson' | topojson |
 
-### Response
+#### Response
 The returned data uses the GeoJSON FeatureCollection or TopoJSON GeometryCollection types. The properties of each sensor feature as described in the following table.
 
 Attribute | Type | Description |

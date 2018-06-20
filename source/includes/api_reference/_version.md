@@ -1,6 +1,6 @@
-# Version
+## Version
 
-## Get CogniCity Versions
+### Get CogniCity Version
 
 Get the CogniCity server and database versions for the chosen instance.
 
@@ -10,7 +10,7 @@ The following attributes are returned:
 - `schema` refers to the CogniCity Database [release version](https://github.com/urbanriskmap/cognicity-schema/releases)
 
 ```shell
-curl 'https://data.{instance}.{tld}/'
+curl '/'
 ```
 
 ```javascript
@@ -18,7 +18,7 @@ const request = require('request');
 request(
   {
     method: 'GET',
-    uri: 'https://data.{instance}.{tld}/'
+    uri: '/'
   },
   function (error, response, body) {
     console.log(error);
@@ -39,6 +39,6 @@ request(
 
 This endpoint gets the CogniCity server and database versions.
 
-### HTTP Request
+#### HTTP Request
 
-`GET https://data.{instance}.{tld}/`
+`GET /`

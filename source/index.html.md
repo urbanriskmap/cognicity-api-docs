@@ -6,18 +6,22 @@ language_tabs: # must be one of https://git.io/vQNgJ
   - javascript
 
 toc_footers:
-  - <a href='https://github.com/urbanriskmap/'>CogniCity on GitHub</a>
+  - <a href='https://github.com/urbanriskmap/'>CogniCity & Urban Risk Map on GitHub</a>
   - <a href='https://github.com/lord/slate'>Documentation Powered by Slate</a>
 
 includes:
-  - introduction
-  - api
-  - authentication
-  - cities
-  - reports
-  - sensors
-  - version
-
+  - api_reference/index
+  - api_reference/authentication
+  - api_reference/formats
+  - api_reference/version
+  - data_api/index
+  - data_api/cards
+  - data_api/cities
+  - data_api/feeds
+  - data_api/floods
+  - data_api/infrastructure
+  - data_api/reports
+  - sensors_api/index
 
 search: true
 ---
