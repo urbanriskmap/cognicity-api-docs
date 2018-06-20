@@ -95,6 +95,7 @@ Parameter | Required | Description | Default | Example |
 --------- | ------- | ------------ | ------- | ------- |
 bbox | false | A list of longitude and latitude pairs representing the top left and bottom right corners of a bounding box for sensor locations. | none | longitude, latitude, longitude, latitude
 geoformat | false | Specifies either 'geojson' or 'topojson' | geojson | geojson |
+agency | false | Optional filter properties.agency of the sensor (e.g. 'USGS') |
 
 ### Response
 The returned data uses the GeoJSON FeatureCollection or TopoJSON GeometryCollection types. The properties of each sensor feature as described in the following table.
@@ -171,7 +172,8 @@ properties | object | Record data |
 ```shell
 curl -X POST / -H 'Content-Type: application/json' -H 'x-api-key: key' -d '{
 	"properties":{
-		"name": "test sensor"
+		"name": "test sensor",
+    "agency": "usgs"
 	},
 	"location":{
 		"lat": 25.0,
@@ -186,7 +188,8 @@ import axios from 'axios'; // package to make http requests
 
 axios.post('/', {
     properties: {
-      name: "test sensor"
+      name: "test sensor",
+      agency: "usgs"
     },
     location: {
       lat: 25.0,
@@ -218,7 +221,8 @@ axios.post('/', {
                     "id": "4",
                     "created": "2018-03-16T18:25:07.613Z",
                     "properties": {
-                        "name": "test sensor"
+                        "name": "test sensor",
+                        "agency": "usgs"
                     }
                 }
             }
@@ -242,6 +246,7 @@ This request requires an API key for authorization using the `x-api-key` header.
 Attribute | Type | Description | Required
 --------- | ---- | ----------- | --------
 properties | object | Sensor metadata properties | Yes
+properties.agency | string | Optional agency tag for sensor (e.g. 'usgs')
 location | object | An object with `lat` and `lng` numerical values representing the sensor's latitude and longitude | Yes
 
 
@@ -250,7 +255,8 @@ location | object | An object with `lat` and `lng` numerical values representing
 ```shell
 curl -X POST /4 -H 'Content-Type: application/json' -H 'x-api-key: key' -d '{
 	"properties":{
-		"METAR": "CYYQ 182200Z 07002KT 15SM OVC017 06/03 A2966 RMK SC10 3 POLAR BEARS ALNG RNWY=="
+		"METAR": "CYYQ 182200Z 07002KT 15SM OVC017 06/03 A2966 RMK SC10 3 POLAR BEARS ALNG RNWY==",
+    "type": "observation"
   }
 }'
 
@@ -261,7 +267,8 @@ import axios from 'axios'; // package to make http requests
 
 axios.post('/4', {
     properties: {
-      METAR: "CYYQ 182200Z 07002KT 15SM OVC017 06/03 A2966 RMK SC10 3 POLAR BEARS ALNG RNWY=="
+      METAR: "CYYQ 182200Z 07002KT 15SM OVC017 06/03 A2966 RMK SC10 3 POLAR BEARS ALNG RNWY==",
+      type: "observation"
     },
   }, {headers: {'x-api-key': 'key'}})
   .then(response => console.log(response))
@@ -303,6 +310,7 @@ ID | The ID of the sensor
 Attribute | Type | Description | Required
 --------- | ---- | ----------- | --------
 properties | object | New data record to be added | Yes
+properties.type | string | Optional type tag for different measurement types (e.g. observation vs manual, or mean vs daily max)
 
 ## Delete Sensor Data
 
