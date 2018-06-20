@@ -220,38 +220,44 @@
         <ul class="search-results"></ul>
       <div id="toc" class="toc-list-h1">
           <li>
-            <a href="#introduction" class="toc-h1 toc-link" data-title="introduction">Introduction</a>
-          </li>
-          <li>
-            <a href="#api-responses" class="toc-h1 toc-link" data-title="api-responses">API Responses</a>
-          </li>
-          <li>
-            <a href="#authentication" class="toc-h1 toc-link" data-title="authentication">Authentication</a>
-          </li>
-          <li>
-            <a href="#cities" class="toc-h1 toc-link" data-title="cities">Cities</a>
+            <a href="#api-reference" class="toc-h1 toc-link" data-title="api-reference">API Reference</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#get-all-cities" class="toc-h2 toc-link" data-title="get-all-cities">Get All Cities</a>
+                    <a href="#authentication" class="toc-h2 toc-link" data-title="authentication">Authentication</a>
+                  </li>
+                  <li>
+                    <a href="#data-formats" class="toc-h2 toc-link" data-title="data-formats">Data Formats</a>
+                  </li>
+                  <li>
+                    <a href="#version" class="toc-h2 toc-link" data-title="version">Version</a>
                   </li>
               </ul>
           </li>
           <li>
-            <a href="#reports" class="toc-h1 toc-link" data-title="reports">Reports</a>
+            <a href="#data-api" class="toc-h1 toc-link" data-title="data-api">Data API</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#get-all-reports" class="toc-h2 toc-link" data-title="get-all-reports">Get All Reports</a>
+                    <a href="#cards" class="toc-h2 toc-link" data-title="cards">Cards</a>
                   </li>
                   <li>
-                    <a href="#archive" class="toc-h2 toc-link" data-title="archive">Archive</a>
+                    <a href="#cities" class="toc-h2 toc-link" data-title="cities">Cities</a>
                   </li>
                   <li>
-                    <a href="#timeseries" class="toc-h2 toc-link" data-title="timeseries">Timeseries</a>
+                    <a href="#feeds" class="toc-h2 toc-link" data-title="feeds">Feeds</a>
+                  </li>
+                  <li>
+                    <a href="#todo" class="toc-h2 toc-link" data-title="todo">TODO</a>
+                  </li>
+                  <li>
+                    <a href="#todo" class="toc-h2 toc-link" data-title="todo">TODO</a>
+                  </li>
+                  <li>
+                    <a href="#reports" class="toc-h2 toc-link" data-title="reports">Reports</a>
                   </li>
               </ul>
           </li>
           <li>
-            <a href="#sensors" class="toc-h1 toc-link" data-title="sensors">Sensors</a>
+            <a href="#sensors-api" class="toc-h1 toc-link" data-title="sensors-api">Sensors API</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#get-all-sensors" class="toc-h2 toc-link" data-title="get-all-sensors">Get All Sensors</a>
@@ -273,24 +279,16 @@
                   </li>
               </ul>
           </li>
-          <li>
-            <a href="#version" class="toc-h1 toc-link" data-title="version">Version</a>
-              <ul class="toc-list-h2">
-                  <li>
-                    <a href="#get-cognicity-versions" class="toc-h2 toc-link" data-title="get-cognicity-versions">Get CogniCity Versions</a>
-                  </li>
-              </ul>
-          </li>
       </div>
         <ul class="toc-footer">
-            <li><a href='https://github.com/urbanriskmap/'>CogniCity on GitHub</a></li>
+            <li><a href='https://github.com/urbanriskmap/'>CogniCity & Urban Risk Map on GitHub</a></li>
             <li><a href='https://github.com/lord/slate'>Documentation Powered by Slate</a></li>
         </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id='introduction'>Introduction</h1>
+        <h1 id='api-reference'>API Reference</h1>
 <p>Welcome to the CogniCity API. CogniCity is the engine that powers Urban Risk Map. You can use this API to access CogniCity data including flood reports and sensor measurements that are stored in the CogniCity database. You can view example requests in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
 
 <p>CogniCity deployments are organised into <em>instances</em> for different countries. Each instance may support mapping for one of more cities. Currently available instances:</p>
@@ -312,23 +310,7 @@
 <ul>
 <li><a href="https://sensors.riskmap.us">sensors.riskmap.us</a></li>
 </ul>
-<h1 id='api-responses'>API Responses</h1>
-<blockquote>
-<p>Response structure:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"statusCode"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">Number</span><span class="w"> </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">Object</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="err">Array</span><span class="w"> </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>CogniCity provides responses in JSON format. The <code>statusCode</code> object gives the HTTP response status for the request (also available in the response header). The <code>response</code> property may be either an <code>Object</code> or an <code>Array</code> depending on the data returned.</p>
-
-<p>Where responses contain geographical information both the <a href="http://geojson.org/">GeoJSON</a> and <a href="https://github.com/topojson/topojson">TopoJSON</a> formats are supported.</p>
-
-<p>The <code>/floods</code> endpoint also supports responses using the <a href="https://docs.oasis-open.org/emergency/cap/v1.2/CAP-v1.2-os.html">Common Alerting Protocol</a>, an XML format.</p>
-
-<p>CogniCity uses the <a href="https://www.postgresql.org/docs/current/static/datatype-numeric.html">PostgreSQL BIGINT</a> data type. As these numbers are potentially greater than <code>Numbers.MAX_SAFE_INTEGER</code> they are returned as Strings.</p>
-<h1 id='authentication'>Authentication</h1><pre class="highlight shell tab-shell"><code>curl <span class="s2">"endpoint"</span> -H <span class="s2">"Authorization: token or key"</span>
+<h2 id='authentication'>Authentication</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"endpoint"</span> -H <span class="s2">"Authorization: token or key"</span>
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">axios</span> <span class="nx">from</span> <span class="s1">'axios'</span><span class="p">;</span> <span class="c1">// package to make http requests</span>
 
@@ -351,9 +333,61 @@
 <aside class="success">
 All requests should be made via https.
 </aside>
-<h1 id='cities'>Cities</h1>
-<p>CogniCity deployments are organised by city. Cities are delineated by a unique code and bounding box geometries. Note that the term &quot;city&quot; is used somewhat arbitrairily for organisational purposes. Cities may refer to an urban conurbation or wider metropolitan area. For example in the United States &quot;Broward&quot; is used to refer to the area of Broward County which includes multiple cities.</p>
-<h2 id='get-all-cities'>Get All Cities</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"/cities?geoformat=geojson"</span>
+<h2 id='data-formats'>Data Formats</h2>
+<blockquote>
+<p>Response structure:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"statusCode"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">Number</span><span class="w"> </span><span class="p">},</span><span class="w">
+  </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="err">Object</span><span class="w"> </span><span class="err">|</span><span class="w"> </span><span class="err">Array</span><span class="w"> </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>CogniCity provides responses in JSON format. The <code>statusCode</code> object gives the HTTP response status for the request (also available in the response header). The <code>response</code> property may be either an <code>Object</code> or an <code>Array</code> depending on the data returned.</p>
+
+<p>Where responses contain geographical information both the <a href="http://geojson.org/">GeoJSON</a> and <a href="https://github.com/topojson/topojson">TopoJSON</a> formats are supported.</p>
+
+<p>The <code>/floods</code> endpoint also supports responses using the <a href="https://docs.oasis-open.org/emergency/cap/v1.2/CAP-v1.2-os.html">Common Alerting Protocol</a>, an XML format.</p>
+
+<p>CogniCity uses the <a href="https://www.postgresql.org/docs/current/static/datatype-numeric.html">PostgreSQL BIGINT</a> data type. As these numbers are potentially greater than <code>Numbers.MAX_SAFE_INTEGER</code> they are returned as Strings.</p>
+<h2 id='version'>Version</h2><h3 id='get-cognicity-version'>Get CogniCity Version</h3>
+<p>Get the CogniCity server and database versions for the chosen instance.</p>
+
+<p>The following attributes are returned:</p>
+
+<ul>
+<li><code>version</code> refers to CogniCity Server <a href="https://github.com/urbanriskmap/cognicity-server/releases">release version</a></li>
+<li><code>schema</code> refers to the CogniCity Database <a href="https://github.com/urbanriskmap/cognicity-schema/releases">release version</a></li>
+</ul>
+<pre class="highlight shell tab-shell"><code>curl <span class="s1">'/'</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'request'</span><span class="p">);</span>
+<span class="nx">request</span><span class="p">(</span>
+  <span class="p">{</span>
+    <span class="na">method</span><span class="p">:</span> <span class="s1">'GET'</span><span class="p">,</span>
+    <span class="na">uri</span><span class="p">:</span> <span class="s1">'/'</span>
+  <span class="p">},</span>
+  <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">response</span><span class="p">,</span> <span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">statusCode</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">)</span>
+</code></pre>
+<blockquote>
+<p>Example JSON output:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"version"</span><span class="p">:</span><span class="s2">"3.0.6"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"schema"</span><span class="p">:</span><span class="s2">"3.0.6"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint gets the CogniCity server and database versions.</p>
+<h4 id='http-request'>HTTP Request</h4>
+<p><code>GET /</code></p>
+<h1 id='data-api'>Data API</h1>
+<p>The data API is...</p>
+<h2 id='cards'>Cards</h2><h3 id='todo'>TODO</h3><h2 id='cities'>Cities</h2>
+<p>CogniCity deployments are organised by city. Cities are delineated by a unique code and bounding box geometries. Note that the term &quot;city&quot; is used somewhat arbitrairily for organisational purposes. Cities may refer to an urban conurbation or wider metropolitan area. For example in the United States &quot;Broward&quot; is used to refer to Broward County which includes multiple cities and non-urban areas.</p>
+<h3 id='get-all-cities'>Get All Cities</h3><pre class="highlight shell tab-shell"><code>curl <span class="s2">"/cities?geoformat=geojson"</span>
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">axios</span> <span class="nx">from</span> <span class="s1">'axios'</span><span class="p">;</span> <span class="c1">// package to make http requests</span>
 
 <span class="nx">axios</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/cities'</span><span class="p">,</span> <span class="p">{</span>
@@ -411,9 +445,9 @@ All requests should be made via https.
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>This endpoint returns all cities covered by the CogniCity instance, including their three letter code and bounding box geometry.</p>
-<h3 id='http-request'>HTTP Request</h3>
+<h4 id='http-request'>HTTP Request</h4>
 <p><code>GET /cities</code></p>
-<h3 id='query-parameters'>Query Parameters</h3>
+<h4 id='query-parameters'>Query Parameters</h4>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -429,7 +463,7 @@ All requests should be made via https.
 <td>topojson</td>
 </tr>
 </tbody></table>
-<h3 id='response'>Response</h3>
+<h4 id='response'>Response</h4>
 <p>The returned data uses the GeoJSON FeatureCollection or TopoJSON GeometryCollection types. The properties of each sensor feature as described in the following table.</p>
 
 <table><thead>
@@ -450,9 +484,9 @@ All requests should be made via https.
 <td>City name</td>
 </tr>
 </tbody></table>
-<h1 id='reports'>Reports</h1>
+<h2 id='feeds'>Feeds</h2><h3 id='todo-qlue'>TODO (Qlue)</h3><h2 id='todo'>TODO</h2><h2 id='todo'>TODO</h2><h2 id='reports'>Reports</h2>
 <p>The reports endpoint contains CogniCity reports submitted by the public. Reports are represented by point-geometries and their accompanying properties (e.g. description, time etc.). Note that all times are UTC, and geometries use the WGS 1984 coordinate system.</p>
-<h2 id='get-all-reports'>Get All Reports</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"/reports?city=brw&amp;geoformat=geojson"</span>
+<h3 id='get-all-reports'>Get All Reports</h3><pre class="highlight shell tab-shell"><code>curl <span class="s2">"/reports?city=brw&amp;geoformat=geojson"</span>
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">axios</span> <span class="nx">from</span> <span class="s1">'axios'</span><span class="p">;</span> <span class="c1">// package to make http requests</span>
 
@@ -509,9 +543,9 @@ All requests should be made via https.
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>This endpoint retrieves all reports.  Note that all times are UTC, and geometries use the WGS 1984 coordinate system.</p>
-<h3 id='http-request'>HTTP Request</h3>
+<h4 id='http-request'>HTTP Request</h4>
 <p><code>GET /reports</code></p>
-<h3 id='query-parameters'>Query Parameters</h3>
+<h4 id='query-parameters'>Query Parameters</h4>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -543,7 +577,7 @@ All requests should be made via https.
 <td>3600</td>
 </tr>
 </tbody></table>
-<h2 id='archive'>Archive</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"/reports/archive?city=brw&amp;geoformat=geojson&amp;start=2018-06-15T00:00:00-0400&amp;end=2018-06-19T15:00:00-0400"</span>
+<h3 id='archive'>Archive</h3><pre class="highlight shell tab-shell"><code>curl <span class="s2">"/reports/archive?city=brw&amp;geoformat=geojson&amp;start=2018-06-15T00:00:00-0400&amp;end=2018-06-19T15:00:00-0400"</span>
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">axios</span> <span class="nx">from</span> <span class="s1">'axios'</span><span class="p">;</span> <span class="c1">// package to make http requests</span>
 
@@ -602,9 +636,9 @@ All requests should be made via https.
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>This endpoint retrieves reports within the specified time period. The maximum duration between start and end times is one week. Note that all times are UTC, and geometries use the WGS 1984 coordinate system.</p>
-<h3 id='http-request-2'>HTTP Request</h3>
+<h4 id='http-request-2'>HTTP Request</h4>
 <p><code>GET /reports/archive</code></p>
-<h3 id='query-parameters-2'>Query Parameters</h3>
+<h4 id='query-parameters-2'>Query Parameters</h4>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -647,14 +681,14 @@ All requests should be made via https.
 <aside class="success">
 Start and end times require UTC offsets using either '+' or '-' which need to be URL encoded as '%2B' and '%2D' respectively.
 </aside>
-<h2 id='timeseries'>Timeseries</h2><pre class="highlight shell tab-shell"><code>curl <span class="s2">"/reports/timeseries?start=2017-11-20T00:00:00%2B0700&amp;end=2017-11-22T15:00:00%2B0700"</span>
+<h3 id='timeseries'>Timeseries</h3><pre class="highlight shell tab-shell"><code>curl <span class="s2">"/reports/timeseries?city=brw&amp;start=2018-06-19T13:00:00%2D0400&amp;end=2018-06-19T15:00:00%2D0400"</span>
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">axios</span> <span class="nx">from</span> <span class="s1">'axios'</span><span class="p">;</span> <span class="c1">// package to make http requests</span>
 
 <span class="nx">axios</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/reports/timeseries'</span><span class="p">,</span> <span class="p">{</span>
   <span class="na">params</span><span class="p">:</span> <span class="p">{</span>
-    <span class="na">start</span><span class="p">:</span> <span class="s1">'2017-11-20T00:00:00+0700'</span><span class="p">,</span>
-    <span class="na">end</span><span class="p">:</span> <span class="s1">'2017-11-22T15:00:00+0700'</span>
+    <span class="na">start</span><span class="p">:</span> <span class="s1">'2018-06-19T13:00:00-0400'</span><span class="p">,</span>
+    <span class="na">end</span><span class="p">:</span> <span class="s1">'2018-06-19T15:00:00-0400'</span>
     <span class="p">}</span>
   <span class="p">})</span>
   <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">))</span>
@@ -665,272 +699,27 @@ Start and end times require UTC offsets using either '+' or '-' which need to be
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-    </span><span class="s2">"statusCode"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-19T17:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-19T18:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-19T19:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-19T20:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-19T21:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-19T22:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-19T23:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-20T00:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-20T01:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-20T02:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-20T03:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-20T04:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-20T05:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-20T06:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-20T07:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-20T08:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-20T09:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-20T10:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-20T11:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-20T12:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-20T13:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-20T14:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-20T15:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-20T16:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-20T17:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-20T18:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-20T19:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-20T20:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-20T21:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-20T22:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-20T23:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-21T00:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-21T01:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-21T02:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-21T03:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-21T04:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-21T05:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-21T06:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-21T07:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-21T08:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-21T09:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-21T10:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-21T11:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-21T12:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-21T13:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-21T14:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-21T15:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-21T16:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-21T17:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-21T18:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-21T19:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-21T20:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-21T21:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-21T22:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-21T23:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-22T00:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-22T01:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-22T02:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-22T03:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-22T04:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-22T05:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-22T06:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-22T07:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-22T08:00:00.000Z"</span><span class="p">,</span><span class="w">
-            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-    </span><span class="p">]</span><span class="w">
+  </span><span class="s2">"statusCode"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-06-19T17:00:00.000Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-06-19T18:00:00.000Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-06-19T19:00:00.000Z"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
-
 </span></code></pre>
 <p>This endpoint generates a time series of reports presented as a count of reports every hour within the specified time period. The maximum duration between start and end times is one week. Report count is recorded alongside an hourly UTC timestamp in ISO 8061 format.</p>
-<h3 id='http-request-3'>HTTP Request</h3>
+<h4 id='http-request-3'>HTTP Request</h4>
 <p><code>GET /reports/timeseries</code></p>
-<h3 id='query-parameters-3'>Query Parameters</h3>
+<h4 id='query-parameters-3'>Query Parameters</h4>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -966,7 +755,7 @@ Start and end times require UTC offsets using either '+' or '-' which need to be
 <aside class="success">
 Start and end times require UTC offsets using either '+' or '-' which need to be URL encoded as '%2B' and '%2D' respectively.
 </aside>
-<h1 id='sensors'>Sensors</h1>
+<h1 id='sensors-api'>Sensors API</h1>
 <p>The CogniCity Sensors endpoints supports centralizing data from automated sensor networks. Sensor data can be inserted into the database for storage, and subsequently served as GeoJSON or TopoJSON to support map visualisations.</p>
 
 <p>Sensor locations are point geometries defined using latitude and longitude coordinates in the WGS 1984 coordinate system.</p>
@@ -1067,6 +856,13 @@ Note that these endpoints reside on a separate sensors subdomain.
 <td>geojson</td>
 <td>geojson</td>
 </tr>
+<tr>
+<td>agency</td>
+<td>false</td>
+<td>Optional filter properties.agency of the sensor (e.g. &#39;USGS&#39;)</td>
+<td></td>
+<td></td>
+</tr>
 </tbody></table>
 <h3 id='response'>Response</h3>
 <p>The returned data uses the GeoJSON FeatureCollection or TopoJSON GeometryCollection types. The properties of each sensor feature as described in the following table.</p>
@@ -1112,6 +908,7 @@ Note that these endpoints reside on a separate sensors subdomain.
       </span><span class="s2">"sensorId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-03-16T17:37:47.116Z"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"observation"</span><span class="p">,</span><span class="w">
         </span><span class="s2">"observations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
           </span><span class="p">{</span><span class="w">
             </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3.84"</span><span class="p">,</span><span class="w">
@@ -1127,7 +924,11 @@ Note that these endpoints reside on a separate sensors subdomain.
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint retrieves a list of data for a specific sensor. Data are organised into records, indexed by the <code>id</code> attribute. The <code>created</code> attribute details when the record was last updated. The <code>properties</code> attribute contains the data for the record. The <code>properties</code> object may be in varying formats. The example shows a <code>properties</code> object for a single data record which contains an <code>observations</code> array of measurements.</p>
+<p>This endpoint retrieves a list of data for a specific sensor. Data are organised into records, indexed by the <code>id</code> attribute. The <code>created</code> attribute details when the record was last updated. The <code>properties</code> attribute contains the data for the record. The <code>properties</code> object may be in varying formats. The example shows a <code>properties</code> object for a single data record which contains an <code>observations</code> array of measurements. Data records are returned in reverse chronological order by <code>created</code> date.</p>
+
+<aside class="warn">
+When a sensor does not have any data associated with it the endpoint will return a 404 error "Sensor [ID] not found".
+</aside>
 <h3 id='http-request-2'>HTTP Request</h3>
 <p><code>GET /&lt;ID&gt;</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
@@ -1140,6 +941,14 @@ Note that these endpoints reside on a separate sensors subdomain.
 <tr>
 <td>ID</td>
 <td>The ID of the sensor to retrieve</td>
+</tr>
+<tr>
+<td>type</td>
+<td>Optional filter for the type field</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>Optional limit on number of returned records</td>
 </tr>
 </tbody></table>
 <h3 id='response-2'>Response</h3>
@@ -1173,7 +982,8 @@ Note that these endpoints reside on a separate sensors subdomain.
 </tbody></table>
 <h2 id='create-sensor'>Create Sensor</h2><pre class="highlight shell tab-shell"><code>curl -X POST / -H <span class="s1">'Content-Type: application/json'</span> -H <span class="s1">'x-api-key: key'</span> -d <span class="s1">'{
     "properties":{
-        "name": "test sensor"
+        "name": "test sensor",
+    "agency": "usgs"
     },
     "location":{
         "lat": 25.0,
@@ -1185,7 +995,8 @@ Note that these endpoints reside on a separate sensors subdomain.
 
 <span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="p">{</span>
     <span class="na">properties</span><span class="p">:</span> <span class="p">{</span>
-      <span class="na">name</span><span class="p">:</span> <span class="s2">"test sensor"</span>
+      <span class="na">name</span><span class="p">:</span> <span class="s2">"test sensor"</span><span class="p">,</span>
+      <span class="na">agency</span><span class="p">:</span> <span class="s2">"usgs"</span>
     <span class="p">},</span>
     <span class="na">location</span><span class="p">:</span> <span class="p">{</span>
       <span class="na">lat</span><span class="p">:</span> <span class="mf">25.0</span><span class="p">,</span>
@@ -1216,7 +1027,8 @@ Note that these endpoints reside on a separate sensors subdomain.
                     </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4"</span><span class="p">,</span><span class="w">
                     </span><span class="s2">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-03-16T18:25:07.613Z"</span><span class="p">,</span><span class="w">
                     </span><span class="s2">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test sensor"</span><span class="w">
+                        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"test sensor"</span><span class="p">,</span><span class="w">
+                        </span><span class="s2">"agency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"usgs"</span><span class="w">
                     </span><span class="p">}</span><span class="w">
                 </span><span class="p">}</span><span class="w">
             </span><span class="p">}</span><span class="w">
@@ -1247,6 +1059,12 @@ This request requires an API key for authorization using the `x-api-key` header.
 <td>Yes</td>
 </tr>
 <tr>
+<td>properties.agency</td>
+<td>string</td>
+<td>Optional agency tag for sensor (e.g. &#39;usgs&#39;)</td>
+<td></td>
+</tr>
+<tr>
 <td>location</td>
 <td>object</td>
 <td>An object with <code>lat</code> and <code>lng</code> numerical values representing the sensor&#39;s latitude and longitude</td>
@@ -1255,7 +1073,8 @@ This request requires an API key for authorization using the `x-api-key` header.
 </tbody></table>
 <h2 id='add-sensor-data'>Add Sensor Data</h2><pre class="highlight shell tab-shell"><code>curl -X POST /4 -H <span class="s1">'Content-Type: application/json'</span> -H <span class="s1">'x-api-key: key'</span> -d <span class="s1">'{
     "properties":{
-        "METAR": "CYYQ 182200Z 07002KT 15SM OVC017 06/03 A2966 RMK SC10 3 POLAR BEARS ALNG RNWY=="
+        "METAR": "CYYQ 182200Z 07002KT 15SM OVC017 06/03 A2966 RMK SC10 3 POLAR BEARS ALNG RNWY==",
+    "type": "observation"
   }
 }'</span>
 
@@ -1263,7 +1082,8 @@ This request requires an API key for authorization using the `x-api-key` header.
 
 <span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">'/4'</span><span class="p">,</span> <span class="p">{</span>
     <span class="na">properties</span><span class="p">:</span> <span class="p">{</span>
-      <span class="na">METAR</span><span class="p">:</span> <span class="s2">"CYYQ 182200Z 07002KT 15SM OVC017 06/03 A2966 RMK SC10 3 POLAR BEARS ALNG RNWY=="</span>
+      <span class="na">METAR</span><span class="p">:</span> <span class="s2">"CYYQ 182200Z 07002KT 15SM OVC017 06/03 A2966 RMK SC10 3 POLAR BEARS ALNG RNWY=="</span><span class="p">,</span>
+      <span class="na">type</span><span class="p">:</span> <span class="s2">"observation"</span>
     <span class="p">},</span>
   <span class="p">},</span> <span class="p">{</span><span class="na">headers</span><span class="p">:</span> <span class="p">{</span><span class="s1">'x-api-key'</span><span class="p">:</span> <span class="s1">'key'</span><span class="p">}})</span>
   <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">))</span>
@@ -1316,6 +1136,12 @@ This request requires an API key for authorization using the `x-api-key` header.
 <td>New data record to be added</td>
 <td>Yes</td>
 </tr>
+<tr>
+<td>properties.type</td>
+<td>string</td>
+<td>Optional type tag for different measurement types (e.g. observation vs manual, or mean vs daily max)</td>
+<td></td>
+</tr>
 </tbody></table>
 <h2 id='delete-sensor-data'>Delete Sensor Data</h2><pre class="highlight sh tab-shell"><code>curl -X DELETE /4/2345 -H <span class="s1">'Content-Type: application/json'</span> -H <span class="s1">'x-api-key: key'</span>
 
@@ -1355,40 +1181,6 @@ This request requires an API key for authorization using the `x-api-key` header.
 </aside>
 <h3 id='http-request-6'>HTTP Request</h3>
 <p><code>DELETE /&lt;ID&gt;</code></p>
-<h1 id='version'>Version</h1><h2 id='get-cognicity-versions'>Get CogniCity Versions</h2>
-<p>Get the CogniCity server and database versions for the chosen instance.</p>
-
-<p>The following attributes are returned:</p>
-
-<ul>
-<li><code>version</code> refers to CogniCity Server <a href="https://github.com/urbanriskmap/cognicity-server/releases">release version</a></li>
-<li><code>schema</code> refers to the CogniCity Database <a href="https://github.com/urbanriskmap/cognicity-schema/releases">release version</a></li>
-</ul>
-<pre class="highlight shell tab-shell"><code>curl <span class="s1">'https://data.{instance}.{tld}/'</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'request'</span><span class="p">);</span>
-<span class="nx">request</span><span class="p">(</span>
-  <span class="p">{</span>
-    <span class="na">method</span><span class="p">:</span> <span class="s1">'GET'</span><span class="p">,</span>
-    <span class="na">uri</span><span class="p">:</span> <span class="s1">'https://data.{instance}.{tld}/'</span>
-  <span class="p">},</span>
-  <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">response</span><span class="p">,</span> <span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">.</span><span class="nx">statusCode</span><span class="p">);</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">)</span>
-  <span class="p">}</span>
-<span class="p">)</span>
-</code></pre>
-<blockquote>
-<p>Example JSON output:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"version"</span><span class="p">:</span><span class="s2">"3.0.6"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"schema"</span><span class="p">:</span><span class="s2">"3.0.6"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>This endpoint gets the CogniCity server and database versions.</p>
-<h3 id='http-request'>HTTP Request</h3>
-<p><code>GET https://data.{instance}.{tld}/</code></p>
 
       </div>
       <div class="dark-box">
