@@ -351,6 +351,13 @@ This request requires an API key for authorization using the `x-api-key` header.
 
 `DELETE /<ID>/<DATAID>`
 
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+ID | The ID of the sensor
+DATAID | The ID of the data record to delete
+
 ## Delete Sensor
 
 ```sh
