@@ -912,7 +912,7 @@ This request requires an API key for authorization using the `x-api-key` header.
 </tr>
 </tbody></table>
 <h3 id='get-cards-id-images'>GET /cards/:id/images</h3>
-<p>Get a signed AWS S3 URL to upload an image associated with a card. This must be done after card report has been created. Only one image can exist for a given card.</p>
+<p>Get a signed AWS S3 URL to upload an image associated with a card. This must be done after card report has been created. Only one image can exist for a given card. See more in the AWS <a href="https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#getSignedUrl-property">documentation</a>.</p>
 <pre class="highlight shell tab-shell"><code>curl GET /cards/:id/images
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">axios</span> <span class="nx">from</span> <span class="s1">'axios'</span><span class="p">;</span> <span class="c1">// package to make http requests</span>
 
