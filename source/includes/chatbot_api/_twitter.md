@@ -1,17 +1,17 @@
-## Facebook
+## Twitter
 
-Send and receive Facebook messenger events.
+Send and receive Twitter direct message events.
 
-### POST /facebook/send
+### POST /twitter/send
 
 
 ```shell
-curl -X POST '/facebook/send' -H 'Content-Type: application/json' -H 'x-api-key: key' -d '{
+curl -X POST '/twitter/send' -H 'Content-Type: application/json' -H 'x-api-key: key' -d '{
     "reportId": 1,
     "instanceRegionCode": "brw",
     "language": "en",
     "username": "userid",
-    "network": "facebook"
+    "network": "twitter"
 }'
 ```
 
@@ -23,7 +23,7 @@ axios.post('/', {
     instanceRegionCode: "brw",
     language: "en",
     username: "userid",
-    network: "facebook"
+    network: "twitter"
   }, {headers: {'x-api-key': 'key'}})
   .then(response => console.log(response))
   .catch(err => console.log(err))```
@@ -39,7 +39,7 @@ Send a reply to user after they submit a report.
 
 #### HTTP Request
 
-`POST /facebook/send`
+`POST /twitter/send`
 
 #### Properties
 Attribute | Required | Description | Example
@@ -48,45 +48,45 @@ reportId  | true | The unique ID of the report submitted | none | 1
 instanceRegionCode | true | The instance region containing the report (from the /cities endpoint). May be null. | "brw"
 language | true | The user's 2 letter language if known. May be null | "en"
 username | true | The username or user id number from the social network | "123"
-network | true | The name of the social network of the user | "facebook"
+network | true | The name of the social network of the user | "twitter"
 
 <aside class="success">
 This request requires an API key for authorization using the `x-api-key` header.
 </aside>
 
-### GET /facebook/webhook
+### GET /twitter/webhook
 
 ```shell
-curl "/facebook/webhook?hub.verify_token=<token>"
+curl "/twitter/webhook?crc_token=<token>"
 ```
 
 ```javascript
-// Webhook configured at developers.facebook.com
+// Webhook configured at developer.twitter.com
 ```
 
 > The above command returns JSON structured like this:
 
 ```json
 {
-    // hub challenge value
+    "response_token": "<token>"
 }
 ```
 
-This endpoint responds to a Facebook Webhook authentication challenge. See https://developers.facebook.com/docs/messenger-platform/getting-started/webhook-setup/
+This endpoint responds to a twitter Webhook challenge response check. See https://developer.twitter.com/en/docs/accounts-and-users/subscribe-account-activity/overview
 
 #### HTTP Request
 
-`GET /facebook/webhook`
+`GET /twitter/webhook`
 
-### POST /facebook/webhook
+### POST /twitter/webhook
 ```sh
-curl -X POST '/facebook/webhook' -H 'Content-Type: application/json' -H 'x-api-key: key' -d '{
+curl -X POST '/twitter/webhook' -H 'Content-Type: application/json' -H 'x-api-key: key' -d '{
     <message event>
 }'
 ```
 
 ```javascript
-// Webhook configured at developers.facebook.com
+// Webhook configured at developer.twitter.com
 ```
 
 > The above command returns JSON structured like this:
@@ -95,8 +95,8 @@ curl -X POST '/facebook/webhook' -H 'Content-Type: application/json' -H 'x-api-k
 {}
 ```
 
-This endpoint responds to a Facebook Webhook message event. See Facebook [documentation](https://developers.facebook.com/docs/messenger-platform/getting-started/webhook-setup/) for more details.
+This endpoint responds to a twitter Webhook message event. See twitter [documentation](https://developers.twitter.com/docs/messenger-platform/getting-started/webhook-setup/) for more details.
 
 #### HTTP Request
 
-`POST /facebook/webhook`
+`POST /twitter/webhook`
