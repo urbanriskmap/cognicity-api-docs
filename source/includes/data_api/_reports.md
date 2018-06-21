@@ -2,7 +2,7 @@
 
 The reports endpoint contains CogniCity reports submitted by the public. Reports are represented by point-geometries and their accompanying properties (e.g. description, time etc.). Note that all times are UTC, and geometries use the WGS 1984 coordinate system.
 
-### Get All Reports
+### Live Reports
 
 ```shell
 curl "/reports?city=brw&geoformat=geojson"

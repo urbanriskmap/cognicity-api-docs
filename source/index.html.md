@@ -15,6 +15,7 @@ includes:
   - api_reference/formats
   - api_reference/version
   - chatbot_api/index
+  - chatbot_api/facebook
   - data_api/index
   - data_api/cards
   - data_api/cities
