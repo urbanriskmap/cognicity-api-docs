@@ -1,2 +1,2 @@
 # Data API
-The data API is...
+The Data API provides the core reporting and mapping functionality of CogniCity. The Cards endpoint enables residents to submit hazard reports and the Reports endpoint provides submitted reports for client applications. Additional endpoints support these core functionality.

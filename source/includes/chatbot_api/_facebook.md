@@ -78,10 +78,6 @@ This endpoint responds to a Facebook Webhook authentication challenge. See https
 
 `GET /facebook/webhook`
 
-<aside class="success">
-This request requires an API key for authorization using the `x-api-key` header.
-</aside>
-
 ### Webhook Message Event
 ```sh
 curl -X POST '/facebook/webhook' -H 'Content-Type: application/json' -H 'x-api-key: key' -d '{
@@ -99,7 +95,7 @@ curl -X POST '/facebook/webhook' -H 'Content-Type: application/json' -H 'x-api-k
 {}
 ```
 
-This endpoint responds to a Facebook Webhook message event. See https://developers.facebook.com/docs/messenger-platform/getting-started/webhook-setup/
+This endpoint responds to a Facebook Webhook message event. See Facebook [documentation](https://developers.facebook.com/docs/messenger-platform/getting-started/webhook-setup/) for more details.
 
 #### HTTP Request
 
