@@ -481,10 +481,6 @@ This request requires an API key for authorization using the `x-api-key` header.
 <p>This endpoint responds to a Facebook Webhook authentication challenge. See https://developers.facebook.com/docs/messenger-platform/getting-started/webhook-setup/</p>
 <h4 id='http-request-2'>HTTP Request</h4>
 <p><code>GET /facebook/webhook</code></p>
-
-<aside class="success">
-This request requires an API key for authorization using the `x-api-key` header.
-</aside>
 <h3 id='webhook-message-event'>Webhook Message Event</h3><pre class="highlight sh tab-shell"><code>curl -X POST <span class="s1">'/facebook/webhook'</span> -H <span class="s1">'Content-Type: application/json'</span> -H <span class="s1">'x-api-key: key'</span> -d <span class="s1">'{
     &lt;message event&gt;
 }'</span>
@@ -495,11 +491,11 @@ This request requires an API key for authorization using the `x-api-key` header.
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{}</span><span class="w">
 </span></code></pre>
-<p>This endpoint responds to a Facebook Webhook message event. See https://developers.facebook.com/docs/messenger-platform/getting-started/webhook-setup/</p>
+<p>This endpoint responds to a Facebook Webhook message event. See Facebook <a href="https://developers.facebook.com/docs/messenger-platform/getting-started/webhook-setup/">documentation</a> for more details.</p>
 <h4 id='http-request-3'>HTTP Request</h4>
 <p><code>POST /facebook/webhook</code></p>
 <h1 id='data-api'>Data API</h1>
-<p>The data API is...</p>
+<p>The Data API provides the core reporting and mapping functionality of CogniCity. The Cards endpoint enables residents to submit hazard reports and the Reports endpoint provides submitted reports for client applications. Additional endpoints support these core functionality.</p>
 <h2 id='cards'>Cards</h2><h3 id='todo'>TODO</h3>
 <ul>
 <li>the cards api...</li>
