@@ -163,7 +163,7 @@ location | object | Point location, latitude and longitude | Yes
 
 ### GET /cards/:id/images
 
-Get a signed AWS S3 URL to upload an image associated with a card. This must be done after card report has been created. Only one image can exist for a given card.
+Get a signed AWS S3 URL to upload an image associated with a card. This must be done after card report has been created. Only one image can exist for a given card. See more in the AWS [documentation](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#getSignedUrl-property).
 
 ```shell
 curl GET /cards/:id/images
