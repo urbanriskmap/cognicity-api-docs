@@ -2,7 +2,7 @@
 
 CogniCity deployments are organised by city. Cities are delineated by a unique code and bounding box geometries. Note that the term "city" is used somewhat arbitrairily for organisational purposes. Cities may refer to an urban conurbation or wider metropolitan area. For example in the United States "Broward" is used to refer to Broward County which includes multiple cities and non-urban areas.
 
-### Get All Cities
+### GET /cities
 
 ```shell
 curl "/cities?geoformat=geojson"
