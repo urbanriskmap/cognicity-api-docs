@@ -370,12 +370,12 @@
                             <a href="#post" class="toc-h3 toc-link" data-title="Sensors API">POST /</a>
                           </li>
                           <li>
-                            <a href="#delete-sensor" class="toc-h3 toc-link" data-title="Sensors API">Delete Sensor</a>
+                            <a href="#delete-id" class="toc-h3 toc-link" data-title="Sensors API">DELETE /:id</a>
                           </li>
                       </ul>
                     </li>
                   <li>
-                    <a href="#sensor-data" class="toc-h2 toc-link" data-title="sensor-data">Sensor Data</a>
+                    <a href="#data" class="toc-h2 toc-link" data-title="data">Data</a>
                       <ul class="toc-list-h3">
                           <li>
                             <a href="#get-id" class="toc-h3 toc-link" data-title="Sensors API">GET /:id</a>
@@ -2412,7 +2412,7 @@ This request requires an API key for authorization using the `x-api-key` header.
 <td>Yes</td>
 </tr>
 </tbody></table>
-<h3 id='delete-sensor'>Delete Sensor</h3><pre class="highlight sh tab-shell"><code>curl -X DELETE /4 -H <span class="s1">'Content-Type: application/json'</span> -H <span class="s1">'x-api-key: key'</span>
+<h3 id='delete-id'>DELETE /:id</h3><pre class="highlight sh tab-shell"><code>curl -X DELETE /4 -H <span class="s1">'Content-Type: application/json'</span> -H <span class="s1">'x-api-key: key'</span>
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">axios</span> <span class="nx">from</span> <span class="s1">'axios'</span><span class="p">;</span> <span class="c1">// http requests</span>
 <span class="c1">// delete record 2345 from sensor 4</span>
@@ -2431,7 +2431,7 @@ This request requires an API key for authorization using the `x-api-key` header.
 </aside>
 <h4 id='http-request-3'>HTTP Request</h4>
 <p><code>DELETE /:id</code></p>
-<h2 id='sensor-data'>Sensor Data</h2><h3 id='get-id'>GET /:id</h3><pre class="highlight shell tab-shell"><code>curl <span class="s2">"/3"</span>
+<h2 id='data'>Data</h2><h3 id='get-id'>GET /:id</h3><pre class="highlight shell tab-shell"><code>curl <span class="s2">"/3"</span>
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">axios</span> <span class="nx">from</span> <span class="s1">'axios'</span><span class="p">;</span> <span class="c1">// package to make http requests</span>
 
 <span class="nx">axios</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/3'</span><span class="p">)</span>
