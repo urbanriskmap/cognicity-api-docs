@@ -1,8 +1,8 @@
 ## Version
 
-### Get CogniCity Version
+### GET /
 
-Get the CogniCity server and database versions for the chosen instance.
+Gets the CogniCity server and database versions.
 
 The following attributes are returned:
 
@@ -36,8 +36,6 @@ request(
   "schema":"3.0.6"
 }
 ```
-
-This endpoint gets the CogniCity server and database versions.
 
 #### HTTP Request
 

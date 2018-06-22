@@ -35,7 +35,7 @@ axios.post('/', {
 {}
 ```
 
-Send a reply to user after they submit a report.
+Send a reply to user after they submit a report via Facebook messenger.
 
 #### HTTP Request
 
@@ -72,7 +72,7 @@ curl "/facebook/webhook?hub.verify_token=<token>"
 }
 ```
 
-This endpoint responds to a Facebook Webhook authentication challenge. See https://developers.facebook.com/docs/messenger-platform/getting-started/webhook-setup/
+This endpoint responds to a Facebook Webhook authentication challenge. See the Facebook [developer documentation](https://developers.facebook.com/docs/messenger-platform/getting-started/webhook-setup/).
 
 #### HTTP Request
 

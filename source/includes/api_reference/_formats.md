@@ -16,4 +16,4 @@ Where responses contain geographical information both the [GeoJSON](http://geojs
 
 The `/floods` endpoint also supports responses using the [Common Alerting Protocol](https://docs.oasis-open.org/emergency/cap/v1.2/CAP-v1.2-os.html), an XML format.
 
-CogniCity uses the [PostgreSQL BIGINT](https://www.postgresql.org/docs/current/static/datatype-numeric.html) data type. As these numbers are potentially greater than `Numbers.MAX_SAFE_INTEGER` they are returned as Strings.
+CogniCity uses the [PostgreSQL BIGINT](https://www.postgresql.org/docs/current/static/datatype-numeric.html) data type. As these numbers are potentially greater than JavaScript's `Numbers.MAX_SAFE_INTEGER` they are returned as strings.

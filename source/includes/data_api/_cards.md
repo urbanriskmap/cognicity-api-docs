@@ -1,6 +1,6 @@
 ## Cards
 
-Report cards for diaster events issued via social media chatbots.
+Report cards for diaster events issued via social media chatbots. Report cards are the mechanism by which users can submit hazard reports. Cards are issued using a one-time-link based on a globally unique identifier (GUID) and can only be used to submit one hazard report. Subsequent hazard reports may be submitted by the user requesting a new card.
 
 The card flow is as follows:
 
@@ -11,7 +11,7 @@ The card flow is as follows:
 
 ### GET /cards/:id
 
-This endpoint lists the status of a card.
+This endpoint lists the status of a card. It is useful for checking whether a card has already been used to submit a hazard report.
 
 ```shell
 curl /cards/:id
@@ -46,7 +46,7 @@ axios.get('/cards')
 
 ### POST /cards
 
-This endpoint creates a new card with a guid, in preparation for submission of hazard information by user.
+This endpoint creates a new card with a GUI, in preparation for submission of hazard information by user.
 
 ```shell
 curl -X POST /cards
@@ -86,7 +86,7 @@ axios.post('/cards', {
 #### New Card Attributes
 Attribute | Type | Description | Required |
 --------- | ---- | ----------- | -------- |
-username | string | User social network username of id | Yes 
+username | string | User social network username or id | Yes 
 network | string | Name of social network (e.g. 'twitter') | Yes 
 language | string | Two-letter language code for user (e.g. 'en') | Yes 
 
@@ -190,5 +190,5 @@ axios.get('/cards/:id/images')
 `GET /cards/:id/images`
 
 <aside class="notice">
-After an image is submitted a server-side process shrinks the image to a standard size and there may be a small time lag of a few seconds before the image goes "live".
+After an image is submitted a server-side process shrinks the image to a standard size and there may be a small time lag of a few seconds before the image goes "live" with the report.
 </aside>

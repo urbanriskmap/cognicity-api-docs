@@ -35,7 +35,7 @@ axios.post('/', {
 {}
 ```
 
-Send a reply to user after they submit a report.
+Send a reply to user after they submit a report as a Twitter direct message.
 
 #### HTTP Request
 
@@ -72,7 +72,7 @@ curl "/twitter/webhook?crc_token=<token>"
 }
 ```
 
-This endpoint responds to a twitter Webhook challenge response check. See https://developer.twitter.com/en/docs/accounts-and-users/subscribe-account-activity/overview
+This endpoint responds to a twitter Webhook challenge response check. See the Twitter [developer documentation](https://developer.twitter.com/en/docs/accounts-and-users/subscribe-account-activity/overview).
 
 #### HTTP Request
 
@@ -95,7 +95,7 @@ curl -X POST '/twitter/webhook' -H 'Content-Type: application/json' -H 'x-api-ke
 {}
 ```
 
-This endpoint responds to a twitter Webhook message event. See twitter [documentation](https://developers.twitter.com/docs/messenger-platform/getting-started/webhook-setup/) for more details.
+This endpoint responds to a Twitter webhook message event. See twitter [documentation](https://developers.twitter.com/docs/messenger-platform/getting-started/webhook-setup/) for more details.
 
 #### HTTP Request
 
