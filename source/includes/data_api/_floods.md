@@ -356,7 +356,7 @@ axios.get('/floods/states?minimum_state=1&city=jbd')
   .catch(err => console.log(err))
 ```
 
-> The above command returns JSON structured as shown below.
+> The above command returns JSON structured like this:
 
 ```json
 {
@@ -441,7 +441,7 @@ axios.delete('/floods/:id/')
   .catch(err => console.log(err))
 ```
 
-> The above command returns JSON structured as show below.
+> The above command returns JSON structured like this:
 
 ```json
 {
@@ -474,7 +474,7 @@ axios.get('/floods/archive?start=2017-11-02T00:00:00+0700&end=2017-11-05T00:00:0
   .catch(err => console.log(err))
 ```
 
-> The above command returns JSON structure as shown below.
+> The above command returns JSON structure like this:
 
 ```json
 {
@@ -501,6 +501,13 @@ GET /floods/archive
 Note that time zone must be specified as +/- UTC offset which will require HTML character encoding (e.g. +0700 becomes %2B0700).
 </aside>
 
+#### Request Parameters
+Attribute | Type | Description | Required | Default |
+--------- | ---- | ----------- | -------- | ------- |
+city | string | Which city do we want data for (e.g. 'jbd')? | No | None
+start | string | Start time for timeseries as ISO 8601 format (YYYY-MM-DDTHH:mm:ss+ZZZZ) | Yes | None
+end | string | End time for timeseries as ISO 8601 format (YYYY-MM-DDTHH:mm:ss+ZZZZ) | Yes | None
+
 ### GET /floods/timeseries
 
 This endpoint provides a time series of flooded areas data represented as a count of flood affected areas every hour within the specificed time period. The count is recoreded alongside an hourly timestamp in ISO8601 format at UTC.
@@ -517,7 +524,7 @@ axios.get('/floods/timeseries?start=2017-11-20T00:00:00+0700&end=2017-11-21T00:0
   .catch(err => console.log(err))
 ```
 
-> The above command returns JSON structured as shown below.
+> The above command returns JSON structured like this:
 
 ```json
 {
@@ -549,3 +556,14 @@ axios.get('/floods/timeseries?start=2017-11-20T00:00:00+0700&end=2017-11-21T00:0
 
 #### HTTP Request
 `GET /floods/timeseries`
+
+#### Request Parameters
+Attribute | Type | Description | Required | Default |
+--------- | ---- | ----------- | -------- | ------- |
+city | string | Which city do we want data for (e.g. 'jbd')? | No | None
+start | string | Start time for timeseries as ISO 8601 format (YYYY-MM-DDTHH:mm:ss+ZZZZ) | Yes | None
+end | string | End time for timeseries as ISO 8601 format (YYYY-MM-DDTHH:mm:ss+ZZZZ) | Yes | None
+
+<aside class="notice">
+Note that time zone must be specified as +/- UTC offset which will require HTML character encoding (e.g. +0700 becomes %2B0700).
+</aside>

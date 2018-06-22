@@ -177,7 +177,7 @@ axios.get('/cards/:id/images')
   .catch(err => console.log(err))
 ```
 
-> The above command returns JSON structured as shown below.
+> The above command returns JSON structured like this:
 
 ```json
 {
