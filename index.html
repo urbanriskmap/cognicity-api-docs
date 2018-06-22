@@ -361,75 +361,30 @@
             <a href="#sensors-api" class="toc-h1 toc-link" data-title="sensors-api">Sensors API</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#metadata" class="toc-h2 toc-link" data-title="metadata">Metadata</a>
-                    </li>
-                  <li>
-                    <a href="#get" class="toc-h2 toc-link" data-title="get">GET /</a>
+                    <a href="#sensors" class="toc-h2 toc-link" data-title="sensors">Sensors</a>
                       <ul class="toc-list-h3">
                           <li>
-                            <a href="#http-request" class="toc-h3 toc-link" data-title="Sensors API">HTTP Request</a>
+                            <a href="#get" class="toc-h3 toc-link" data-title="Sensors API">GET /</a>
                           </li>
                           <li>
-                            <a href="#query-parameters" class="toc-h3 toc-link" data-title="Sensors API">Query Parameters</a>
+                            <a href="#post" class="toc-h3 toc-link" data-title="Sensors API">POST /</a>
                           </li>
                           <li>
-                            <a href="#response" class="toc-h3 toc-link" data-title="Sensors API">Response</a>
+                            <a href="#delete-sensor" class="toc-h3 toc-link" data-title="Sensors API">Delete Sensor</a>
                           </li>
                       </ul>
                     </li>
                   <li>
-                    <a href="#post" class="toc-h2 toc-link" data-title="post">POST /</a>
+                    <a href="#sensor-data" class="toc-h2 toc-link" data-title="sensor-data">Sensor Data</a>
                       <ul class="toc-list-h3">
-                          <li>
-                            <a href="#http-request-2" class="toc-h3 toc-link" data-title="Sensors API">HTTP Request</a>
-                          </li>
-                          <li>
-                            <a href="#new-sensor-attributes" class="toc-h3 toc-link" data-title="Sensors API">New Sensor Attributes</a>
-                          </li>
-                      </ul>
-                    </li>
-                  <li>
-                    <a href="#delete-sensor" class="toc-h2 toc-link" data-title="delete-sensor">Delete Sensor</a>
-                      <ul class="toc-list-h3">
-                          <li>
-                            <a href="#http-request-3" class="toc-h3 toc-link" data-title="Sensors API">HTTP Request</a>
-                          </li>
                           <li>
                             <a href="#get-id" class="toc-h3 toc-link" data-title="Sensors API">GET /:id</a>
                           </li>
                           <li>
-                            <a href="#http-request" class="toc-h3 toc-link" data-title="Sensors API">HTTP Request</a>
+                            <a href="#post-id" class="toc-h3 toc-link" data-title="Sensors API">POST /:id</a>
                           </li>
                           <li>
-                            <a href="#url-parameters" class="toc-h3 toc-link" data-title="Sensors API">URL Parameters</a>
-                          </li>
-                          <li>
-                            <a href="#response" class="toc-h3 toc-link" data-title="Sensors API">Response</a>
-                          </li>
-                      </ul>
-                    </li>
-                  <li>
-                    <a href="#post-id" class="toc-h2 toc-link" data-title="post-id">POST /:id</a>
-                      <ul class="toc-list-h3">
-                          <li>
-                            <a href="#http-request-2" class="toc-h3 toc-link" data-title="Sensors API">HTTP Request</a>
-                          </li>
-                          <li>
-                            <a href="#url-parameters-2" class="toc-h3 toc-link" data-title="Sensors API">URL Parameters</a>
-                          </li>
-                          <li>
-                            <a href="#new-sensor-attributes" class="toc-h3 toc-link" data-title="Sensors API">New Sensor Attributes</a>
-                          </li>
-                      </ul>
-                    </li>
-                  <li>
-                    <a href="#delete-id-dataid" class="toc-h2 toc-link" data-title="delete-id-dataid">DELETE /:id/:dataId</a>
-                      <ul class="toc-list-h3">
-                          <li>
-                            <a href="#http-request-3" class="toc-h3 toc-link" data-title="Sensors API">HTTP Request</a>
-                          </li>
-                          <li>
-                            <a href="#url-parameters-3" class="toc-h3 toc-link" data-title="Sensors API">URL Parameters</a>
+                            <a href="#delete-id-dataid" class="toc-h3 toc-link" data-title="Sensors API">DELETE /:id/:dataId</a>
                           </li>
                       </ul>
                     </li>
@@ -2239,7 +2194,7 @@ Start and end times require UTC offsets using either '+' or '-' which need to be
 <aside class="notice">
 Note that these endpoints reside on a separate sensors subdomain.
 </aside>
-<h2 id='metadata'>Metadata</h2><h2 id='get'>GET /</h2>
+<h2 id='sensors'>Sensors</h2><h3 id='get'>GET /</h3>
 <p>This endpoint returns a collection of sensors and their properties within the specified bounding box. If no bounding box is provided all sensors in the database will be returned.</p>
 <pre class="highlight shell tab-shell"><code>curl <span class="s2">"/?bbox=-81,27,-79,25&amp;geoformat=geojson"</span>
 
@@ -2306,9 +2261,9 @@ Note that these endpoints reside on a separate sensors subdomain.
         </span><span class="p">]</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='http-request'>HTTP Request</h3>
+</span></code></pre><h4 id='http-request'>HTTP Request</h4>
 <p><code>GET /</code></p>
-<h3 id='query-parameters'>Query Parameters</h3>
+<h4 id='query-parameters'>Query Parameters</h4>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2340,7 +2295,7 @@ Note that these endpoints reside on a separate sensors subdomain.
 <td></td>
 </tr>
 </tbody></table>
-<h3 id='response'>Response</h3>
+<h4 id='response'>Response</h4>
 <p>The returned data uses the GeoJSON FeatureCollection or TopoJSON GeometryCollection types. The properties of each sensor feature as described in the following table.</p>
 
 <table><thead>
@@ -2366,7 +2321,7 @@ Note that these endpoints reside on a separate sensors subdomain.
 <td>metadata attributes for each sensor</td>
 </tr>
 </tbody></table>
-<h2 id='post'>POST /</h2>
+<h3 id='post'>POST /</h3>
 <p>This endpoint creates a new sensor. On success a GeoJSON feature representing the new sensor is returned.</p>
 <pre class="highlight shell tab-shell"><code>curl -X POST / -H <span class="s1">'Content-Type: application/json'</span> -H <span class="s1">'x-api-key: key'</span> -d <span class="s1">'{
     "properties":{
@@ -2423,13 +2378,13 @@ Note that these endpoints reside on a separate sensors subdomain.
         </span><span class="p">]</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre><h3 id='http-request-2'>HTTP Request</h3>
+</span></code></pre><h4 id='http-request-2'>HTTP Request</h4>
 <p><code>POST /</code></p>
 
 <aside class="success">
 This request requires an API key for authorization using the `x-api-key` header.
 </aside>
-<h3 id='new-sensor-attributes'>New Sensor Attributes</h3>
+<h4 id='new-sensor-attributes'>New Sensor Attributes</h4>
 <table><thead>
 <tr>
 <th>Attribute</th>
@@ -2457,7 +2412,7 @@ This request requires an API key for authorization using the `x-api-key` header.
 <td>Yes</td>
 </tr>
 </tbody></table>
-<h2 id='delete-sensor'>Delete Sensor</h2><pre class="highlight sh tab-shell"><code>curl -X DELETE /4 -H <span class="s1">'Content-Type: application/json'</span> -H <span class="s1">'x-api-key: key'</span>
+<h3 id='delete-sensor'>Delete Sensor</h3><pre class="highlight sh tab-shell"><code>curl -X DELETE /4 -H <span class="s1">'Content-Type: application/json'</span> -H <span class="s1">'x-api-key: key'</span>
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">axios</span> <span class="nx">from</span> <span class="s1">'axios'</span><span class="p">;</span> <span class="c1">// http requests</span>
 <span class="c1">// delete record 2345 from sensor 4</span>
@@ -2474,9 +2429,9 @@ This request requires an API key for authorization using the `x-api-key` header.
 <aside class="success">
 This request requires an API key for authorization using the `x-api-key` header.
 </aside>
-<h3 id='http-request-3'>HTTP Request</h3>
+<h4 id='http-request-3'>HTTP Request</h4>
 <p><code>DELETE /:id</code></p>
-<h3 id='get-id'>GET /:id</h3><pre class="highlight shell tab-shell"><code>curl <span class="s2">"/3"</span>
+<h2 id='sensor-data'>Sensor Data</h2><h3 id='get-id'>GET /:id</h3><pre class="highlight shell tab-shell"><code>curl <span class="s2">"/3"</span>
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">axios</span> <span class="nx">from</span> <span class="s1">'axios'</span><span class="p">;</span> <span class="c1">// package to make http requests</span>
 
 <span class="nx">axios</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/3'</span><span class="p">)</span>
@@ -2515,9 +2470,9 @@ This request requires an API key for authorization using the `x-api-key` header.
 <aside class="warn">
 When a sensor does not have any data associated with it the endpoint will return a 404 error "No data found for sensor [ID]".
 </aside>
-<h3 id='http-request'>HTTP Request</h3>
+<h4 id='http-request'>HTTP Request</h4>
 <p><code>GET /:id</code></p>
-<h3 id='url-parameters'>URL Parameters</h3>
+<h4 id='url-parameters'>URL Parameters</h4>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2537,7 +2492,7 @@ When a sensor does not have any data associated with it the endpoint will return
 <td>Optional limit on number of returned records</td>
 </tr>
 </tbody></table>
-<h3 id='response'>Response</h3>
+<h4 id='response'>Response</h4>
 <table><thead>
 <tr>
 <th>Attribute</th>
@@ -2566,7 +2521,7 @@ When a sensor does not have any data associated with it the endpoint will return
 <td>Record data</td>
 </tr>
 </tbody></table>
-<h2 id='post-id'>POST /:id</h2><pre class="highlight shell tab-shell"><code>curl -X POST /4 -H <span class="s1">'Content-Type: application/json'</span> -H <span class="s1">'x-api-key: key'</span> -d <span class="s1">'{
+<h3 id='post-id'>POST /:id</h3><pre class="highlight shell tab-shell"><code>curl -X POST /4 -H <span class="s1">'Content-Type: application/json'</span> -H <span class="s1">'x-api-key: key'</span> -d <span class="s1">'{
     "properties":{
         "METAR": "CYYQ 182200Z 07002KT 15SM OVC017 06/03 A2966 RMK SC10 3 POLAR BEARS ALNG RNWY==",
     "type": "observation"
@@ -2602,9 +2557,9 @@ When a sensor does not have any data associated with it the endpoint will return
 <aside class="success">
 This request requires an API key for authorization using the `x-api-key` header.
 </aside>
-<h3 id='http-request-2'>HTTP Request</h3>
+<h4 id='http-request-2'>HTTP Request</h4>
 <p><code>POST /:id</code></p>
-<h3 id='url-parameters-2'>URL Parameters</h3>
+<h4 id='url-parameters-2'>URL Parameters</h4>
 <table><thead>
 <tr>
 <th>Parameter</th>
@@ -2616,7 +2571,7 @@ This request requires an API key for authorization using the `x-api-key` header.
 <td>The ID of the sensor</td>
 </tr>
 </tbody></table>
-<h3 id='new-sensor-attributes'>New Sensor Attributes</h3>
+<h4 id='new-sensor-attributes'>New Sensor Attributes</h4>
 <table><thead>
 <tr>
 <th>Attribute</th>
@@ -2638,7 +2593,7 @@ This request requires an API key for authorization using the `x-api-key` header.
 <td></td>
 </tr>
 </tbody></table>
-<h2 id='delete-id-dataid'>DELETE /:id/:dataId</h2><pre class="highlight sh tab-shell"><code>curl -X DELETE /4/2345 -H <span class="s1">'Content-Type: application/json'</span> -H <span class="s1">'x-api-key: key'</span>
+<h3 id='delete-id-dataid'>DELETE /:id/:dataId</h3><pre class="highlight sh tab-shell"><code>curl -X DELETE /4/2345 -H <span class="s1">'Content-Type: application/json'</span> -H <span class="s1">'x-api-key: key'</span>
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">axios</span> <span class="nx">from</span> <span class="s1">'axios'</span><span class="p">;</span> <span class="c1">// http requests</span>
 <span class="c1">// delete record 2345 from sensor 4</span>
@@ -2655,9 +2610,9 @@ This request requires an API key for authorization using the `x-api-key` header.
 <aside class="success">
 This request requires an API key for authorization using the `x-api-key` header.
 </aside>
-<h3 id='http-request-3'>HTTP Request</h3>
+<h4 id='http-request-3'>HTTP Request</h4>
 <p><code>DELETE /:id/:dataId</code></p>
-<h3 id='url-parameters-3'>URL Parameters</h3>
+<h4 id='url-parameters-3'>URL Parameters</h4>
 <table><thead>
 <tr>
 <th>Parameter</th>
