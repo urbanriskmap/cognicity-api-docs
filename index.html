@@ -337,7 +337,7 @@
                     <a href="#infrastructure" class="toc-h2 toc-link" data-title="infrastructure">Infrastructure</a>
                       <ul class="toc-list-h3">
                           <li>
-                            <a href="#todo" class="toc-h3 toc-link" data-title="Data API">TODO</a>
+                            <a href="#get-infrastructure" class="toc-h3 toc-link" data-title="Data API">GET /infrastructure</a>
                           </li>
                       </ul>
                     </li>
@@ -979,7 +979,7 @@ This request requires an API key for authorization using the `x-api-key` header.
   <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">err</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">))</span>
 </code></pre>
 <blockquote>
-<p>The above command returns JSON structured as shown below.</p>
+<p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"signedRequest"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.us-west-2.amazonaws.com/domain/originals/guid.jpeg?aws-signature"</span><span class="p">,</span><span class="w">
@@ -1587,7 +1587,7 @@ Flood states in the CAP format have a default expiry time of 6 hours from the ti
   <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">err</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">))</span>
 </code></pre>
 <blockquote>
-<p>The above command returns JSON structured as shown below.</p>
+<p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"statusCode"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
@@ -1682,7 +1682,7 @@ This endpoint requires authorization in the form of a JSON web token.
   <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">err</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">))</span>
 </code></pre>
 <blockquote>
-<p>The above command returns JSON structured as show below.</p>
+<p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="s2">"localAreaId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;id&gt;"</span><span class="p">,</span><span class="w">
@@ -1705,7 +1705,7 @@ This endpoint requires authorization in the form of a JSON web token.
   <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">err</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">))</span>
 </code></pre>
 <blockquote>
-<p>The above command returns JSON structure as shown below.</p>
+<p>The above command returns JSON structure like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"statusCode"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
@@ -1728,6 +1728,38 @@ This endpoint requires authorization in the form of a JSON web token.
 <aside class="notice">
 Note that time zone must be specified as +/- UTC offset which will require HTML character encoding (e.g. +0700 becomes %2B0700).
 </aside>
+<h4 id='request-parameters-3'>Request Parameters</h4>
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>city</td>
+<td>string</td>
+<td>Which city do we want data for (e.g. &#39;jbd&#39;)?</td>
+<td>No</td>
+<td>None</td>
+</tr>
+<tr>
+<td>start</td>
+<td>string</td>
+<td>Start time for timeseries as ISO 8601 format (YYYY-MM-DDTHH:mm:ss+ZZZZ)</td>
+<td>Yes</td>
+<td>None</td>
+</tr>
+<tr>
+<td>end</td>
+<td>string</td>
+<td>End time for timeseries as ISO 8601 format (YYYY-MM-DDTHH:mm:ss+ZZZZ)</td>
+<td>Yes</td>
+<td>None</td>
+</tr>
+</tbody></table>
 <h3 id='get-floods-timeseries'>GET /floods/timeseries</h3>
 <p>This endpoint provides a time series of flooded areas data represented as a count of flood affected areas every hour within the specificed time period. The count is recoreded alongside an hourly timestamp in ISO8601 format at UTC.</p>
 <pre class="highlight shell tab-shell"><code>curl GET /floods/timeseries?start<span class="o">=</span>2017-11-20T00:00:00+0700&amp;end<span class="o">=</span>2017-11-21T00:00:00+0700
@@ -1738,7 +1770,7 @@ Note that time zone must be specified as +/- UTC offset which will require HTML 
   <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">err</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">))</span>
 </code></pre>
 <blockquote>
-<p>The above command returns JSON structured as shown below.</p>
+<p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
     </span><span class="s2">"statusCode"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
@@ -1767,7 +1799,167 @@ Note that time zone must be specified as +/- UTC offset which will require HTML 
 </span><span class="p">}</span><span class="w">
 </span></code></pre><h4 id='http-request-6'>HTTP Request</h4>
 <p><code>GET /floods/timeseries</code></p>
-<h2 id='infrastructure'>Infrastructure</h2><h3 id='todo'>TODO</h3><h2 id='reports'>Reports</h2>
+<h4 id='request-parameters-4'>Request Parameters</h4>
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>city</td>
+<td>string</td>
+<td>Which city do we want data for (e.g. &#39;jbd&#39;)?</td>
+<td>No</td>
+<td>None</td>
+</tr>
+<tr>
+<td>start</td>
+<td>string</td>
+<td>Start time for timeseries as ISO 8601 format (YYYY-MM-DDTHH:mm:ss+ZZZZ)</td>
+<td>Yes</td>
+<td>None</td>
+</tr>
+<tr>
+<td>end</td>
+<td>string</td>
+<td>End time for timeseries as ISO 8601 format (YYYY-MM-DDTHH:mm:ss+ZZZZ)</td>
+<td>Yes</td>
+<td>None</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+Note that time zone must be specified as +/- UTC offset which will require HTML character encoding (e.g. +0700 becomes %2B0700).
+</aside>
+<h2 id='infrastructure'>Infrastructure</h2>
+<p>CogniCity stores the locations of local infrastructure including flood gates, pumps, waterways and drainage basins to assist mapping. Note that not all infrastructure are necessarily available in each instance.</p>
+
+<p><strong>Available Infrastructure Types</strong></p>
+
+<p>The following types of infrastructure are available:</p>
+
+<ul>
+<li>floodgates</li>
+<li>pumps</li>
+<li>waterways</li>
+<li>sites (measurement stations) </li>
+<li>basins (drainage)</li>
+</ul>
+<h3 id='get-infrastructure'>GET /infrastructure</h3>
+<p>This endpoint returns the location and attributes of the specific infrastructure.</p>
+<pre class="highlight shell tab-shell"><code>curl /infrastructure/pumps
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">axios</span> <span class="nx">from</span> <span class="s1">'axios'</span><span class="p">;</span> <span class="c1">// package to make http requests</span>
+
+<span class="nx">axios</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/infrastructure/pumps'</span><span class="p">,</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">err</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">))</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"statusCode"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Topology"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"objects"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"output"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GeometryCollection"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"geometries"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Point"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PA Marina"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"coordinates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+              </span><span class="mi">7164</span><span class="p">,</span><span class="w">
+              </span><span class="mi">7352</span><span class="p">,</span><span class="w">
+              </span><span class="mi">0</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Point"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pompa Waduk Setia Budi Barat"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"coordinates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+              </span><span class="mi">5312</span><span class="p">,</span><span class="w">
+              </span><span class="mi">5077</span><span class="p">,</span><span class="w">
+              </span><span class="mi">0</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="err">//</span><span class="w"> </span><span class="err">etc.</span><span class="w"> </span><span class="err">etc.</span><span class="w"> </span><span class="err">//</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Point"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Pompa UP Senen"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"coordinates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+              </span><span class="mi">6143</span><span class="p">,</span><span class="w">
+              </span><span class="mi">6544</span><span class="p">,</span><span class="w">
+              </span><span class="mi">0</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"arcs"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+    </span><span class="s2">"transform"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"scale"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="mf">0.000020651319451945148</span><span class="p">,</span><span class="w">
+        </span><span class="mf">0.000020217245084508508</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"translate"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="mf">106.7188310623</span><span class="p">,</span><span class="w">
+        </span><span class="mf">-6.3060956581</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"bbox"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="mf">106.7188310623</span><span class="p">,</span><span class="w">
+      </span><span class="mf">-6.3060956581</span><span class="p">,</span><span class="w">
+      </span><span class="mf">106.9253236055</span><span class="p">,</span><span class="w">
+      </span><span class="mf">-6.1039434245</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h4 id='http-request'>HTTP Request</h4>
+<p>GET /infrastructure/:type</p>
+<h4 id='request-parameters'>Request Parameters</h4>
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>city</td>
+<td>string</td>
+<td>Which city do we want data for (e.g. &#39;jbd&#39;)?</td>
+<td>No</td>
+<td>None</td>
+</tr>
+<tr>
+<td>format</td>
+<td>string</td>
+<td>Format of the returned data (must be &#39;json&#39;)</td>
+<td>No</td>
+<td>json</td>
+</tr>
+<tr>
+<td>geoformat</td>
+<td>string</td>
+<td>Format for geographical objects (one of &#39;geojson&#39; or &#39;topojson&#39;)</td>
+<td>No</td>
+<td>topojson</td>
+</tr>
+</tbody></table>
+<h2 id='reports'>Reports</h2>
 <p>The reports endpoint contains CogniCity reports submitted by the public. Reports are represented by point-geometries and their accompanying properties (e.g. description, time etc.). Note that all times are UTC, and geometries use the WGS 1984 coordinate system.</p>
 <h3 id='live-reports'>Live Reports</h3><pre class="highlight shell tab-shell"><code>curl <span class="s2">"/reports?city=brw&amp;geoformat=geojson"</span>
 
