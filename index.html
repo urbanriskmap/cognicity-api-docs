@@ -312,6 +312,11 @@
                     </li>
                   <li>
                     <a href="#floods" class="toc-h2 toc-link" data-title="floods">Floods</a>
+                      <ul class="toc-list-h3">
+                          <li>
+                            <a href="#get-floods" class="toc-h3 toc-link" data-title="Data API">GET /floods</a>
+                          </li>
+                      </ul>
                     </li>
                   <li>
                     <a href="#infrastructure" class="toc-h2 toc-link" data-title="infrastructure">Infrastructure</a>
@@ -479,15 +484,15 @@ All requests should be made via https.
 </thead><tbody>
 <tr>
 <td>400</td>
-<td>Bad Request -- Your request is invalid.</td>
+<td>Bad Request - Your request is invalid.</td>
 </tr>
 <tr>
 <td>403</td>
-<td>Forbiddenj= -- Your API key or authentication token is wrong.</td>
+<td>Forbidden - Your API key or authentication token is wrong.</td>
 </tr>
 <tr>
 <td>404</td>
-<td>Not Found -- The specified report could not be found.</td>
+<td>Not Found - The specified report could not be found.</td>
 </tr>
 <tr>
 <td>409</td>
@@ -1175,7 +1180,386 @@ After an image is submitted a server-side process shrinks the image to a standar
 <td>Yes</td>
 </tr>
 </tbody></table>
-<h2 id='floods'>Floods</h2><h2 id='infrastructure'>Infrastructure</h2><h3 id='todo'>TODO</h3><h2 id='reports'>Reports</h2>
+<h2 id='floods'>Floods</h2>
+<p>The floods endpoint provides flood hazard seveirty by neighborhood. This information is created through the CogniCity Risk Evaluation Matrix, and is nowt operational in all cities. Neighborhoods are delineated by available local boundary data (e.g. Fire grids in the US, or RW districts in Indonesia).</p>
+
+<p>In addition to topojson and geojson support the floods endpoint supports the Common Alerting Protocol (CAP).</p>
+
+<aside class="notice">
+Flood states in the CAP format have a default expiry time of 6 hours from the time that the API request is made.
+</aside>
+
+<p><strong>Flood State Codes</strong>
+Flood state by area is represneted by numberic code, as follows:</p>
+
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Severity</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>Unknown</td>
+<td>AN UNKNOWN LEVEL OF FLOODING - USE CAUTION</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Minor</td>
+<td>FLOODING OF BETWEEN 10 AND 70 CENTIMETERS</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Moderate</td>
+<td>FLOODING OF BETWEEN 71 and 150 CENTIMETERS</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Severe</td>
+<td>FLOODING OF OVER 150 CENTIMETERS</td>
+</tr>
+</tbody></table>
+<h3 id='get-floods'>GET /floods</h3>
+<p>This endpoint gets flood hazard information by neighborhood.</p>
+<pre class="highlight shell tab-shell"><code>curl /floods
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">axios</span> <span class="nx">from</span> <span class="s1">'axios'</span><span class="p">;</span> <span class="c1">// package to make http requests</span>
+
+<span class="nx">axios</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/floods'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">err</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">))</span>
+</code></pre>
+<blockquote>
+<p>The above commands returns JSON structured as follows (example taken from petabencana.id for Jakarta).</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"statusCode"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Topology"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"objects"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"output"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GeometryCollection"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"geometries"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Polygon"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"properties"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"area_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"geom_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3174040004009000"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"area_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"RW 09"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"parent_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GROGOL"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"city_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jakarta"</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"last_updated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-19T13:53:52.274Z"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="s2">"arcs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+              </span><span class="p">[</span><span class="w">
+                </span><span class="mi">0</span><span class="w">
+              </span><span class="p">]</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"arcs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">[</span><span class="w">
+        </span><span class="p">[</span><span class="w">
+          </span><span class="mi">9999</span><span class="p">,</span><span class="w">
+          </span><span class="mi">7847</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="w">
+          </span><span class="mi">-507</span><span class="p">,</span><span class="w">
+          </span><span class="mi">-6</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="w">
+          </span><span class="mi">-695</span><span class="p">,</span><span class="w">
+          </span><span class="mi">-70</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="w">
+          </span><span class="mi">-317</span><span class="p">,</span><span class="w">
+          </span><span class="mi">-221</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="w">
+          </span><span class="mi">-761</span><span class="p">,</span><span class="w">
+          </span><span class="mi">-18</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="w">
+          </span><span class="mi">-516</span><span class="p">,</span><span class="w">
+          </span><span class="mi">98</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="w">
+          </span><span class="mi">-641</span><span class="p">,</span><span class="w">
+          </span><span class="mi">-61</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="w">
+          </span><span class="mi">-649</span><span class="p">,</span><span class="w">
+          </span><span class="mi">-119</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="w">
+          </span><span class="mi">-169</span><span class="p">,</span><span class="w">
+          </span><span class="mi">-762</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="w">
+          </span><span class="mi">-181</span><span class="p">,</span><span class="w">
+          </span><span class="mi">-519</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="w">
+          </span><span class="mi">48</span><span class="p">,</span><span class="w">
+          </span><span class="mi">-602</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="w">
+          </span><span class="mi">-130</span><span class="p">,</span><span class="w">
+          </span><span class="mi">-162</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="w">
+          </span><span class="mi">64</span><span class="p">,</span><span class="w">
+          </span><span class="mi">-1235</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="w">
+          </span><span class="mi">81</span><span class="p">,</span><span class="w">
+          </span><span class="mi">-2351</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="w">
+          </span><span class="mi">136</span><span class="p">,</span><span class="w">
+          </span><span class="mi">-1098</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="w">
+          </span><span class="mi">15</span><span class="p">,</span><span class="w">
+          </span><span class="mi">-675</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="w">
+          </span><span class="mi">-1250</span><span class="p">,</span><span class="w">
+          </span><span class="mi">-40</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="w">
+          </span><span class="mi">-879</span><span class="p">,</span><span class="w">
+          </span><span class="mi">-6</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="w">
+          </span><span class="mi">-924</span><span class="p">,</span><span class="w">
+          </span><span class="mi">217</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="w">
+          </span><span class="mi">-924</span><span class="p">,</span><span class="w">
+          </span><span class="mi">425</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="w">
+          </span><span class="mi">-1800</span><span class="p">,</span><span class="w">
+          </span><span class="mi">138</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="w">
+          </span><span class="mi">830</span><span class="p">,</span><span class="w">
+          </span><span class="mi">1540</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="w">
+          </span><span class="mi">565</span><span class="p">,</span><span class="w">
+          </span><span class="mi">1455</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="w">
+          </span><span class="mi">764</span><span class="p">,</span><span class="w">
+          </span><span class="mi">1975</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="w">
+          </span><span class="mi">1018</span><span class="p">,</span><span class="w">
+          </span><span class="mi">2079</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="w">
+          </span><span class="mi">384</span><span class="p">,</span><span class="w">
+          </span><span class="mi">788</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="w">
+          </span><span class="mi">389</span><span class="p">,</span><span class="w">
+          </span><span class="mi">1061</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="w">
+          </span><span class="mi">1398</span><span class="p">,</span><span class="w">
+          </span><span class="mi">-76</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="w">
+          </span><span class="mi">296</span><span class="p">,</span><span class="w">
+          </span><span class="mi">-25</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="w">
+          </span><span class="mi">360</span><span class="p">,</span><span class="w">
+          </span><span class="mi">6</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="w">
+          </span><span class="mi">392</span><span class="p">,</span><span class="w">
+          </span><span class="mi">-9</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="w">
+          </span><span class="mi">360</span><span class="p">,</span><span class="w">
+          </span><span class="mi">-9</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="w">
+          </span><span class="mi">377</span><span class="p">,</span><span class="w">
+          </span><span class="mi">12</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="w">
+          </span><span class="mi">323</span><span class="p">,</span><span class="w">
+          </span><span class="mi">25</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="w">
+          </span><span class="mi">354</span><span class="p">,</span><span class="w">
+          </span><span class="mi">76</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="w">
+          </span><span class="mi">296</span><span class="p">,</span><span class="w">
+          </span><span class="mi">89</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="w">
+          </span><span class="mi">211</span><span class="p">,</span><span class="w">
+          </span><span class="mi">42</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="w">
+          </span><span class="mi">290</span><span class="p">,</span><span class="w">
+          </span><span class="mi">52</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="w">
+          </span><span class="mi">217</span><span class="p">,</span><span class="w">
+          </span><span class="mi">28</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="w">
+          </span><span class="mi">341</span><span class="p">,</span><span class="w">
+          </span><span class="mi">110</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="w">
+          </span><span class="mi">43</span><span class="p">,</span><span class="w">
+          </span><span class="mi">-67</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="w">
+          </span><span class="mi">57</span><span class="p">,</span><span class="w">
+          </span><span class="mi">-174</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="w">
+          </span><span class="mi">109</span><span class="p">,</span><span class="w">
+          </span><span class="mi">-159</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="w">
+          </span><span class="mi">154</span><span class="p">,</span><span class="w">
+          </span><span class="mi">-257</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="w">
+          </span><span class="mi">115</span><span class="p">,</span><span class="w">
+          </span><span class="mi">-370</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="w">
+          </span><span class="mi">99</span><span class="p">,</span><span class="w">
+          </span><span class="mi">-346</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="w">
+          </span><span class="mi">124</span><span class="p">,</span><span class="w">
+          </span><span class="mi">-357</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="p">[</span><span class="w">
+          </span><span class="mi">133</span><span class="p">,</span><span class="w">
+          </span><span class="mi">-422</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"transform"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"scale"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="mf">0.0000003311331833192323</span><span class="p">,</span><span class="w">
+        </span><span class="mf">0.00000032713269326930546</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"translate"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="mf">106.7917869997</span><span class="p">,</span><span class="w">
+        </span><span class="mf">-6.158925</span><span class="w">
+      </span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"bbox"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="mf">106.7917869997</span><span class="p">,</span><span class="w">
+      </span><span class="mf">-6.158925</span><span class="p">,</span><span class="w">
+      </span><span class="mf">106.7950980004</span><span class="p">,</span><span class="w">
+      </span><span class="mf">-6.1556540002</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<blockquote>
+<p>Data example when requested in CAP XML format.</p>
+</blockquote>
+<pre class="highlight xml tab-xml"><code><span class="cp">&lt;?xml version="1.0"?&gt;</span>
+<span class="nt">&lt;feed</span> <span class="na">xmlns=</span><span class="s">"http://www.w3.org/2005/Atom"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;id&gt;</span>https://data.petabencana.id/floods<span class="nt">&lt;/id&gt;</span>
+    <span class="nt">&lt;title&gt;</span>petabencana.id Flood Affected Areas<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;updated&gt;</span>2016-12-19T23:08:52+07:00<span class="nt">&lt;/updated&gt;</span>
+    <span class="nt">&lt;author&gt;</span>
+        <span class="nt">&lt;name&gt;</span>petabencana.id<span class="nt">&lt;/name&gt;</span>
+        <span class="nt">&lt;uri&gt;</span>https://petabencana.id/<span class="nt">&lt;/uri&gt;</span>
+    <span class="nt">&lt;/author&gt;</span>
+    <span class="nt">&lt;entry&gt;</span>
+        <span class="nt">&lt;id&gt;</span>https://data.petabencana.id/floods?parent_name=GROGOL<span class="ni">&amp;amp;</span>area_name=RW%2009<span class="ni">&amp;amp;</span>time=2016-12-19T22:41:35+07:00<span class="nt">&lt;/id&gt;</span>
+        <span class="nt">&lt;title&gt;</span>GROGOL.RW_09.2016-12-19T22:41:35+07:00 Flood Affected Area<span class="nt">&lt;/title&gt;</span>
+        <span class="nt">&lt;updated&gt;</span>2016-12-19T22:41:35+07:00<span class="nt">&lt;/updated&gt;</span>
+        <span class="nt">&lt;content</span> <span class="na">type=</span><span class="s">"text/xml"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;alert</span> <span class="na">xmlns=</span><span class="s">"urn:oasis:names:tc:emergency:cap:1.2"</span><span class="nt">&gt;</span>
+                <span class="nt">&lt;identifier&gt;</span>GROGOL.RW_09.2016-12-19T22:41:35+07:00<span class="nt">&lt;/identifier&gt;</span>
+                <span class="nt">&lt;sender&gt;</span>BPBD.JAKARTA.GOV.ID<span class="nt">&lt;/sender&gt;</span>
+                <span class="nt">&lt;sent&gt;</span>2016-12-19T22:41:35+07:00<span class="nt">&lt;/sent&gt;</span>
+                <span class="nt">&lt;status&gt;</span>Actual<span class="nt">&lt;/status&gt;</span>
+                <span class="nt">&lt;msgType&gt;</span>Alert<span class="nt">&lt;/msgType&gt;</span>
+                <span class="nt">&lt;scope&gt;</span>Public<span class="nt">&lt;/scope&gt;</span>
+                <span class="nt">&lt;info&gt;</span>
+                    <span class="nt">&lt;category&gt;</span>Met<span class="nt">&lt;/category&gt;</span>
+                    <span class="nt">&lt;event&gt;</span>FLOODING<span class="nt">&lt;/event&gt;</span>
+                    <span class="nt">&lt;urgency&gt;</span>Immediate<span class="nt">&lt;/urgency&gt;</span>
+                    <span class="nt">&lt;severity&gt;</span>Minor<span class="nt">&lt;/severity&gt;</span>
+                    <span class="nt">&lt;certainty&gt;</span>Observed<span class="nt">&lt;/certainty&gt;</span>
+                    <span class="nt">&lt;senderName&gt;</span>JAKARTA EMERGENCY MANAGEMENT AGENCY<span class="nt">&lt;/senderName&gt;</span>
+                    <span class="nt">&lt;headline&gt;</span>FLOOD WARNING<span class="nt">&lt;/headline&gt;</span>
+                    <span class="nt">&lt;description&gt;</span>AT 22:41 WIB THE JAKARTA EMERGENCY MANAGEMENT AGENCY OBSERVED FLOODING OF BETWEEN 10 and 70 CENTIMETERS IN GROGOL, RW 09.<span class="nt">&lt;/description&gt;</span>
+                    <span class="nt">&lt;web&gt;</span>https://petabencana.id/<span class="nt">&lt;/web&gt;</span>
+                    <span class="nt">&lt;area&gt;</span>
+                        <span class="nt">&lt;areaDesc&gt;</span>RW 09, GROGOL<span class="nt">&lt;/areaDesc&gt;</span>
+                        <span class="nt">&lt;polygon&gt;</span>-6.1563580003,106.7950980004 -6.1563600004,106.7949299998 -6.1563829997,106.7947 -6.1564550003,106.7945949997 -6.1564609997,106.7943429997 -6.156429,106.7941719999 -6.156449,106.7939600001 -6.156488,106.793745 -6.1567369998,106.7936890001 -6.1569070004,106.7936290001 -6.1571040005,106.7936449999 -6.1571570003,106.7936019997 -6.157561,106.7936229998 -6.1583300004,106.7936500001 -6.1586889999,106.7936950004 -6.1589100002,106.7936999998 -6.1589229999,106.7932860005 -6.158925,106.7929949996 -6.1588540003,106.7926889999 -6.1587150002,106.7923830002 -6.1586699999,106.7917869997 -6.158166,106.7920619998 -6.1576899997,106.7922490003 -6.1570440005,106.7925020003 -6.1563639997,106.7928389996 -6.1561060004,106.7929660001 -6.1557589997,106.7930949997 -6.1557839999,106.7935580004 -6.1557920003,106.7936560004 -6.1557900002,106.7937749996 -6.1557930003,106.7939050002 -6.1557960005,106.7940240003 -6.1557920003,106.7941489998 -6.1557839999,106.7942560002 -6.1557589997,106.7943730002 -6.1557300001,106.7944710002 -6.1557160004,106.7945409999 -6.1556990005,106.7946369998 -6.1556900001,106.7947090004 -6.1556540002,106.7948220002 -6.1556760003,106.794836 -6.1557330003,106.794855 -6.155785,106.7948909998 -6.1558690002,106.7949420004 -6.1559900004,106.7949800003 -6.1561030002,106.7950130001 -6.1562200002,106.7950540001 -6.1563580003,106.7950980004 <span class="nt">&lt;/polygon&gt;</span>
+                    <span class="nt">&lt;/area&gt;</span>
+                <span class="nt">&lt;/info&gt;</span>
+            <span class="nt">&lt;/alert&gt;</span>
+        <span class="nt">&lt;/content&gt;</span>
+    <span class="nt">&lt;/entry&gt;</span>
+<span class="nt">&lt;/feed&gt;</span>
+</code></pre><h4 id='http-request'>HTTP Request</h4>
+<p><code>GET /floods</code></p>
+<h4 id='request-parameters'>Request Parameters</h4>
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>city</td>
+<td>string</td>
+<td>Which city do we want data for (e.g. &#39;jbd&#39;)?</td>
+<td>No</td>
+<td>None</td>
+</tr>
+<tr>
+<td>format</td>
+<td>string</td>
+<td>Format to return data in (one of &#39;json&#39;, &#39;xml&#39;)</td>
+<td>No</td>
+<td>json</td>
+</tr>
+<tr>
+<td>geoformat</td>
+<td>string</td>
+<td>What format should geographic result use (one of &#39;topojson&#39;, &#39;geojson&#39;, &#39;cap&#39;)</td>
+<td>No</td>
+<td>topojson</td>
+</tr>
+<tr>
+<td>minimum_state</td>
+<td>number</td>
+<td>The minimum flood state that should be returned (min: 1, max: 4)</td>
+<td>No</td>
+<td>None</td>
+</tr>
+</tbody></table>
+<h2 id='infrastructure'>Infrastructure</h2><h3 id='todo'>TODO</h3><h2 id='reports'>Reports</h2>
 <p>The reports endpoint contains CogniCity reports submitted by the public. Reports are represented by point-geometries and their accompanying properties (e.g. description, time etc.). Note that all times are UTC, and geometries use the WGS 1984 coordinate system.</p>
 <h3 id='live-reports'>Live Reports</h3><pre class="highlight shell tab-shell"><code>curl <span class="s2">"/reports?city=brw&amp;geoformat=geojson"</span>
 
