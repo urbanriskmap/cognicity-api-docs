@@ -12,6 +12,7 @@ toc_footers:
 includes:
   - api_reference/index
   - api_reference/authentication
+  - api_reference/errors
   - api_reference/formats
   - api_reference/version
   - chatbot_api/index
