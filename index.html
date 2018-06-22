@@ -316,6 +316,15 @@
                           <li>
                             <a href="#get-floods" class="toc-h3 toc-link" data-title="Data API">GET /floods</a>
                           </li>
+                          <li>
+                            <a href="#get-floods-states" class="toc-h3 toc-link" data-title="Data API">GET /floods/states</a>
+                          </li>
+                          <li>
+                            <a href="#put-floods-id" class="toc-h3 toc-link" data-title="Data API">PUT /floods/:id</a>
+                          </li>
+                          <li>
+                            <a href="#delete-floods-id" class="toc-h3 toc-link" data-title="Data API">DELETE /floods/:id</a>
+                          </li>
                       </ul>
                     </li>
                   <li>
@@ -1181,7 +1190,7 @@ After an image is submitted a server-side process shrinks the image to a standar
 </tr>
 </tbody></table>
 <h2 id='floods'>Floods</h2>
-<p>The floods endpoint provides flood hazard seveirty by neighborhood. This information is created through the CogniCity Risk Evaluation Matrix, and is nowt operational in all cities. Neighborhoods are delineated by available local boundary data (e.g. Fire grids in the US, or RW districts in Indonesia).</p>
+<p>The floods endpoint provides flood hazard seveirty by local area. This information is created through the CogniCity Risk Evaluation Matrix, and is nowt operational in all cities. Local areas are delineated by available local boundary data (e.g. Fire grids in the US, or RW districts in Indonesia).</p>
 
 <p>In addition to topojson and geojson support the floods endpoint supports the Common Alerting Protocol (CAP).</p>
 
@@ -1189,8 +1198,9 @@ After an image is submitted a server-side process shrinks the image to a standar
 Flood states in the CAP format have a default expiry time of 6 hours from the time that the API request is made.
 </aside>
 
-<p><strong>Flood State Codes</strong>
-Flood state by area is represneted by numberic code, as follows:</p>
+<p><strong>Flood State Codes</strong></p>
+
+<p>Flood state by area is represneted by numberic code, as follows:</p>
 
 <table><thead>
 <tr>
@@ -1221,7 +1231,7 @@ Flood state by area is represneted by numberic code, as follows:</p>
 </tr>
 </tbody></table>
 <h3 id='get-floods'>GET /floods</h3>
-<p>This endpoint gets flood hazard information by neighborhood.</p>
+<p>This endpoint gets flood hazard information by local area.</p>
 <pre class="highlight shell tab-shell"><code>curl /floods
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">axios</span> <span class="nx">from</span> <span class="s1">'axios'</span><span class="p">;</span> <span class="c1">// package to make http requests</span>
 
@@ -1559,6 +1569,126 @@ Flood state by area is represneted by numberic code, as follows:</p>
 <td>None</td>
 </tr>
 </tbody></table>
+<h3 id='get-floods-states'>GET /floods/states</h3>
+<p>Get flooded areas without geospatial boundary data. Areas are referenced by <code>area_id</code> property. This is useful for updating state without the overhead of requesting the complete geographic data-set.</p>
+
+<p>Example lists flooded areas in Jakarta with a state of 1 of higher.</p>
+<pre class="highlight shell tab-shell"><code>curl /floods/states?minimum_state<span class="o">=</span>1&amp;city<span class="o">=</span>jbd
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">axios</span> <span class="nx">from</span> <span class="s1">'axios'</span><span class="p">;</span> <span class="c1">// package to make http requests</span>
+
+<span class="nx">axios</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/floods/states?minimum_state=1&amp;city=jbd'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">err</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">))</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured as shown below.</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"statusCode"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"area_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"last_updated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-12-19T13:53:52.274Z"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h4 id='request-parameters-2'>Request Parameters</h4>
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>city</td>
+<td>string</td>
+<td>Which city do we want data for (e.g. &#39;jbd&#39;)?</td>
+<td>No</td>
+<td>None</td>
+</tr>
+<tr>
+<td>minimum_state</td>
+<td>number</td>
+<td>The minimum flood state that should be returned (min: 1, max: 4)</td>
+<td>No</td>
+<td>None</td>
+</tr>
+</tbody></table>
+<h4 id='http-request-2'>HTTP Request</h4>
+<p><code>GET /floods/states?minimum_state=1&amp;city=jbd</code></p>
+<h3 id='put-floods-id'>PUT /floods/:id</h3>
+<p>This endpoint receives new flood state information for a given local area.</p>
+<pre class="highlight shell tab-shell"><code>curl -X PUT /floods/:id
+    -H <span class="s1">'Content-Type: application/json'</span>
+    -H <span class="s1">'Authorization'</span>: <span class="s1">'token'</span>,
+    -d <span class="s1">'{
+        "state": 2
+    }'</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">axios</span> <span class="nx">from</span> <span class="s1">'axios'</span><span class="p">;</span> <span class="c1">// package to make http requests</span>
+
+<span class="nx">axios</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="s1">'/floods/:id'</span><span class="p">,</span> <span class="p">{</span>
+    <span class="na">state</span><span class="p">:</span> <span class="mi">2</span>
+  <span class="p">},</span> <span class="p">{</span><span class="na">headers</span><span class="p">:</span> <span class="p">{</span><span class="s1">'Authorization'</span><span class="p">:</span> <span class="s1">'token'</span><span class="p">}})</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">err</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">))</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"localAreaId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;id&gt;"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"updated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h4 id='http-request-3'>HTTP Request</h4>
+<p><code>PUT /floods/:id</code></p>
+<h4 id='flood-state-attributes'>Flood State Attributes</h4>
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>state</td>
+<td>number</td>
+<td>Flood severity</td>
+<td>Yes</td>
+</tr>
+</tbody></table>
+
+<aside class="success">
+This endpoint requires authorization in the form of a JSON web token.
+</aside>
+<h3 id='delete-floods-id'>DELETE /floods/:id</h3>
+<p>This endpoint clears the flood state for a given local area.</p>
+<pre class="highlight shell tab-shell"><code>curl -X DELETE /floods/:id
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">axios</span> <span class="nx">from</span> <span class="s1">'axios'</span><span class="p">;</span> <span class="c1">// package to make http requests</span>
+
+<span class="nx">axios</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="s1">'/floods/:id/'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">err</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">))</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured as show below.</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"localAreaId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;id&gt;"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"updated"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h4 id='http-request-4'>HTTP Request</h4>
+<p><code>DELETE /floods/:id</code></p>
+
+<aside class="success">
+This endpoint requires authorization in the form of a JSON web token.
+</aside>
 <h2 id='infrastructure'>Infrastructure</h2><h3 id='todo'>TODO</h3><h2 id='reports'>Reports</h2>
 <p>The reports endpoint contains CogniCity reports submitted by the public. Reports are represented by point-geometries and their accompanying properties (e.g. description, time etc.). Note that all times are UTC, and geometries use the WGS 1984 coordinate system.</p>
 <h3 id='live-reports'>Live Reports</h3><pre class="highlight shell tab-shell"><code>curl <span class="s2">"/reports?city=brw&amp;geoformat=geojson"</span>
