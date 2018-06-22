@@ -26,6 +26,8 @@ includes:
   - data_api/infrastructure
   - data_api/reports
   - sensors_api/index
+  - sensors_api/sensors
+  - sensors_api/data
 
 search: true
 ---
