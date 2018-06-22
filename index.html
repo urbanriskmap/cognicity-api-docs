@@ -232,7 +232,7 @@
                     <a href="#version" class="toc-h2 toc-link" data-title="version">Version</a>
                       <ul class="toc-list-h3">
                           <li>
-                            <a href="#get-cognicity-version" class="toc-h3 toc-link" data-title="API Reference">Get CogniCity Version</a>
+                            <a href="#get" class="toc-h3 toc-link" data-title="API Reference">GET /</a>
                           </li>
                       </ul>
                     </li>
@@ -303,7 +303,7 @@
                     <a href="#feeds" class="toc-h2 toc-link" data-title="feeds">Feeds</a>
                       <ul class="toc-list-h3">
                           <li>
-                            <a href="#todo-qlue" class="toc-h3 toc-link" data-title="Data API">TODO (Qlue)</a>
+                            <a href="#post-qlue" class="toc-h3 toc-link" data-title="Data API">POST /qlue</a>
                           </li>
                       </ul>
                     </li>
@@ -485,9 +485,9 @@ All requests should be made via https.
 
 <p>The <code>/floods</code> endpoint also supports responses using the <a href="https://docs.oasis-open.org/emergency/cap/v1.2/CAP-v1.2-os.html">Common Alerting Protocol</a>, an XML format.</p>
 
-<p>CogniCity uses the <a href="https://www.postgresql.org/docs/current/static/datatype-numeric.html">PostgreSQL BIGINT</a> data type. As these numbers are potentially greater than <code>Numbers.MAX_SAFE_INTEGER</code> they are returned as Strings.</p>
-<h2 id='version'>Version</h2><h3 id='get-cognicity-version'>Get CogniCity Version</h3>
-<p>Get the CogniCity server and database versions for the chosen instance.</p>
+<p>CogniCity uses the <a href="https://www.postgresql.org/docs/current/static/datatype-numeric.html">PostgreSQL BIGINT</a> data type. As these numbers are potentially greater than JavaScript&#39;s <code>Numbers.MAX_SAFE_INTEGER</code> they are returned as strings.</p>
+<h2 id='version'>Version</h2><h3 id='get'>GET /</h3>
+<p>Gets the CogniCity server and database versions.</p>
 
 <p>The following attributes are returned:</p>
 
@@ -516,9 +516,7 @@ All requests should be made via https.
   </span><span class="s2">"version"</span><span class="p">:</span><span class="s2">"3.0.6"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"schema"</span><span class="p">:</span><span class="s2">"3.0.6"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>This endpoint gets the CogniCity server and database versions.</p>
-<h4 id='http-request'>HTTP Request</h4>
+</span></code></pre><h4 id='http-request'>HTTP Request</h4>
 <p><code>GET /</code></p>
 <h1 id='chatbot-api'>Chatbot API</h1>
 <p>The chatbot API exposes endpoints to receive incoming messages from social media platforms (e.g. via webhooks) and functions to send replies to users (e.g. on succesful report submission). Note that chatbot APIs may run on a custom domain.</p>
@@ -550,7 +548,7 @@ All requests should be made via https.
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{}</span><span class="w">
 </span></code></pre>
-<p>Send a reply to user after they submit a report.</p>
+<p>Send a reply to user after they submit a report via Facebook messenger.</p>
 <h4 id='http-request'>HTTP Request</h4>
 <p><code>POST /facebook/send</code></p>
 <h4 id='properties'>Properties</h4>
@@ -607,7 +605,7 @@ This request requires an API key for authorization using the `x-api-key` header.
     </span><span class="err">//</span><span class="w"> </span><span class="err">hub</span><span class="w"> </span><span class="err">challenge</span><span class="w"> </span><span class="err">value</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint responds to a Facebook Webhook authentication challenge. See https://developers.facebook.com/docs/messenger-platform/getting-started/webhook-setup/</p>
+<p>This endpoint responds to a Facebook Webhook authentication challenge. See the Facebook <a href="https://developers.facebook.com/docs/messenger-platform/getting-started/webhook-setup/">developer documentation</a>.</p>
 <h4 id='http-request-2'>HTTP Request</h4>
 <p><code>GET /facebook/webhook</code></p>
 <h3 id='post-facebook-webhook'>POST /facebook/webhook</h3><pre class="highlight sh tab-shell"><code>curl -X POST <span class="s1">'/facebook/webhook'</span> -H <span class="s1">'Content-Type: application/json'</span> -H <span class="s1">'x-api-key: key'</span> -d <span class="s1">'{
@@ -649,7 +647,7 @@ This request requires an API key for authorization using the `x-api-key` header.
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{}</span><span class="w">
 </span></code></pre>
-<p>Send a reply to user after they submit a report.</p>
+<p>Send a reply to user after they submit a report as a Twitter direct message.</p>
 <h4 id='http-request'>HTTP Request</h4>
 <p><code>POST /twitter/send</code></p>
 <h4 id='properties'>Properties</h4>
@@ -706,7 +704,7 @@ This request requires an API key for authorization using the `x-api-key` header.
     </span><span class="s2">"response_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;token&gt;"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint responds to a twitter Webhook challenge response check. See https://developer.twitter.com/en/docs/accounts-and-users/subscribe-account-activity/overview</p>
+<p>This endpoint responds to a twitter Webhook challenge response check. See the Twitter <a href="https://developer.twitter.com/en/docs/accounts-and-users/subscribe-account-activity/overview">developer documentation</a>.</p>
 <h4 id='http-request-2'>HTTP Request</h4>
 <p><code>GET /twitter/webhook</code></p>
 <h3 id='post-twitter-webhook'>POST /twitter/webhook</h3><pre class="highlight sh tab-shell"><code>curl -X POST <span class="s1">'/twitter/webhook'</span> -H <span class="s1">'Content-Type: application/json'</span> -H <span class="s1">'x-api-key: key'</span> -d <span class="s1">'{
@@ -719,13 +717,13 @@ This request requires an API key for authorization using the `x-api-key` header.
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{}</span><span class="w">
 </span></code></pre>
-<p>This endpoint responds to a twitter Webhook message event. See twitter <a href="https://developers.twitter.com/docs/messenger-platform/getting-started/webhook-setup/">documentation</a> for more details.</p>
+<p>This endpoint responds to a Twitter webhook message event. See twitter <a href="https://developers.twitter.com/docs/messenger-platform/getting-started/webhook-setup/">documentation</a> for more details.</p>
 <h4 id='http-request-3'>HTTP Request</h4>
 <p><code>POST /twitter/webhook</code></p>
 <h1 id='data-api'>Data API</h1>
-<p>The Data API provides the core reporting and mapping functionality of CogniCity. The Cards endpoint enables residents to submit hazard reports and the Reports endpoint provides submitted reports for client applications. Additional endpoints support these core functionality.</p>
+<p>The Data API provides the core reporting and mapping functionality of CogniCity. The Cards endpoint enables residents to submit hazard reports and the Reports endpoint provides submitted reports for client applications. Additional endpoints support the core funciotnality with additional data.</p>
 <h2 id='cards'>Cards</h2>
-<p>Report cards for diaster events issued via social media chatbots.</p>
+<p>Report cards for diaster events issued via social media chatbots. Report cards are the mechanism by which users can submit hazard reports. Cards are issued using a one-time-link based on a globally unique identifier (GUID) and can only be used to submit one hazard report. Subsequent hazard reports may be submitted by the user requesting a new card.</p>
 
 <p>The card flow is as follows:</p>
 
@@ -735,7 +733,7 @@ This request requires an API key for authorization using the `x-api-key` header.
 <li>Upload image (GET /cards/:id/images)</li>
 </ol>
 <h3 id='get-cards-id'>GET /cards/:id</h3>
-<p>This endpoint lists the status of a card.</p>
+<p>This endpoint lists the status of a card. It is useful for checking whether a card has already been used to submit a hazard report.</p>
 <pre class="highlight shell tab-shell"><code>curl /cards/:id
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">axios</span> <span class="nx">from</span> <span class="s1">'axios'</span><span class="p">;</span> <span class="c1">// package to make http requests</span>
 
@@ -759,7 +757,7 @@ This request requires an API key for authorization using the `x-api-key` header.
 </span></code></pre><h4 id='http-request'>HTTP Request</h4>
 <p><code>GET /cards/:id</code></p>
 <h3 id='post-cards'>POST /cards</h3>
-<p>This endpoint creates a new card with a guid, in preparation for submission of hazard information by user.</p>
+<p>This endpoint creates a new card with a GUI, in preparation for submission of hazard information by user.</p>
 <pre class="highlight shell tab-shell"><code>curl -X POST /cards
   -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
   -H <span class="s1">'x-api-key: api-key'</span> <span class="se">\</span>
@@ -799,7 +797,7 @@ This request requires an API key for authorization using the `x-api-key` header.
 <tr>
 <td>username</td>
 <td>string</td>
-<td>User social network username of id</td>
+<td>User social network username or id</td>
 <td>Yes</td>
 </tr>
 <tr>
@@ -931,10 +929,10 @@ This request requires an API key for authorization using the `x-api-key` header.
 <p><code>GET /cards/:id/images</code></p>
 
 <aside class="notice">
-After an image is submitted a server-side process shrinks the image to a standard size and there may be a small time lag of a few seconds before the image goes "live".
+After an image is submitted a server-side process shrinks the image to a standard size and there may be a small time lag of a few seconds before the image goes "live" with the report.
 </aside>
 <h2 id='cities'>Cities</h2>
-<p>CogniCity deployments are organised by city. Cities are delineated by a unique code and bounding box geometries. Note that the term &quot;city&quot; is used somewhat arbitrairily for organisational purposes. Cities may refer to an urban conurbation or wider metropolitan area. For example in the United States &quot;Broward&quot; is used to refer to Broward County which includes multiple cities and non-urban areas.</p>
+<p>CogniCity deployments are organised by city. Cities are delineated by a unique three letter code and a bounding box geometry. Note that the term &quot;city&quot; is used somewhat arbitrairily for organisational purposes. Cities may refer to an urban conurbation or wider metropolitan area. For example in the United States &quot;Broward&quot; is used to refer to Broward County which includes multiple cities and non-urban areas.</p>
 <h3 id='get-cities'>GET /cities</h3><pre class="highlight shell tab-shell"><code>curl <span class="s2">"/cities?geoformat=geojson"</span>
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">axios</span> <span class="nx">from</span> <span class="s1">'axios'</span><span class="p">;</span> <span class="c1">// package to make http requests</span>
 
@@ -1032,7 +1030,112 @@ After an image is submitted a server-side process shrinks the image to a standar
 <td>City name</td>
 </tr>
 </tbody></table>
-<h2 id='feeds'>Feeds</h2><h3 id='todo-qlue'>TODO (Qlue)</h3><h2 id='floods'>Floods</h2><h3 id='todo'>TODO</h3><h2 id='infrastructure'>Infrastructure</h2><h3 id='todo'>TODO</h3><h2 id='reports'>Reports</h2>
+<h2 id='feeds'>Feeds</h2>
+<p>The feeds endpoint supports input of hazard reports from third-party data-streams such as local civic applications. Reports collected from external data feeds are available from the /reports endpoint.</p>
+<h3 id='post-qlue'>POST /qlue</h3>
+<p>This endpoint accepts hazard reports from the <a href="http://www.qlue.co.id/">Qlue Smart City Application</a>.</p>
+<pre class="highlight shell tab-shell"><code>curl -X post /feeds/qlue
+  -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+  -H <span class="s1">'x-api-key: api-key'</span> <span class="se">\</span>
+  -d <span class="s1">'{
+    "post_id": "123",
+    "created_at": "twitter",
+    "title": "en",
+    "text": "flooding!",
+    "image_url": "url",
+    "qlue_city": "jabodetabek",
+    "disaster_type": "flood",
+    "location": {
+        "lat":-6.2,
+        "lon":106.8
+    }
+}'</span> 
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">axios</span> <span class="nx">from</span> <span class="s1">'axios'</span><span class="p">;</span> <span class="c1">// package to make http requests</span>
+
+<span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">'/feeds/qlue'</span><span class="p">,</span> <span class="p">{</span>
+    <span class="na">post_id</span><span class="p">:</span> <span class="mi">123</span><span class="p">,</span>
+    <span class="na">created_at</span><span class="p">:</span> <span class="s2">"2018-06-18T00:00+0700"</span><span class="p">,</span>
+    <span class="na">title</span><span class="p">:</span> <span class="s2">"en"</span><span class="p">,</span>
+    <span class="na">text</span><span class="p">:</span> <span class="s2">"flooding!"</span><span class="p">,</span>
+    <span class="na">image_url</span><span class="p">:</span> <span class="s2">"url"</span><span class="p">,</span>
+    <span class="na">qlue_city</span><span class="p">:</span> <span class="s2">"jabodetabek"</span><span class="p">,</span>
+    <span class="na">disaster_type</span><span class="p">:</span> <span class="s2">"flood"</span><span class="p">,</span>
+    <span class="na">location</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">lat</span><span class="p">:</span><span class="o">-</span><span class="mf">6.2</span><span class="p">,</span>
+        <span class="na">lon</span><span class="p">:</span><span class="mf">106.8</span>
+    <span class="p">}</span>
+  <span class="p">},</span> <span class="p">{</span><span class="na">headers</span><span class="p">:</span> <span class="p">{</span><span class="s1">'x-api-key'</span><span class="p">:</span> <span class="s1">'key'</span><span class="p">}})</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">err</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">))</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"post_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> 
+    </span><span class="s2">"created"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h4 id='http-request'>HTTP Request</h4>
+<p><code>POST /feeds/qlue</code></p>
+<h4 id='qlue-report-attributes'>Qlue Report Attributes</h4>
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>post_id</td>
+<td>number</td>
+<td>Qlue identifier</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>created_at</td>
+<td>string</td>
+<td>Timestamp in ISO8601 format YYYY-MM-DDTHH:MM:SS</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>title</td>
+<td>string</td>
+<td>Title of report</td>
+<td>No</td>
+</tr>
+<tr>
+<td>text</td>
+<td>string</td>
+<td>Hazard description</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>image_url</td>
+<td>string</td>
+<td>URL of image</td>
+<td>No</td>
+</tr>
+<tr>
+<td>qlue_city</td>
+<td>string</td>
+<td>City of report origin</td>
+<td>No</td>
+</tr>
+<tr>
+<td>disaster_type</td>
+<td>string</td>
+<td>Hazard type</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>location</td>
+<td>object</td>
+<td>Point location, latitude and longitude</td>
+<td>Yes</td>
+</tr>
+</tbody></table>
+<h2 id='floods'>Floods</h2><h3 id='todo'>TODO</h3><h2 id='infrastructure'>Infrastructure</h2><h3 id='todo'>TODO</h3><h2 id='reports'>Reports</h2>
 <p>The reports endpoint contains CogniCity reports submitted by the public. Reports are represented by point-geometries and their accompanying properties (e.g. description, time etc.). Note that all times are UTC, and geometries use the WGS 1984 coordinate system.</p>
 <h3 id='live-reports'>Live Reports</h3><pre class="highlight shell tab-shell"><code>curl <span class="s2">"/reports?city=brw&amp;geoformat=geojson"</span>
 
