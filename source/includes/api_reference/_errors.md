@@ -1,4 +1,4 @@
-#### Errors
+## Errors
 
 The CogniCity APIs uses the following error codes:
 
