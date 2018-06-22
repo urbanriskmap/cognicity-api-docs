@@ -4,9 +4,9 @@ The CogniCity APIs uses the following error codes:
 
 Error Code | Meaning
 ---------- | -------
-400 | Bad Request -- Your request is invalid.
-403 | Forbiddenj= -- Your API key or authentication token is wrong.
-404 | Not Found -- The specified report could not be found.
+400 | Bad Request - Your request is invalid.
+403 | Forbidden - Your API key or authentication token is wrong.
+404 | Not Found - The specified report could not be found.
 409 | Conflict - Report already recieved.
 415 | Unsupported Media Type - The file being uploaded is not supported by the system.
 429 | Too Many Requests - You have exceeded API request quota.
