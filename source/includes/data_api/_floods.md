@@ -1,6 +1,6 @@
 ## Floods
 
-The floods endpoint provides flood hazard seveirty by neighborhood. This information is created through the CogniCity Risk Evaluation Matrix, and is nowt operational in all cities. Neighborhoods are delineated by available local boundary data (e.g. Fire grids in the US, or RW districts in Indonesia).
+The floods endpoint provides flood hazard seveirty by local area. This information is created through the CogniCity Risk Evaluation Matrix, and is nowt operational in all cities. Local areas are delineated by available local boundary data (e.g. Fire grids in the US, or RW districts in Indonesia).
 
 In addition to topojson and geojson support the floods endpoint supports the Common Alerting Protocol (CAP).
 
@@ -9,6 +9,7 @@ Flood states in the CAP format have a default expiry time of 6 hours from the ti
 </aside>
 
 **Flood State Codes**
+
 Flood state by area is represneted by numberic code, as follows:
 
 | Code | Severity | Description
@@ -20,7 +21,7 @@ Flood state by area is represneted by numberic code, as follows:
 
 ### GET /floods
 
-This endpoint gets flood hazard information by neighborhood.
+This endpoint gets flood hazard information by local area.
 
 ```shell
 curl /floods
@@ -337,3 +338,122 @@ format | string | Format to return data in (one of 'json', 'xml') | No | json
 geoformat | string | What format should geographic result use (one of 'topojson', 'geojson', 'cap') | No | topojson
 minimum_state | number | The minimum flood state that should be returned (min: 1, max: 4) | No | None
 
+### GET /floods/states
+
+Get flooded areas without geospatial boundary data. Areas are referenced by `area_id` property. This is useful for updating state without the overhead of requesting the complete geographic data-set.
+
+Example lists flooded areas in Jakarta with a state of 1 of higher.
+
+```shell
+curl /floods/states?minimum_state=1&city=jbd
+```
+
+```javascript
+import axios from 'axios'; // package to make http requests
+
+axios.get('/floods/states?minimum_state=1&city=jbd')
+  .then(response => console.log(response))
+  .catch(err => console.log(err))
+```
+
+> The above command returns JSON structured as shown below.
+
+```json
+{
+  "statusCode": 200,
+  "result": [
+    {
+      "area_id": "5",
+      "state": 1,
+      "last_updated": "2016-12-19T13:53:52.274Z"
+    }
+  ]
+}
+```
+
+#### Request Parameters
+Attribute | Type | Description | Required | Default |
+--------- | ---- | ----------- | -------- | ------- |
+city | string | Which city do we want data for (e.g. 'jbd')? | No | None
+minimum_state | number | The minimum flood state that should be returned (min: 1, max: 4) | No | None
+
+#### HTTP Request
+`GET /floods/states?minimum_state=1&city=jbd`
+
+### PUT /floods/:id
+
+This endpoint receives new flood state information for a given local area.
+
+```shell
+curl -X PUT /floods/:id
+    -H 'Content-Type: application/json'
+    -H 'Authorization': 'token',
+    -d '{
+        "state": 2
+    }'
+```
+
+```javascript
+import axios from 'axios'; // package to make http requests
+
+axios.put('/floods/:id', {
+    state: 2
+  }, {headers: {'Authorization': 'token'}})
+  .then(response => console.log(response))
+  .catch(err => console.log(err))
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "localAreaId": "<id>",
+    "state": 2,
+    "updated": true
+}
+```
+
+#### HTTP Request
+`PUT /floods/:id`
+
+#### Flood State Attributes
+Attribute | Type | Description | Required |
+--------- | ---- | ----------- | -------- |
+state | number | Flood severity | Yes 
+
+<aside class="success">
+This endpoint requires authorization in the form of a JSON web token.
+</aside>
+
+### DELETE /floods/:id
+
+This endpoint clears the flood state for a given local area.
+
+```shell
+curl -X DELETE /floods/:id
+```
+
+```javascript
+import axios from 'axios'; // package to make http requests
+
+axios.delete('/floods/:id/')
+  .then(response => console.log(response))
+  .catch(err => console.log(err))
+```
+
+> The above command returns JSON structured as show below.
+
+```json
+{
+  "localAreaId": "<id>",
+  "state": null,
+  "updated": true
+}
+```
+
+#### HTTP Request
+`DELETE /floods/:id`
+
+<aside class="success">
+This endpoint requires authorization in the form of a JSON web token.
+</aside>
