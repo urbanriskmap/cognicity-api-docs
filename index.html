@@ -309,11 +309,6 @@
                     </li>
                   <li>
                     <a href="#floods" class="toc-h2 toc-link" data-title="floods">Floods</a>
-                      <ul class="toc-list-h3">
-                          <li>
-                            <a href="#todo" class="toc-h3 toc-link" data-title="Data API">TODO</a>
-                          </li>
-                      </ul>
                     </li>
                   <li>
                     <a href="#infrastructure" class="toc-h2 toc-link" data-title="infrastructure">Infrastructure</a>
@@ -470,6 +465,48 @@
 <aside class="success">
 All requests should be made via https.
 </aside>
+<h4 id='errors'>Errors</h4>
+<p>The CogniCity APIs uses the following error codes:</p>
+
+<table><thead>
+<tr>
+<th>Error Code</th>
+<th>Meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>400</td>
+<td>Bad Request -- Your request is invalid.</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Forbiddenj= -- Your API key or authentication token is wrong.</td>
+</tr>
+<tr>
+<td>404</td>
+<td>Not Found -- The specified report could not be found.</td>
+</tr>
+<tr>
+<td>409</td>
+<td>Conflict - Report already recieved.</td>
+</tr>
+<tr>
+<td>415</td>
+<td>Unsupported Media Type - The file being uploaded is not supported by the system.</td>
+</tr>
+<tr>
+<td>429</td>
+<td>Too Many Requests - You have exceeded API request quota.</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal Server Error - We had a problem with our server. Try again later.</td>
+</tr>
+<tr>
+<td>503</td>
+<td>Service Unavailable - The service is down and we cannot respond to requests.</td>
+</tr>
+</tbody></table>
 <h2 id='data-formats'>Data Formats</h2>
 <blockquote>
 <p>Response structure:</p>
@@ -1135,7 +1172,7 @@ After an image is submitted a server-side process shrinks the image to a standar
 <td>Yes</td>
 </tr>
 </tbody></table>
-<h2 id='floods'>Floods</h2><h3 id='todo'>TODO</h3><h2 id='infrastructure'>Infrastructure</h2><h3 id='todo'>TODO</h3><h2 id='reports'>Reports</h2>
+<h2 id='floods'>Floods</h2><h2 id='infrastructure'>Infrastructure</h2><h3 id='todo'>TODO</h3><h2 id='reports'>Reports</h2>
 <p>The reports endpoint contains CogniCity reports submitted by the public. Reports are represented by point-geometries and their accompanying properties (e.g. description, time etc.). Note that all times are UTC, and geometries use the WGS 1984 coordinate system.</p>
 <h3 id='live-reports'>Live Reports</h3><pre class="highlight shell tab-shell"><code>curl <span class="s2">"/reports?city=brw&amp;geoformat=geojson"</span>
 
