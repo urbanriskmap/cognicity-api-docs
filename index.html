@@ -325,6 +325,12 @@
                           <li>
                             <a href="#delete-floods-id" class="toc-h3 toc-link" data-title="Data API">DELETE /floods/:id</a>
                           </li>
+                          <li>
+                            <a href="#get-floods-archive" class="toc-h3 toc-link" data-title="Data API">GET /floods/archive</a>
+                          </li>
+                          <li>
+                            <a href="#get-floods-timeseries" class="toc-h3 toc-link" data-title="Data API">GET /floods/timeseries</a>
+                          </li>
                       </ul>
                     </li>
                   <li>
@@ -1689,6 +1695,78 @@ This endpoint requires authorization in the form of a JSON web token.
 <aside class="success">
 This endpoint requires authorization in the form of a JSON web token.
 </aside>
+<h3 id='get-floods-archive'>GET /floods/archive</h3>
+<p>This endpoint provides an archive of flooded areas, presented as the maximum flood state recorded for all flood affected areas within the specified time period. Maximum flood state is recorded alonside local area. Use the <code>/floods</code> endpoint to get the geographic boundaries of local areas.</p>
+<pre class="highlight shell tab-shell"><code>curl GET /floods/archive?start<span class="o">=</span>2017-11-02T00:00:00+0700&amp;end<span class="o">=</span>2017-11-05T00:00:00+0700
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">axios</span> <span class="nx">from</span> <span class="s1">'axios'</span><span class="p">;</span> <span class="c1">// package to make http requests</span>
+
+<span class="nx">axios</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/floods/archive?start=2017-11-02T00:00:00+0700&amp;end=2017-11-05T00:00:00+0700'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">err</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">))</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structure as shown below.</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"statusCode"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"area_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"509"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"last_updated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-03T22:57:01.387Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"max_state"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"area_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"510"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"last_updated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-03T22:57:10.463Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"max_state"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h4 id='http-request-5'>HTTP Request</h4>
+<p>GET /floods/archive</p>
+
+<aside class="notice">
+Note that time zone must be specified as +/- UTC offset which will require HTML character encoding (e.g. +0700 becomes %2B0700).
+</aside>
+<h3 id='get-floods-timeseries'>GET /floods/timeseries</h3>
+<p>This endpoint provides a time series of flooded areas data represented as a count of flood affected areas every hour within the specificed time period. The count is recoreded alongside an hourly timestamp in ISO8601 format at UTC.</p>
+<pre class="highlight shell tab-shell"><code>curl GET /floods/timeseries?start<span class="o">=</span>2017-11-20T00:00:00+0700&amp;end<span class="o">=</span>2017-11-21T00:00:00+0700
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">axios</span> <span class="nx">from</span> <span class="s1">'axios'</span><span class="p">;</span> <span class="c1">// package to make http requests</span>
+
+<span class="nx">axios</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/floods/timeseries?start=2017-11-20T00:00:00+0700&amp;end=2017-11-21T00:00:00+0700'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">err</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">))</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured as shown below.</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"statusCode"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-20T16:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-20T17:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-20T18:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-20T19:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"ts"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-11-20T20:00:00.000Z"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h4 id='http-request-6'>HTTP Request</h4>
+<p><code>GET /floods/timeseries</code></p>
 <h2 id='infrastructure'>Infrastructure</h2><h3 id='todo'>TODO</h3><h2 id='reports'>Reports</h2>
 <p>The reports endpoint contains CogniCity reports submitted by the public. Reports are represented by point-geometries and their accompanying properties (e.g. description, time etc.). Note that all times are UTC, and geometries use the WGS 1984 coordinate system.</p>
 <h3 id='live-reports'>Live Reports</h3><pre class="highlight shell tab-shell"><code>curl <span class="s2">"/reports?city=brw&amp;geoformat=geojson"</span>
