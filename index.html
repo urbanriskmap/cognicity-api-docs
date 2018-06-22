@@ -345,13 +345,13 @@
                     <a href="#reports" class="toc-h2 toc-link" data-title="reports">Reports</a>
                       <ul class="toc-list-h3">
                           <li>
-                            <a href="#live-reports" class="toc-h3 toc-link" data-title="Data API">Live Reports</a>
+                            <a href="#get-reports" class="toc-h3 toc-link" data-title="Data API">GET /reports</a>
                           </li>
                           <li>
-                            <a href="#archive" class="toc-h3 toc-link" data-title="Data API">Archive</a>
+                            <a href="#get-reports-archive" class="toc-h3 toc-link" data-title="Data API">GET /reports/archive</a>
                           </li>
                           <li>
-                            <a href="#timeseries" class="toc-h3 toc-link" data-title="Data API">Timeseries</a>
+                            <a href="#get-reports-timeseries" class="toc-h3 toc-link" data-title="Data API">GET /reports/timeseries</a>
                           </li>
                       </ul>
                     </li>
@@ -1961,7 +1961,7 @@ Note that time zone must be specified as +/- UTC offset which will require HTML 
 </tbody></table>
 <h2 id='reports'>Reports</h2>
 <p>The reports endpoint contains CogniCity reports submitted by the public. Reports are represented by point-geometries and their accompanying properties (e.g. description, time etc.). Note that all times are UTC, and geometries use the WGS 1984 coordinate system.</p>
-<h3 id='live-reports'>Live Reports</h3><pre class="highlight shell tab-shell"><code>curl <span class="s2">"/reports?city=brw&amp;geoformat=geojson"</span>
+<h3 id='get-reports'>GET /reports</h3><pre class="highlight shell tab-shell"><code>curl <span class="s2">"/reports?city=brw&amp;geoformat=geojson"</span>
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">axios</span> <span class="nx">from</span> <span class="s1">'axios'</span><span class="p">;</span> <span class="c1">// package to make http requests</span>
 
@@ -2052,7 +2052,7 @@ Note that time zone must be specified as +/- UTC offset which will require HTML 
 <td>3600</td>
 </tr>
 </tbody></table>
-<h3 id='archive'>Archive</h3><pre class="highlight shell tab-shell"><code>curl <span class="s2">"/reports/archive?city=brw&amp;geoformat=geojson&amp;start=2018-06-15T00:00:00-0400&amp;end=2018-06-19T15:00:00-0400"</span>
+<h3 id='get-reports-archive'>GET /reports/archive</h3><pre class="highlight shell tab-shell"><code>curl <span class="s2">"/reports/archive?city=brw&amp;geoformat=geojson&amp;start=2018-06-15T00:00:00-0400&amp;end=2018-06-19T15:00:00-0400"</span>
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">axios</span> <span class="nx">from</span> <span class="s1">'axios'</span><span class="p">;</span> <span class="c1">// package to make http requests</span>
 
@@ -2156,7 +2156,7 @@ Note that time zone must be specified as +/- UTC offset which will require HTML 
 <aside class="success">
 Start and end times require UTC offsets using either '+' or '-' which need to be URL encoded as '%2B' and '%2D' respectively.
 </aside>
-<h3 id='timeseries'>Timeseries</h3><pre class="highlight shell tab-shell"><code>curl <span class="s2">"/reports/timeseries?city=brw&amp;start=2018-06-19T13:00:00%2D0400&amp;end=2018-06-19T15:00:00%2D0400"</span>
+<h3 id='get-reports-timeseries'>GET /reports/timeseries</h3><pre class="highlight shell tab-shell"><code>curl <span class="s2">"/reports/timeseries?city=brw&amp;start=2018-06-19T13:00:00%2D0400&amp;end=2018-06-19T15:00:00%2D0400"</span>
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">axios</span> <span class="nx">from</span> <span class="s1">'axios'</span><span class="p">;</span> <span class="c1">// package to make http requests</span>
 
