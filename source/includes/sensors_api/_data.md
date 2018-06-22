@@ -1,4 +1,4 @@
-## Sensor Data
+## Data
 
 ### GET /:id
 

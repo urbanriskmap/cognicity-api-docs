@@ -180,7 +180,7 @@ properties | object | Sensor metadata properties | Yes
 properties.agency | string | Optional agency tag for sensor (e.g. 'usgs')
 location | object | An object with `lat` and `lng` numerical values representing the sensor's latitude and longitude | Yes
 
-### Delete Sensor
+### DELETE /:id
 
 ```sh
 curl -X DELETE /4 -H 'Content-Type: application/json' -H 'x-api-key: key'
