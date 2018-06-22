@@ -457,3 +457,95 @@ axios.delete('/floods/:id/')
 <aside class="success">
 This endpoint requires authorization in the form of a JSON web token.
 </aside>
+
+### GET /floods/archive
+
+This endpoint provides an archive of flooded areas, presented as the maximum flood state recorded for all flood affected areas within the specified time period. Maximum flood state is recorded alonside local area. Use the `/floods` endpoint to get the geographic boundaries of local areas.
+
+```shell
+curl GET /floods/archive?start=2017-11-02T00:00:00+0700&end=2017-11-05T00:00:00+0700
+```
+
+```javascript
+import axios from 'axios'; // package to make http requests
+
+axios.get('/floods/archive?start=2017-11-02T00:00:00+0700&end=2017-11-05T00:00:00+0700')
+  .then(response => console.log(response))
+  .catch(err => console.log(err))
+```
+
+> The above command returns JSON structure as shown below.
+
+```json
+{
+    "statusCode": 200,
+    "result": [
+        {
+            "area_id": "509",
+            "last_updated": "2017-11-03T22:57:01.387Z",
+            "max_state": 1
+        },
+        {
+            "area_id": "510",
+            "last_updated": "2017-11-03T22:57:10.463Z",
+            "max_state": 4
+        }
+    ]
+}
+```
+
+#### HTTP Request
+GET /floods/archive
+
+<aside class="notice">
+Note that time zone must be specified as +/- UTC offset which will require HTML character encoding (e.g. +0700 becomes %2B0700).
+</aside>
+
+### GET /floods/timeseries
+
+This endpoint provides a time series of flooded areas data represented as a count of flood affected areas every hour within the specificed time period. The count is recoreded alongside an hourly timestamp in ISO8601 format at UTC.
+
+```shell
+curl GET /floods/timeseries?start=2017-11-20T00:00:00+0700&end=2017-11-21T00:00:00+0700
+```
+
+```javascript
+import axios from 'axios'; // package to make http requests
+
+axios.get('/floods/timeseries?start=2017-11-20T00:00:00+0700&end=2017-11-21T00:00:00+0700')
+  .then(response => console.log(response))
+  .catch(err => console.log(err))
+```
+
+> The above command returns JSON structured as shown below.
+
+```json
+{
+    "statusCode": 200,
+    "result": [
+        {
+            "ts": "2017-11-20T16:00:00.000Z",
+            "count": "0"
+        },
+        {
+            "ts": "2017-11-20T17:00:00.000Z",
+            "count": "2"
+        },
+        {
+            "ts": "2017-11-20T18:00:00.000Z",
+            "count": "10"
+        },
+        {
+            "ts": "2017-11-20T19:00:00.000Z",
+            "count": "0"
+        },
+        {
+            "ts": "2017-11-20T20:00:00.000Z",
+            "count": "0"
+        }
+    ]
+}
+```
+
+#### HTTP Request
+`GET /floods/timeseries`
