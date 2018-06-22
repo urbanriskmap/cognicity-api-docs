@@ -2,7 +2,7 @@
 
 The reports endpoint contains CogniCity reports submitted by the public. Reports are represented by point-geometries and their accompanying properties (e.g. description, time etc.). Note that all times are UTC, and geometries use the WGS 1984 coordinate system.
 
-### Live Reports
+### GET /reports
 
 ```shell
 curl "/reports?city=brw&geoformat=geojson"
@@ -80,7 +80,7 @@ city | false | Filter reports by 3-letter city code (see cities endpoint for det
 geoformat | false | Specifies either 'geojson' or 'topojson' | topojson | geojson |
 timeperiod | false | Time period in seconds to filter reports by, must be strictly between 1 and 604800 (1 week) | 3600 (1 hour) | 3600 | 3600 |
 
-### Archive
+### GET /reports/archive
 
 ```shell
 curl "/reports/archive?city=brw&geoformat=geojson&start=2018-06-15T00:00:00-0400&end=2018-06-19T15:00:00-0400"
@@ -166,7 +166,7 @@ Start and end times require UTC offsets using either '+' or '-' which need to be
 </aside>
 
 
-### Timeseries
+### GET /reports/timeseries
 
 ```shell
 curl "/reports/timeseries?city=brw&start=2018-06-19T13:00:00%2D0400&end=2018-06-19T15:00:00%2D0400"
