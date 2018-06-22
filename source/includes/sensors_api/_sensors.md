@@ -1,6 +1,6 @@
-## Metadata
+## Sensors
 
-## GET /
+### GET /
 
 This endpoint returns a collection of sensors and their properties within the specified bounding box. If no bounding box is provided all sensors in the database will be returned.
 
@@ -76,11 +76,11 @@ axios.get('/', {
 }
 ```
 
-### HTTP Request
+#### HTTP Request
 
 `GET /`
 
-### Query Parameters
+#### Query Parameters
 
 Parameter | Required | Description | Default | Example |
 --------- | ------- | ------------ | ------- | ------- |
@@ -88,7 +88,7 @@ bbox | false | A list of longitude and latitude pairs representing the top left 
 geoformat | false | Specifies either 'geojson' or 'topojson' | geojson | geojson |
 agency | false | Optional filter properties.agency of the sensor (e.g. 'USGS') |
 
-### Response
+#### Response
 The returned data uses the GeoJSON FeatureCollection or TopoJSON GeometryCollection types. The properties of each sensor feature as described in the following table.
 
 Attribute | Type | Description |
@@ -97,7 +97,7 @@ id | integer | Unique sensor identifier |
 created | string | timestamp sensor created in database (ISO 8601 format) |
 properties | json | metadata attributes for each sensor |
 
-## POST /
+### POST /
 
 
 This endpoint creates a new sensor. On success a GeoJSON feature representing the new sensor is returned.
@@ -164,7 +164,7 @@ axios.post('/', {
 }
 ```
 
-### HTTP Request
+#### HTTP Request
 
 `POST / `
 
@@ -173,14 +173,14 @@ This request requires an API key for authorization using the `x-api-key` header.
 </aside>
 
 
-### New Sensor Attributes
+#### New Sensor Attributes
 Attribute | Type | Description | Required
 --------- | ---- | ----------- | --------
 properties | object | Sensor metadata properties | Yes
 properties.agency | string | Optional agency tag for sensor (e.g. 'usgs')
 location | object | An object with `lat` and `lng` numerical values representing the sensor's latitude and longitude | Yes
 
-## Delete Sensor
+### Delete Sensor
 
 ```sh
 curl -X DELETE /4 -H 'Content-Type: application/json' -H 'x-api-key: key'
@@ -207,6 +207,6 @@ This endpoint deletes a sensor and any data from that sensor. On success the sta
 This request requires an API key for authorization using the `x-api-key` header.
 </aside>
 
-### HTTP Request
+#### HTTP Request
 
 `DELETE /:id`

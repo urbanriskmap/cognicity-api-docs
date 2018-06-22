@@ -1,3 +1,5 @@
+## Sensor Data
+
 ### GET /:id
 
 ```shell
@@ -47,11 +49,11 @@ When a sensor does not have any data associated with it the endpoint will return
 </aside>
 
 
-### HTTP Request
+#### HTTP Request
 
 `GET /:id`
 
-### URL Parameters
+#### URL Parameters
 
 Parameter | Description
 --------- | -----------
@@ -59,7 +61,7 @@ ID | The ID of the sensor to retrieve
 type | Optional filter for the type field
 limit | Optional limit on number of returned records
 
-### Response
+#### Response
 Attribute | Type | Description |
 --------- | --------- | ----------- |
 dataId | integer | Unique data record identifier |
@@ -67,7 +69,7 @@ sensorId | integer | The ID of the sensor |
 created | string | Data record update time (ISO 8601 format) |
 properties | object | Record data |
 
-## POST /:id
+### POST /:id
 
 ```shell
 curl -X POST /4 -H 'Content-Type: application/json' -H 'x-api-key: key' -d '{
@@ -112,24 +114,24 @@ This endpoint adds a new data record to the specified sensor. On success the sen
 This request requires an API key for authorization using the `x-api-key` header.
 </aside>
 
-### HTTP Request
+#### HTTP Request
 
 `POST /:id`
 
-### URL Parameters
+#### URL Parameters
 
 Parameter | Description
 --------- | -----------
 ID | The ID of the sensor
 
-### New Sensor Attributes
+#### New Sensor Attributes
 
 Attribute | Type | Description | Required
 --------- | ---- | ----------- | --------
 properties | object | New data record to be added | Yes
 properties.type | string | Optional type tag for different measurement types (e.g. observation vs manual, or mean vs daily max)
 
-## DELETE /:id/:dataId
+### DELETE /:id/:dataId
 
 ```sh
 curl -X DELETE /4/2345 -H 'Content-Type: application/json' -H 'x-api-key: key'
@@ -156,11 +158,11 @@ This endpoint deletes a data record for the specified sensor. On success the sta
 This request requires an API key for authorization using the `x-api-key` header.
 </aside>
 
-### HTTP Request
+#### HTTP Request
 
 `DELETE /:id/:dataId`
 
-### URL Parameters
+#### URL Parameters
 
 Parameter | Description
 --------- | -----------
