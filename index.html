@@ -845,7 +845,7 @@ This request requires an API key for authorization using the `x-api-key` header.
         },
     "disaster_type": "flood",
     "text": "Very big flood",
-    "created_at":"2016-12-13T19:25:29",
+    "created_at":"2016-12-13T19:25:29Z",
     "location": {
         "lat":-6.4,
         "lng":106.6
@@ -860,7 +860,7 @@ This request requires an API key for authorization using the `x-api-key` header.
         <span class="p">},</span>
     <span class="na">disaster_type</span><span class="p">:</span> <span class="s2">"flood"</span><span class="p">,</span>
     <span class="na">text</span><span class="p">:</span> <span class="s2">"Very big flood"</span><span class="p">,</span>
-    <span class="na">created_at</span><span class="p">:</span><span class="s2">"2016-12-13T19:25:29"</span><span class="p">,</span>
+    <span class="na">created_at</span><span class="p">:</span><span class="s2">"2016-12-13T19:25:29Z"</span><span class="p">,</span>
     <span class="na">location</span><span class="p">:</span> <span class="p">{</span>
         <span class="na">lat</span><span class="p">:</span><span class="o">-</span><span class="mf">6.4</span><span class="p">,</span>
         <span class="na">lng</span><span class="p">:</span><span class="mf">106.6</span>
@@ -909,7 +909,7 @@ This request requires an API key for authorization using the `x-api-key` header.
 <tr>
 <td>created_at</td>
 <td>string</td>
-<td>Timestamp in ISO8601 format YYYY-MM-DDTHH:MM:SS</td>
+<td>Timestamp in ISO8601 format YYYY-MM-DDTHH:MM:SSZ</td>
 <td>Yes</td>
 </tr>
 <tr>
@@ -925,6 +925,10 @@ This request requires an API key for authorization using the `x-api-key` header.
 <td>Yes</td>
 </tr>
 </tbody></table>
+
+<aside class="notice">
+Timestamps must be submitted with a time zone, either denoted by appending a 'Z' for UTC or using the +/- UTC offset notation. Timestamps may optionally include milliseconds using the decminal notation (e.g. '2017-11-02T02:00:00.04Z').
+</aside>
 <h3 id='get-cards-id-images'>GET /cards/:id/images</h3>
 <p>Get a signed AWS S3 URL to upload an image associated with a card. This must be done after card report has been created. Only one image can exist for a given card. See more in the AWS <a href="https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#getSignedUrl-property">documentation</a>.</p>
 <pre class="highlight shell tab-shell"><code>curl GET /cards/:id/images
