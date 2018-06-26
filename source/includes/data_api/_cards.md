@@ -109,7 +109,7 @@ curl -X PUT /cards/:id
     	},
     "disaster_type": "flood",
     "text": "Very big flood",
-    "created_at":"2016-12-13T19:25:29",
+    "created_at":"2016-12-13T19:25:29Z",
     "location": {
         "lat":-6.4,
         "lng":106.6
@@ -127,7 +127,7 @@ axios.post('/', {
     	},
     disaster_type: "flood",
     text: "Very big flood",
-    created_at:"2016-12-13T19:25:29",
+    created_at:"2016-12-13T19:25:29Z",
     location: {
         lat:-6.4,
         lng:106.6
@@ -156,10 +156,13 @@ Attribute | Type | Description | Required |
 card_data | object | Object containing hazard specific data | Yes 
 disaster_type | string | Hazard type | Yes 
 text | string | Hazard description | Yes 
-created_at | string | Timestamp in ISO8601 format YYYY-MM-DDTHH:MM:SS | Yes 
+created_at | string | Timestamp in ISO8601 format YYYY-MM-DDTHH:MM:SSZ | Yes 
 disaster_type | string | Hazard type | Yes 
 location | object | Point location, latitude and longitude | Yes
 
+<aside class="notice">
+Timestamps must be submitted with a time zone, either denoted by appending a 'Z' for UTC or using the +/- UTC offset notation. Timestamps may optionally include milliseconds using the decminal notation (e.g. '2017-11-02T02:00:00.04Z').
+</aside>
 
 ### GET /cards/:id/images
 
