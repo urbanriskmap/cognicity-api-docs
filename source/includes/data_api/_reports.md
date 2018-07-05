@@ -85,7 +85,9 @@ timeperiod | false | Time period in seconds to filter reports by, must be strict
 Edit report tags, including 'points' for up/down vote functionality.
 
 ```shell
-curl "/reports?city=brw&geoformat=geojson"
+curl -X PATCH /reports/:id
+  -H 'Content-Type: application/json'
+  -d '{points: 1}'
 
 ```
 
