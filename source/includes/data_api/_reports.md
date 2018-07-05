@@ -82,7 +82,7 @@ timeperiod | false | Time period in seconds to filter reports by, must be strict
 
 ### PATCH /reports/:id
 
-Edit report tags, including add 'points' for up/down vote functionality.
+Edit report tags, including 'points' for up/down vote functionality.
 
 ```shell
 curl "/reports?city=brw&geoformat=geojson"
@@ -119,6 +119,7 @@ axios.patch('/reports', {
 Parameter | Required | Description | Default | Example |
 --------- | ------- | ------------ | ------- | ------- |
 points | true | Value of either -1 or 1 to be added to report points value | none | -1 
+
 
 ### GET /reports/archive
 
