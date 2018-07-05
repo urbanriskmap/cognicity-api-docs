@@ -87,7 +87,7 @@ Edit report tags, including 'points' for up/down vote functionality.
 ```shell
 curl -X PATCH /reports/:id
   -H 'Content-Type: application/json'
-  -d '{points: 1}'
+  -d '{"points": 1}'
 
 ```
 
