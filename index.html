@@ -2017,7 +2017,9 @@ Note that time zone must be specified as +/- UTC offset which will require HTML 
 </tbody></table>
 <h3 id='patch-reports-id'>PATCH /reports/:id</h3>
 <p>Edit report tags, including &#39;points&#39; for up/down vote functionality.</p>
-<pre class="highlight shell tab-shell"><code>curl <span class="s2">"/reports?city=brw&amp;geoformat=geojson"</span>
+<pre class="highlight shell tab-shell"><code>curl -X PATCH /reports/:id
+  -H <span class="s1">'Content-Type: application/json'</span>
+  -d <span class="s1">'{points: 1}'</span>
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">axios</span> <span class="nx">from</span> <span class="s1">'axios'</span><span class="p">;</span> <span class="c1">// package to make http requests</span>
 
