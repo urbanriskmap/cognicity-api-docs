@@ -120,7 +120,7 @@ curl -X PUT /cards/:id
 ```javascript
 import axios from 'axios'; // package to make http requests
 
-axios.post('/', {
+axios.put('/', {
     card_data:{
     	report_type:"flood",
     	flood_depth: 20

@@ -80,6 +80,46 @@ city | false | Filter reports by 3-letter city code (see cities endpoint for det
 geoformat | false | Specifies either 'geojson' or 'topojson' | topojson | geojson |
 timeperiod | false | Time period in seconds to filter reports by, must be strictly between 1 and 604800 (1 week) | 3600 (1 hour) | 3600 | 3600 |
 
+### PATCH /reports/:id
+
+Edit report tags, including add 'points' for up/down vote functionality.
+
+```shell
+curl "/reports?city=brw&geoformat=geojson"
+
+```
+
+```javascript
+import axios from 'axios'; // package to make http requests
+
+axios.patch('/reports', {
+  points: 1
+  })
+  .then(response => console.log(response))
+  .catch(err => console.log(err))
+
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "statusCode": 200,
+  "id": "id",
+  "points": 5
+}
+```
+
+#### HTTP Request
+
+`PATCH /reports/:id`
+
+#### Report Attributes
+
+Parameter | Required | Description | Default | Example |
+--------- | ------- | ------------ | ------- | ------- |
+points | true | Value of either -1 or 1 to be added to report points value | none | -1 
+
 ### GET /reports/archive
 
 ```shell
