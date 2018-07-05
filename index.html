@@ -348,6 +348,9 @@
                             <a href="#get-reports" class="toc-h3 toc-link" data-title="Data API">GET /reports</a>
                           </li>
                           <li>
+                            <a href="#patch-reports-id" class="toc-h3 toc-link" data-title="Data API">PATCH /reports/:id</a>
+                          </li>
+                          <li>
                             <a href="#get-reports-archive" class="toc-h3 toc-link" data-title="Data API">GET /reports/archive</a>
                           </li>
                           <li>
@@ -853,7 +856,7 @@ This request requires an API key for authorization using the `x-api-key` header.
 }'</span> 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">axios</span> <span class="nx">from</span> <span class="s1">'axios'</span><span class="p">;</span> <span class="c1">// package to make http requests</span>
 
-<span class="nx">axios</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="p">{</span>
+<span class="nx">axios</span><span class="p">.</span><span class="nx">put</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="p">{</span>
     <span class="na">card_data</span><span class="p">:{</span>
         <span class="na">report_type</span><span class="p">:</span><span class="s2">"flood"</span><span class="p">,</span>
         <span class="na">flood_depth</span><span class="p">:</span> <span class="mi">20</span>
@@ -2012,6 +2015,47 @@ Note that time zone must be specified as +/- UTC offset which will require HTML 
 <td>3600</td>
 </tr>
 </tbody></table>
+<h3 id='patch-reports-id'>PATCH /reports/:id</h3>
+<p>Edit report tags, including add &#39;points&#39; for up/down vote functionality.</p>
+<pre class="highlight shell tab-shell"><code>curl <span class="s2">"/reports?city=brw&amp;geoformat=geojson"</span>
+
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">axios</span> <span class="nx">from</span> <span class="s1">'axios'</span><span class="p">;</span> <span class="c1">// package to make http requests</span>
+
+<span class="nx">axios</span><span class="p">.</span><span class="nx">patch</span><span class="p">(</span><span class="s1">'/reports'</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">points</span><span class="p">:</span> <span class="mi">1</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">response</span><span class="p">))</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">err</span> <span class="o">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">))</span>
+
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"statusCode"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"id"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"points"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h4 id='http-request-2'>HTTP Request</h4>
+<p><code>PATCH /reports/:id</code></p>
+<h4 id='report-attributes'>Report Attributes</h4>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Required</th>
+<th>Description</th>
+<th>Default</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>points</td>
+<td>true</td>
+<td>Value of either -1 or 1 to be added to report points value</td>
+<td>none</td>
+<td>-1</td>
+</tr>
+</tbody></table>
 <h3 id='get-reports-archive'>GET /reports/archive</h3><pre class="highlight shell tab-shell"><code>curl <span class="s2">"/reports/archive?city=brw&amp;geoformat=geojson&amp;start=2018-06-15T00:00:00-0400&amp;end=2018-06-19T15:00:00-0400"</span>
 
 </code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">import</span> <span class="nx">axios</span> <span class="nx">from</span> <span class="s1">'axios'</span><span class="p">;</span> <span class="c1">// package to make http requests</span>
@@ -2071,7 +2115,7 @@ Note that time zone must be specified as +/- UTC offset which will require HTML 
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>This endpoint retrieves reports within the specified time period. The maximum duration between start and end times is one week. Note that all times are UTC, and geometries use the WGS 1984 coordinate system.</p>
-<h4 id='http-request-2'>HTTP Request</h4>
+<h4 id='http-request-3'>HTTP Request</h4>
 <p><code>GET /reports/archive</code></p>
 <h4 id='query-parameters-2'>Query Parameters</h4>
 <table><thead>
@@ -2152,7 +2196,7 @@ Start and end times require UTC offsets using either '+' or '-' which need to be
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <p>This endpoint generates a time series of reports presented as a count of reports every hour within the specified time period. The maximum duration between start and end times is one week. Report count is recorded alongside an hourly UTC timestamp in ISO 8061 format.</p>
-<h4 id='http-request-3'>HTTP Request</h4>
+<h4 id='http-request-4'>HTTP Request</h4>
 <p><code>GET /reports/timeseries</code></p>
 <h4 id='query-parameters-3'>Query Parameters</h4>
 <table><thead>
