@@ -94,7 +94,7 @@ curl -X PATCH /reports/:id
 ```javascript
 import axios from 'axios'; // package to make http requests
 
-axios.patch('/reports', {
+axios.patch('/reports/:id', {
   points: 1
   })
   .then(response => console.log(response))
@@ -122,6 +122,51 @@ Parameter | Required | Description | Default | Example |
 --------- | ------- | ------------ | ------- | ------- |
 points | true | Value of either -1 or 1 to be added to report points value | none | -1 
 
+### PATCH /reports/:id/flag
+
+Set a report's flag value.
+
+```shell
+curl -X PATCH /reports/:id/flag
+  -H 'Content-Type: application/json'
+  -d '{"flag": true}'
+
+```
+
+```javascript
+import axios from 'axios'; // package to make http requests
+
+axios.patch('/reports/:id/flag', {
+  flag: true
+  })
+  .then(response => console.log(response))
+  .catch(err => console.log(err))
+
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "statusCode": 200,
+  "id": "id",
+  "flag": true
+}
+```
+
+#### HTTP Request
+
+`PATCH /reports/:id/flag`
+
+#### Report Attributes
+
+Parameter | Required | Description | Default | Example |
+--------- | ------- | ------------ | ------- | ------- |
+flag | true | Value of either true or false to be added to report flag value | none | true
+
+<aside class="success">
+This request requires an API key for authorization using the `x-api-key` header.
+</aside>
 
 ### GET /reports/archive
 
