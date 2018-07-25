@@ -2568,7 +2568,7 @@ This request requires an API key for authorization using the `x-api-key` header.
 <p>This endpoint retrieves a list of data for a specific sensor. Data are organised into records, indexed by the <code>id</code> attribute. The <code>created</code> attribute details when the record was last updated. The <code>properties</code> attribute contains the data for the record. The <code>properties</code> object may be in varying formats. The example shows a <code>properties</code> object for a single data record which contains an <code>observations</code> array of measurements. Data records are returned in reverse chronological order by <code>created</code> date.</p>
 
 <aside class="warn">
-When a sensor does not have any data associated with it the endpoint will return a 404 error "No data found for sensor [ID]".
+When a sensor does not have any data associated with it the endpoint will return an empty object with status code 200".
 </aside>
 <h4 id='http-request'>HTTP Request</h4>
 <p><code>GET /:id</code></p>
