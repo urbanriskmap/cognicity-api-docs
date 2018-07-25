@@ -45,7 +45,7 @@ axios.get('/3')
 This endpoint retrieves a list of data for a specific sensor. Data are organised into records, indexed by the `id` attribute. The `created` attribute details when the record was last updated. The `properties` attribute contains the data for the record. The `properties` object may be in varying formats. The example shows a `properties` object for a single data record which contains an `observations` array of measurements. Data records are returned in reverse chronological order by `created` date.
 
 <aside class="warn">
-When a sensor does not have any data associated with it the endpoint will return a 404 error "No data found for sensor [ID]".
+When a sensor does not have any data associated with it the endpoint will return an empty object with status code 200".
 </aside>
 
 
